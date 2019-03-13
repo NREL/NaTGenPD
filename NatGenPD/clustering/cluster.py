@@ -12,7 +12,7 @@ from scipy.spatial import cKDTree
 logger = logging.getLogger(__name__)
 
 
-def single_cluster(df, cols=None, NN=20, dist=50, normalize=True):
+def single_cluster(df, cols=None, NN=5, dist=0.1, normalize=True):
     """Use euclidian KNN to reduce noisy dataset to one cluster.
 
     Parameters
