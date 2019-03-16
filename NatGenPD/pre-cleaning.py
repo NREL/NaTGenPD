@@ -1,10 +1,42 @@
 # -*- coding: utf-8 -*-
-"""Data clustering utilities
+"""
+Data clustering utilities
 
 @author: mrossol
 """
 import numpy as np
-import pandas as pd
+import os
+# import pandas as pd
+
+
+class ParseSmoke:
+    """
+    Parse and combine SMOKE .txt files
+    """
+    def __init__(self, dir_path, year):
+        """
+        Parameters
+        ----------
+        dir_path : str
+            Path to root directory containing SMOKE .txt files
+        year : int
+            Year to parse
+        """
+        self._smoke_files = self.get_smoke_files(dir_path, year)
+        self._out_file = os.path.join(dir_path, 'SMOKE_{}.h5'.format(year))
+
+    @staticmethod
+    def get_smoke_files(dir_path, year):
+        """
+        Find all .txt files in dir_path associated with year
+
+        Parameters
+        ----------
+        dir_path : str
+            Path to root directory containing SMOKE .txt files
+        year : int
+            Year to parse
+        """
 
 
 def round_to(data, val):

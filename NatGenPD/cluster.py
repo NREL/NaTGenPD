@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Data clustering utilities
+"""
+Data clustering utilities
 
 @author: gbuster
 """
