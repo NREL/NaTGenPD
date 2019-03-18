@@ -240,6 +240,50 @@ class ParseSmoke:
         smoke.save_peformance_vars(out_file)
 
 
+class ParseUnitInfo:
+    """
+    Extract Unit locational (coordinate, state, regions) and
+    type (fuel, technology)
+    """
+    COLS = {' Facility ID (ORISPL)': 'ORISID',
+            ' Unit ID': 'BLRID',
+            ' Facility Latitude': 'latitude',
+            ' Facility Longitude': 'Longitude',
+            'State': 'state',
+            ' EPA Region': 'EPA_region',
+            ' NERC Region': 'NERC_region',
+            ' Unit Type': 'unit_type',
+            ' Fuel Type (Primary)': 'fuel_type'}
+
+    def __init__(self, unit_attrs_path):
+        """
+        Parameters
+        ----------
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
+        """
+        self._unit_attrs = self._parse_csv(unit_attrs_path)
+
+    def _parse_csv(self, unit_attrs_path):
+        """
+        Load unit attributes from .csv file and update columns
+
+        Parameters
+        ----------
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
+
+        Returns
+        -------
+        unit_attrs : pandas.DataFrame
+            DataFrame of unit attributes
+        """
+        unit_attrs = pd.read_csv(unit_attrs_path, index_col=False)
+        unit_attrs = unit_attrs[[self.COLS.keys()]].rename(columns=self.COLS)
+
+        return unit_attrs
+
+
 def round_to(data, val):
     """
     round data to nearest val
