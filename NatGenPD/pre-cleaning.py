@@ -27,10 +27,10 @@ class ParseSmoke:
         year : int | str
             Year to parse
         """
-        self._smoke_df = self.combine_smoke_files(dir_path, year)
+        self._smoke_raw = self.combine_smoke_files(dir_path, year)
 
     @property
-    def smoke_df(self):
+    def smoke_raw(self):
         """
         DataFrame of raw SMOKE data parsed from .txt files
 
@@ -39,7 +39,21 @@ class ParseSmoke:
         _smoke_df : pandas.DataFrame
             DataFrame of raw SMOKE data (loaded from .txt files)
         """
-        return self._smoke_df
+        return self._smoke_raw
+
+    @property
+    def smoke_df(self):
+        """
+        DataFrame of performance variables derived from SMOKE data
+
+        Returns
+        -------
+        performance_df : pandas.DataFrame
+            DataFrame of performance varialbes derived from SMOKE data
+            (unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)
+        """
+        smoke_df = self.extract_performance_vars(self.smoke_raw)
+        return smoke_df
 
     @staticmethod
     def get_smoke_files(dir_path, year):
@@ -98,7 +112,7 @@ class ParseSmoke:
         return smoke_df
 
     @staticmethod
-    def unit_ids(smoke_raw):
+    def create_unit_ids(smoke_raw):
         """
         Create unit ids from ORISID and BLRD ID
 
@@ -118,7 +132,7 @@ class ParseSmoke:
         return unit_ids
 
     @staticmethod
-    def datetime(smoke_raw):
+    def create_datetime(smoke_raw):
         """
         Create timestamps from YYMMDD and HOUR
 
@@ -139,7 +153,7 @@ class ParseSmoke:
         return time_stamps
 
     @staticmethod
-    def gross_load(smoke_raw):
+    def calc_gross_load(smoke_raw):
         """
         Compute gross load from GLOAD and OPTIME
 
@@ -158,7 +172,7 @@ class ParseSmoke:
         return gload
 
     @staticmethod
-    def heat_rate(smoke_raw):
+    def calc_heat_rate(smoke_raw):
         """
         Compute heat rate in (mmBTU/MWh)
 
@@ -172,7 +186,7 @@ class ParseSmoke:
         heat_rate : pandas.DataFrame
             heat rate in mmBTU/MWh
         """
-        gload = ParseSmoke.gross_load(smoke_raw)
+        gload = ParseSmoke.calc_gross_load(smoke_raw)
         heat_rate = smoke_raw['HTINPUT'] / gload
 
         return heat_rate
@@ -191,13 +205,13 @@ class ParseSmoke:
         Returns
         -------
         smoke_df : pandas.DataFrame
-            DataFrame of performance variables
+            DataFrame of performance variables from SMOKE data
         """
         smoke_df = smoke_raw[['HTINPUT', 'OPTIME', 'HTINPUTMEASURE']].copy()
-        smoke_df['unit_id'] = ParseSmoke.unit_ids(smoke_raw)
-        smoke_df['time'] = ParseSmoke.datetime(smoke_raw)
-        smoke_df['gload'] = ParseSmoke.gross_load(smoke_raw)
-        smoke_df['heat_rate'] = ParseSmoke.heat_rate(smoke_raw)
+        smoke_df['unit_id'] = ParseSmoke.create_unit_ids(smoke_raw)
+        smoke_df['time'] = ParseSmoke.create_datetime(smoke_raw)
+        smoke_df['gload'] = ParseSmoke.calc_gross_load(smoke_raw)
+        smoke_df['heat_rate'] = ParseSmoke.calc_heat_rate(smoke_raw)
 
         smoke_df = smoke_df[['unit_id', 'time', 'heat_rate', 'HTINPUT',
                              'gload', 'OPTIME', 'HTINPUTMEASURE']]
@@ -215,11 +229,11 @@ class ParseSmoke:
         out_file : str
             Path to output file
         """
-        smoke_df = self.extract_performance_vars(self.smoke_df)
+        smoke_df = self.smoke_df
         smoke_df.to_hdf(out_file, 'smoke_df', mode='w')
 
     @classmethod
-    def performance_vars(cls, dir_path, year, out_file=None):
+    def performance_vars(cls, dir_path, year, save=True):
         """
         Parse Smoke data from .txt, extract performance variables, and save
         to disc as a .h5 file
@@ -230,14 +244,20 @@ class ParseSmoke:
             Path to root directory containing SMOKE .txt files
         year : int | str
             Year to parse
-        out_file : str
-            Path to output file, if None save to SMOKE_{year}.h5 in dir_path
+        save : bool
+            Flag to save data to .h5 file in dir_path
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data
         """
         smoke = cls(dir_path, year)
-        if out_file is None:
+        if save:
             out_file = os.path.join(dir_path, 'SMOKE_{}.h5'.format(year))
+            smoke.save_peformance_vars(out_file)
 
-        smoke.save_peformance_vars(out_file)
+        return smoke.smoke_df
 
 
 class ParseUnitInfo:
@@ -248,7 +268,7 @@ class ParseUnitInfo:
     COLS = {' Facility ID (ORISPL)': 'ORISID',
             ' Unit ID': 'BLRID',
             ' Facility Latitude': 'latitude',
-            ' Facility Longitude': 'Longitude',
+            ' Facility Longitude': 'longitude',
             'State': 'state',
             ' EPA Region': 'EPA_region',
             ' NERC Region': 'NERC_region',
@@ -264,7 +284,37 @@ class ParseUnitInfo:
         """
         self._unit_attrs = self._parse_csv(unit_attrs_path)
 
-    def _parse_csv(self, unit_attrs_path):
+    @property
+    def unit_attrs(self):
+        """
+        Unit attributes parsed from .csv
+
+        Returns
+        ----------
+        _unit_attrs: pandas.DataFrame
+            DataFrame of unit attributes parsed from .csv
+        """
+        return self._unit_attrs
+
+    @property
+    def unit_info(self):
+        """
+        Unit info:
+        ('unit_id', 'latitude', 'longitude', 'state', 'EPA_region'
+         'NERC_region', 'unit_type', 'fuel_type', 'group_type')
+
+        Returns
+        ----------
+        unit_info: pandas.DataFrame
+            DataFrame of unit info
+        """
+        unit_info = self.unit_attrs[[self.COLS.keys()]]
+        unit_info = unit_info.rename(columns=self.COLS)
+        unit_info = self.create_unit_info(unit_info)
+        return unit_info
+
+    @staticmethod
+    def _parse_csv(unit_attrs_path):
         """
         Load unit attributes from .csv file and update columns
 
@@ -279,9 +329,111 @@ class ParseUnitInfo:
             DataFrame of unit attributes
         """
         unit_attrs = pd.read_csv(unit_attrs_path, index_col=False)
-        unit_attrs = unit_attrs[[self.COLS.keys()]].rename(columns=self.COLS)
 
         return unit_attrs
+
+    @staticmethod
+    def create_group_types(unit_attrs):
+        """
+        Create technology (fuel) groups from fuel and unit types
+
+        Parameters
+        ----------
+        unit_attrs: pandas.DataFrame
+            DataFrame of unit attributes
+
+        Returns
+        -------
+        group_types : pd.DataFrame
+            Unit technology and fuel group type
+        """
+        tech = unit_attrs['unit_type'].copy()
+        # Combine boilers and tangentially-fired units
+        pos = tech.apply(lambda unit_type: 'boiler' in unit_type or
+                         unit_type == 'Tangentially-fired')
+        tech[pos] = 'Boiler'
+        # Combine Combined cycle units
+        pos = tech.apply(lambda unit_type: 'cycle' in unit_type)
+        tech[pos] = 'CC'
+        # Combine turbine units
+        pos = tech.apply(lambda unit_type: 'turbine' in unit_type)
+        tech[pos] = 'CT'
+
+        fuel = unit_attrs['fuel_type'].copy()
+        # Combine Natural Gas and all other gases
+        pos = fuel.apply(lambda fuel_type: 'Gas' in fuel_type)
+        fuel[pos] = 'NG'
+        # Combine Diesel Oil and all other oils
+        pos = fuel.apply(lambda fuel_type: 'Oil' in fuel_type)
+        fuel[pos] = 'Oil'
+        # Combine Coals and petroleum coke
+        pos = fuel.apply(lambda fuel_type: 'Coal' in fuel_type or
+                         fuel_type == 'Petroleum Coke')
+        fuel[pos] = 'Coal'
+        # Combine Wood and Other Solid Fuel and Tire Derived Fuel
+        pos = fuel.apply(lambda fuel_type: fuel_type in
+                         ['Wood', 'Other Solid Fuel', 'Tire Derived Fuel'])
+        fuel[pos] = 'Solid Fuel'
+
+        # Combine tech and fuel types
+        group_types = tech + ' (' + fuel + ')'
+        group_types.name = 'group_type'
+
+        return group_types
+
+    @staticmethod
+    def create_unit_info(unit_attrs):
+        """
+        Add unit_ids and group_types to unit_attrs
+
+        Parameters
+        ----------
+        unit_attrs: pandas.DataFrame
+            DataFrame of unit attributes
+
+        Returns
+        -------
+        unit_attrs : pd.DataFrame
+            Updated and cleaned up unit attributes
+        """
+        unit_attrs['unit_id'] = ParseSmoke.create_unit_ids(unit_attrs)
+        unit_attrs = unit_attrs.drop(columns=['ORISID', 'BLRID'])
+        unit_attrs['group_type'] = ParseUnitInfo.create_group_types(unit_attrs)
+
+        return unit_attrs
+
+    @classmethod
+    def add_unit_info(cls, smoke_df, unit_attrs_path):
+        """
+        Parse unit info and add it to smoke_df
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        """
+        unit_info = cls(unit_attrs_path).unit_info
+        smoke_df = pd.merge(smoke_df, unit_info, on='unit', how='left')
+        smoke_df = smoke_df.fill_na('None')
+
+        return smoke_df
+
+
+class CleanSmoke:
+    """
+    Pre-clean Smoke data prior to Heat Rate analysis
+    - Remove null value
+    - Remove start-up and shut-down
+    - Remove unrealistic values
+    - Convert gross load to net load
+    """
 
 
 def round_to(data, val):
