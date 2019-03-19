@@ -4,6 +4,7 @@ Data clustering utilities
 
 @author: mrossol
 """
+from functools import partial
 import numpy as np
 import os
 import pandas as pd
@@ -309,7 +310,7 @@ class ParseUnitInfo:
         unit_info: pandas.DataFrame
             DataFrame of unit info
         """
-        unit_info = self.unit_attrs[[self.COLS.keys()]]
+        unit_info = self.unit_attrs[list(self.COLS.keys())]
         unit_info = unit_info.rename(columns=self.COLS)
         unit_info = self.create_unit_info(unit_info)
         return unit_info
@@ -508,10 +509,16 @@ class CleanSmoke:
             Updated DataFrame w/ net load and updated heat rate
         """
         fuel_map = {'solid': ['Coal', 'Solid Fuel'], 'liquid': ['NG', 'Oil']}
-        groups = smoke_df['group_type']
         smoke_df = smoke_df.rename(columns={'gload': 'load'})
+
+        def _filter(fuels, row):
+            for x in fuels:
+                if x in row:
+                    return True
+            return False
+
         for key, fuels in fuel_map.items():
-            pos = groups.apply(lambda fuel_type: fuel_type in fuels)
+            pos = smoke_df['group_type'].apply(partial(_filter, fuels))
             gross_to_net = load_multipliers[key]
             smoke_df.loc[pos, 'load'] *= gross_to_net
             smoke_df.loc[pos, 'heat_rate'] *= (1 / gross_to_net)
