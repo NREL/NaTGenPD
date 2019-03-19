@@ -7,6 +7,7 @@ Data clustering utilities
 import numpy as np
 import os
 import pandas as pd
+import warnings
 
 
 class ParseSmoke:
@@ -360,16 +361,16 @@ class ParseUnitInfo:
         tech[pos] = 'CT'
 
         fuel = unit_attrs['fuel_type'].copy()
+        # Combine Coals and petroleum coke
+        pos = fuel.apply(lambda fuel_type: 'Coal' in fuel_type or
+                         fuel_type == 'Petroleum Coke')
+        fuel[pos] = 'Coal'
         # Combine Natural Gas and all other gases
         pos = fuel.apply(lambda fuel_type: 'Gas' in fuel_type)
         fuel[pos] = 'NG'
         # Combine Diesel Oil and all other oils
         pos = fuel.apply(lambda fuel_type: 'Oil' in fuel_type)
         fuel[pos] = 'Oil'
-        # Combine Coals and petroleum coke
-        pos = fuel.apply(lambda fuel_type: 'Coal' in fuel_type or
-                         fuel_type == 'Petroleum Coke')
-        fuel[pos] = 'Coal'
         # Combine Wood and Other Solid Fuel and Tire Derived Fuel
         pos = fuel.apply(lambda fuel_type: fuel_type in
                          ['Wood', 'Other Solid Fuel', 'Tire Derived Fuel'])
@@ -429,81 +430,225 @@ class ParseUnitInfo:
 class CleanSmoke:
     """
     Pre-clean Smoke data prior to Heat Rate analysis
+    - Convert gross load to net load
     - Remove null value
     - Remove start-up and shut-down
     - Remove unrealistic values
-    - Convert gross load to net load
     """
+    def __init__(self, smoke, unit_attrs_path=None):
+        """
+        Parameters
+        ----------
+        smoke : pandas.DataFrame | str
+            DataFrame of performance variables or path to .h5 file
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
+        """
+        self._smoke_df = self.load_smoke_df(smoke,
+                                            unit_attrs_path=unit_attrs_path)
 
+    @property
+    def smoke_df(self):
+        """
+        DataFrame of performance variables from SMOKE data with unit info
 
-def round_to(data, val):
-    """
-    round data to nearest val
+        Returns
+        -------
+        _smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        """
+        return self._smoke_df
 
-    Parameters
-    ----------
-    data : 'ndarray', 'float'
-        Input data
-    perc : 'float'
-        Value to round to the nearest
+    @staticmethod
+    def load_smoke_df(smoke_df, unit_attrs_path=None):
+        """
+        Load smoke data if needed and combine unit info if needed
 
-    Returns
-    -------
-    'ndarray', 'float
-        Rounded data, same type as data
-    """
-    return data // val * val
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame | str
+            DataFrame of performance variables or path to .h5 file
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
 
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        """
+        if isinstance(smoke_df, str):
+            smoke_df = pd.read_hdf(smoke_df, 'smoke_df')
 
-def perc_max_filter(unit_df, perc=0.1):
-    """
-    Find and remove values below perc of max load or HTINPUT
+        if 'group_type' not in smoke_df.columns:
+            if unit_attrs_path is None:
+                raise ValueError('Unit attributes are needed to clean data')
+            else:
+                smoke_df = ParseUnitInfo.add_unit_info(smoke_df,
+                                                       unit_attrs_path)
 
-    Parameters
-    ----------
-    unit_df : 'pd.DataFrame'
-        Pandas DataFrame for individual generator unit
-    perc : 'float'
-        Percentage of max below which to filter
+        return smoke_df
 
-    Returns
-    -------
-    'ndarray'
-        Indexes of bad rows
-    """
+    @staticmethod
+    def gross_to_net(smoke_df,
+                     load_multipliers={'solid': 0.925, 'liquid': 0.963}):
+        """
+        Convert gross load to net load using given multipliers for
+        solid and liquid fuel
 
-    # Calculate % of max load
-    load_perc = unit_df['load'] / unit_df['load'].max()
-    # Calculate % of max HTINPUT
-    heat_perc = unit_df['HTINPUT'] / unit_df['HTINPUT'].max()
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        load_multipliers : dict
+            Gross to net multipliers for solid and liquid/gas fuel
 
-    # Find positions for values < the perc of max load or HTINPUT
-    pos = np.logical_or(heat_perc < perc, load_perc < perc)
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            Updated DataFrame w/ net load and updated heat rate
+        """
+        fuel_map = {'solid': ['Coal', 'Solid Fuel'], 'liquid': ['NG', 'Oil']}
+        groups = smoke_df['group_type']
+        smoke_df = smoke_df.rename(columns={'gload': 'load'})
+        for key, fuels in fuel_map.items():
+            pos = groups.apply(lambda fuel_type: fuel_type in fuels)
+            gross_to_net = load_multipliers[key]
+            smoke_df.loc[pos, 'load'] *= gross_to_net
+            smoke_df.loc[pos, 'heat_rate'] *= (1 / gross_to_net)
 
-    # Return Indexes
-    return unit_df.index[pos]
+        return smoke_df
 
+    @staticmethod
+    def remove_null_values(smoke_df, hr_bounds=(4.5, 40), **kwargs):
+        """
+        Remove null values:
+        - HTINPUT <= 0
+        - HTINPUTMEASURE is not measured (1) or calculated (2)
+        - load <= 0
+        - heat_rate is outside given heat reat bounds
 
-def process_perc_max(smoke_df, **kwargs):
-    """
-    Find and remove values below perc of max load or HTINPUT
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        hr_bounds : tuple
+            Bounds (min, max) of realistic heat_rate values
+        kwargs : dict
+            Internal kwargs
 
-    Parameters
-    ----------
-    smoke_df : 'pd.DataFrame'
-        Pandas DataFrame of SMOKE CEMS data
-    **kwargs
-        internal kwargs
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            Updated DataFrame w/ null values removed
+        """
+        smoke_df = smoke_df.loc[smoke_df['HTINPUT'] > 0]
+        smoke_df = smoke_df.loc[smoke_df['HTINPUTMEASURE'].isin([1, 2])]
 
-    Returns
-    -------
-    'pd.DataFrame'
-        Clean Pandas DataFrame of SMOKE CEMS data
-    """
-    units = np.sort(smoke_df['unit'].unique())
-    unit_groups = smoke_df.groupby('unit')
-    # Find indexes to be filtered
-    bad_indexes = [perc_max_filter(unit_groups.get_group(unit), **kwargs)
-                   for unit in units]
+        if 'load' not in smoke_df.columns:
+            warnings.warn('Converting gload to net load')
+            smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
 
-    return smoke_df.drop(np.hstack(bad_indexes)).reset_index(drop=True)
+        smoke_df = smoke_df.loc[smoke_df['load'] > 0]
+
+        hr_min = smoke_df['heat_rate'] > hr_bounds[0]
+        hr_max = smoke_df['heat_rate'] < hr_bounds[1]
+        smoke_df = smoke_df.loc[np.logical_and(hr_min, hr_max)]
+
+        return smoke_df.reset_index(drop=True)
+
+    @staticmethod
+    def remove_start_stop(smoke_df, max_perc=0.1):
+        """
+        Remove data associated with start-up and shut-down:
+        - OPTIME < 1
+        - Data with < max_perc of max load or max HTINPUT
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        max_perc : float
+            Percentage (as a float) of max load and max HTINPUT to associate
+            with start-up and shut-down
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            Updated DataFrame start-up and shut-down removed
+        """
+        smoke_df = smoke_df.loc[smoke_df['OPTIME'] == 1]
+
+        if max_perc:
+            maxes = smoke_df.groupby('unit_id')[['load', 'HTINPUT']].max()
+            maxes = pd.merge(smoke_df['unit_id'], maxes.reset_index(),
+                             on='unit_id')
+
+            load_pos = (smoke_df['load'] / maxes['load']) > max_perc
+            ht_pos = (smoke_df['HTINPUT'] / maxes['HTINPUT']) > max_perc
+            smoke_df = smoke_df.loc[np.logical_and(load_pos, ht_pos)]
+
+        return smoke_df.reset_index(drop=True)
+
+    def preclean(self, load_multipliers={'solid': 0.925, 'liquid': 0.963},
+                 hr_bounds=(4.5, 40), max_perc=0.1):
+        """
+        Clean-up SMOKE data for heat rate analysis:
+        - Convert gross load to net load
+        - Remove null/unrealistic values
+        - Remove start-up and shut-down
+
+        Parameters
+        ----------
+        load_multipliers : dict
+            Gross to net multipliers for solid and liquid/gas fuel
+        hr_bounds : tuple
+            Bounds (min, max) of realistic heat_rate values
+        max_perc : float
+            Percentage (as a float) of max load and max HTINPUT to associate
+            with start-up and shut-down
+
+        Returns
+        -------
+        smoke_clean : pandas.DataFrame
+            Cleaned SMOKE data
+        """
+        smoke_clean = self.gross_to_net(self.smoke_df,
+                                        load_multipliers=load_multipliers)
+        smoke_clean = self.remove_null_values(smoke_clean, hr_bounds=hr_bounds)
+        smoke_clean = self.remove_start_stop(smoke_clean, max_perc=max_perc)
+
+        return smoke_clean
+
+    @classmethod
+    def clean(cls, smoke, unit_attrs_path=None,
+              load_multipliers={'solid': 0.925, 'liquid': 0.963},
+              hr_bounds=(4.5, 40), max_perc=0.1):
+        """
+        Clean-up SMOKE data for heat rate analysis:
+        - Convert gross load to net load
+        - Remove null/unrealistic values
+        - Remove start-up and shut-down
+
+        Parameters
+        ----------
+        smoke : pandas.DataFrame | str
+            DataFrame of performance variables or path to .h5 file
+        unit_attrs_path : str
+            Path to .csv containing facility (unit) attributes
+        load_multipliers : dict
+            Gross to net multipliers for solid and liquid/gas fuel
+        hr_bounds : tuple
+            Bounds (min, max) of realistic heat_rate values
+        max_perc : float
+            Percentage (as a float) of max load and max HTINPUT to associate
+            with start-up and shut-down
+
+        Returns
+        -------
+        smoke_clean : pandas.DataFrame
+            Cleaned SMOKE data
+        """
+        smoke = cls(smoke, unit_attrs_path=unit_attrs_path)
+        smoke_clean = smoke.preclean(load_multipliers=load_multipliers,
+                                     hr_bounds=hr_bounds, max_perc=max_perc)
+        return smoke_clean
