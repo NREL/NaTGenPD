@@ -215,8 +215,8 @@ class ParseSmoke:
         smoke_df['gload'] = ParseSmoke.calc_gross_load(smoke_raw)
         smoke_df['heat_rate'] = ParseSmoke.calc_heat_rate(smoke_raw)
 
-        smoke_df = smoke_df[['unit_id', 'time', 'heat_rate', 'HTINPUT',
-                             'gload', 'OPTIME', 'HTINPUTMEASURE']]
+        smoke_df = smoke_df[['unit_id', 'time', 'gload', 'HTINPUT',
+                             'heat_rate', 'OPTIME', 'HTINPUTMEASURE']]
 
         return smoke_df.reset_index(drop=True)
 
@@ -581,7 +581,7 @@ class CleanSmoke:
         Returns
         -------
         smoke_df : pandas.DataFrame
-            Updated DataFrame start-up and shut-down removed
+            Updated DataFrame with start-up and shut-down removed
         """
         smoke_df = smoke_df.loc[smoke_df['OPTIME'] == 1]
 
@@ -595,6 +595,26 @@ class CleanSmoke:
             smoke_df = smoke_df.loc[np.logical_and(load_pos, ht_pos)]
 
         return smoke_df.reset_index(drop=True)
+
+    # @staticmethod
+    # def aggregate_ccs(smoke_df, cc_map):
+    #     """
+    #     Aggregate CEMS CC 'units' into EIA CC 'units'
+    #     NOTE: CEMS reports CC on a CT by CT basis with the combined steam
+    #     generation disaggregated between the CTs
+    #
+    #     Parameters
+    #     ----------
+    #     smoke_df : pandas.DataFrame
+    #         DataFrame of performance variables from SMOKE data with unit info
+    #     cc_map : path
+    #         Path to .csv with CEMS to EIA CC unit mapping
+    #
+    #     Returns
+    #     -------
+    #     smoke_df : pandas.DataFrame
+    #         Updated DataFrame with CCs aggregated to EIA units
+    #     """
 
     def preclean(self, load_multipliers={'solid': 0.925, 'liquid': 0.963},
                  hr_bounds=(4.5, 40), max_perc=0.1):
@@ -619,12 +639,13 @@ class CleanSmoke:
         smoke_clean : pandas.DataFrame
             Cleaned SMOKE data
         """
+        out_cols = ['unit_id', 'time', 'gload', 'HTINPUT', 'heat_rate', 'cts']
         smoke_clean = self.gross_to_net(self.smoke_df,
                                         load_multipliers=load_multipliers)
         smoke_clean = self.remove_null_values(smoke_clean, hr_bounds=hr_bounds)
         smoke_clean = self.remove_start_stop(smoke_clean, max_perc=max_perc)
 
-        return smoke_clean
+        return smoke_clean[out_cols]
 
     @classmethod
     def clean(cls, smoke, unit_attrs_path=None,
