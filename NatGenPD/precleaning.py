@@ -422,7 +422,7 @@ class ParseUnitInfo:
             DataFrame of performance variables from SMOKE data with unit info
         """
         unit_info = cls(unit_attrs_path).unit_info
-        smoke_df = pd.merge(smoke_df, unit_info, on='unit', how='left')
+        smoke_df = pd.merge(smoke_df, unit_info, on='unit_id', how='left')
         smoke_df = smoke_df.fill_na('None')
 
         return smoke_df
