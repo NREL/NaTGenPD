@@ -5,10 +5,13 @@ Data clustering utilities
 @author: mrossol
 """
 from functools import partial
+import logging
 import numpy as np
 import os
 import pandas as pd
 import warnings
+
+logger = logging.getLogger(__name__)
 
 
 class ParseSmoke:
@@ -107,7 +110,7 @@ class ParseSmoke:
             DataFrame of Smoke data for given year
         """
         smoke_files = self.get_smoke_files(dir_path, year)
-        smoke_df = [pd.read_table(file, sep=',', names=self.SMOKE_HEADER)
+        smoke_df = [pd.read_csv(file, sep=',', names=self.SMOKE_HEADER)
                     for file in smoke_files]
         smoke_df = pd.concat(smoke_df)
 
@@ -231,8 +234,7 @@ class ParseSmoke:
         out_file : str
             Path to output file
         """
-        smoke_df = self.smoke_df
-        smoke_df.to_hdf(out_file, 'smoke_df', mode='w')
+        self.smoke_df.to_hdf(out_file, key='smoke_df', mode='w')
 
     @classmethod
     def performance_vars(cls, dir_path, year, save=True):
@@ -375,7 +377,7 @@ class ParseUnitInfo:
         # Combine Wood and Other Solid Fuel and Tire Derived Fuel
         pos = fuel.apply(lambda fuel_type: fuel_type in
                          ['Wood', 'Other Solid Fuel', 'Tire Derived Fuel'])
-        fuel[pos] = 'Solid Fuel'
+        fuel[pos] = 'Other Solid Fuel'
 
         # Combine tech and fuel types
         group_types = tech + ' (' + fuel + ')'
@@ -422,8 +424,7 @@ class ParseUnitInfo:
             DataFrame of performance variables from SMOKE data with unit info
         """
         unit_info = cls(unit_attrs_path).unit_info
-        smoke_df = pd.merge(smoke_df, unit_info, on='unit_id', how='left')
-        smoke_df = smoke_df.fill_na('None')
+        smoke_df = pd.merge(smoke_df, unit_info, on='unit_id')
 
         return smoke_df
 
@@ -436,6 +437,10 @@ class CleanSmoke:
     - Remove start-up and shut-down
     - Remove unrealistic values
     """
+    OUT_COLS = ['unit_id', 'time', 'load', 'HTINPUT', 'heat_rate',
+                'latitude', 'longitude', 'state', 'EPA_region', 'NERC_region',
+                'unit_type', 'fuel_type', 'group_type']
+
     def __init__(self, smoke, unit_attrs_path=None):
         """
         Parameters
@@ -445,8 +450,8 @@ class CleanSmoke:
         unit_attrs_path : str
             Path to .csv containing facility (unit) attributes
         """
-        self._smoke_df = self.load_smoke_df(smoke,
-                                            unit_attrs_path=unit_attrs_path)
+        self._smoke_df, self._unit_info = self.load_smoke_df(smoke,
+                                                             unit_attrs_path)
 
     @property
     def smoke_df(self):
@@ -459,6 +464,18 @@ class CleanSmoke:
             DataFrame of performance variables from SMOKE data with unit info
         """
         return self._smoke_df
+
+    @property
+    def unit_info(self):
+        """
+        DataFrame of unique units and their attributes (type, fuel, location)
+
+        Returns
+        -------
+        _unit_info : pandas.DataFrame
+            DataFrame of unique units and their attributes
+        """
+        return self._unit_info
 
     @staticmethod
     def load_smoke_df(smoke_df, unit_attrs_path=None):
@@ -476,6 +493,8 @@ class CleanSmoke:
         -------
         smoke_df : pandas.DataFrame
             DataFrame of performance variables from SMOKE data with unit info
+        unit_info : pandas.DataFrame
+            DataFrame of unique units and their attributes
         """
         if isinstance(smoke_df, str):
             smoke_df = pd.read_hdf(smoke_df, 'smoke_df')
@@ -484,10 +503,33 @@ class CleanSmoke:
             if unit_attrs_path is None:
                 raise ValueError('Unit attributes are needed to clean data')
             else:
-                smoke_df = ParseUnitInfo.add_unit_info(smoke_df,
-                                                       unit_attrs_path)
+                unit_info = ParseUnitInfo(unit_attrs_path).unit_info
+                smoke_df = pd.merge(smoke_df, unit_info, on='unit_id',
+                                    how='outer')
+        else:
+            unit_info = CleanSmoke.get_unit_info(smoke_df)
 
-        return smoke_df
+        return smoke_df, unit_info
+
+    @staticmethod
+    def get_unit_info(smoke_df):
+        """
+        Extract unit attributes
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+
+        Returns
+        -------
+        unit_info : pandas.DataFrame
+            DataFrame of unique units and their attributes
+        """
+        info_cols = ['unit_id', 'latitude', 'longitude', 'state', 'EPA_region',
+                     'NERC_region', 'unit_type', 'fuel_type', 'group_type']
+        unit_info = smoke_df[info_cols].drop_duplicates()
+        return unit_info
 
     @staticmethod
     def gross_to_net(smoke_df,
@@ -550,6 +592,7 @@ class CleanSmoke:
         """
         smoke_df = smoke_df.loc[smoke_df['HTINPUT'] > 0]
         smoke_df = smoke_df.loc[smoke_df['HTINPUTMEASURE'].isin([1, 2])]
+        smoke_df = smoke_df.drop(columns=['HTINPUTMEASURE'])
 
         if 'load' not in smoke_df.columns:
             warnings.warn('Converting gload to net load')
@@ -584,6 +627,7 @@ class CleanSmoke:
             Updated DataFrame with start-up and shut-down removed
         """
         smoke_df = smoke_df.loc[smoke_df['OPTIME'] == 1]
+        smoke_df = smoke_df.drop(columns=['OPTIME'])
 
         if max_perc:
             maxes = smoke_df.groupby('unit_id')[['load', 'HTINPUT']].max()
@@ -596,28 +640,96 @@ class CleanSmoke:
 
         return smoke_df.reset_index(drop=True)
 
-    # @staticmethod
-    # def aggregate_ccs(smoke_df, cc_map):
-    #     """
-    #     Aggregate CEMS CC 'units' into EIA CC 'units'
-    #     NOTE: CEMS reports CC on a CT by CT basis with the combined steam
-    #     generation disaggregated between the CTs
-    #
-    #     Parameters
-    #     ----------
-    #     smoke_df : pandas.DataFrame
-    #         DataFrame of performance variables from SMOKE data with unit info
-    #     cc_map : path
-    #         Path to .csv with CEMS to EIA CC unit mapping
-    #
-    #     Returns
-    #     -------
-    #     smoke_df : pandas.DataFrame
-    #         Updated DataFrame with CCs aggregated to EIA units
-    #     """
+    @staticmethod
+    def fill_null_units(smoke_df, unit_info):
+        """
+        Insert place-holders for units removed during cleaning
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of cleaned SMOKE data
+        unit_info : pandas.DataFrame
+            DataFrame of unique units and their attributes
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            DataFrame of cleaned SMOKE data with null units filled in
+        """
+        units = smoke_df['unit_id'].unique()
+        missing_units = unit_info.loc[~unit_info['unit_id'].isin(units)]
+
+        smoke_df = pd.concat((smoke_df, missing_units), sort=False)
+        return smoke_df.reset_index(drop=True)
+
+    @staticmethod
+    def cts_to_cc(cc_df):
+        """
+        Combine multiple CTs into a single CC by:
+        - Aggregating load and htinput
+        - Re-computing heat_rate
+        - Renaming unit
+        - Transfering unit info
+
+        Parameters
+        ----------
+        cc_df : pandas.DataFrame
+            DataFrame containing data points for all CTs that make up a EIA CC
+
+        Returns
+        -------
+        cc_unit : pandas.DataFrame
+            CC unit data after aggregation of CT data
+        """
+        cc_unit = cc_df.groupby('time')[['load', 'HTINPUT']].sum()
+        cc_unit = cc_unit.reset_index()
+        cc_unit['heat_rate'] = cc_unit['HTINPUT'] / cc_unit['load']
+        cc_unit['cts'] = len(cc_df['unit_id'].unique())
+        cc_unit['unit_id'] = cc_df.name
+        info_cols = ['latitude', 'longitude', 'state', 'EPA_region',
+                     'NERC_region', 'unit_type', 'fuel_type', 'group_type']
+        series = cc_df.iloc[0]
+        for col in info_cols:
+            cc_unit[col] = series[col]
+
+        return cc_unit
+
+    @staticmethod
+    def aggregate_ccs(smoke_df, cc_map):
+        """
+        Aggregate CEMS CC 'units' into EIA CC 'units'
+        NOTE: CEMS reports CC on a CT by CT basis with the combined steam
+        generation disaggregated between the CTs
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+        cc_map : path
+            Path to .csv with CEMS to EIA CC unit mapping
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            Updated DataFrame with CCs aggregated to EIA units
+        """
+        cc_map = pd.read_csv(cc_map)
+        cc_map['cc_unit'] = (cc_map['EIAPlant'].astype(str) + '_' +
+                             cc_map['EIAUnit'].astype(str))
+        cc_map['unit_id'] = cc_map['CEMSUnit']
+        cc_map = cc_map[['unit_id', 'cc_unit']]
+
+        cc_df = pd.merge(smoke_df, cc_map, on='unit_id', how='right')
+        cc_df = cc_df.groupby('cc_unit').apply(CleanSmoke.cts_to_cc)
+        cc_df = cc_df.reset_index(drop=True)
+
+        pos = smoke_df['unit_id'].isin(cc_map['unit_id'])
+        smoke_df = pd.concat((smoke_df.loc[~pos], cc_df), sort=False)
+        return smoke_df.reset_index(drop=True)
 
     def preclean(self, load_multipliers={'solid': 0.925, 'liquid': 0.963},
-                 hr_bounds=(4.5, 40), max_perc=0.1):
+                 hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -633,24 +745,47 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
+        cc_map : path
+            Path to .csv with CEMS to EIA CC unit mapping
 
         Returns
         -------
         smoke_clean : pandas.DataFrame
             Cleaned SMOKE data
         """
-        out_cols = ['unit_id', 'time', 'gload', 'HTINPUT', 'heat_rate', 'cts']
+        logger.info('Cleaning SMOKE data')
+        s_p = len(self.smoke_df)
+        s_u = len(self.unit_info)
+        logger.debug('- Raw points = {}'.format(s_p))
+        logger.debug('- Raw units = {}'.format(s_u))
         smoke_clean = self.gross_to_net(self.smoke_df,
                                         load_multipliers=load_multipliers)
         smoke_clean = self.remove_null_values(smoke_clean, hr_bounds=hr_bounds)
+        s_n = len(smoke_clean)
+        logger.debug('- Null points removed = {}'.format(s_p - s_n))
         smoke_clean = self.remove_start_stop(smoke_clean, max_perc=max_perc)
+        logger.debug('- Start/Shut-down points removed = {}'
+                     .format(s_n - len(smoke_clean)))
+        logger.debug('- Clean units = {}'
+                     .format(len(smoke_clean['unit_id'].unique())))
+        smoke_clean = self.fill_null_units(smoke_clean, self.unit_info)
+        if cc_map:
+            logger.info('Combining CC units')
+            smoke_clean = self.aggregate_ccs(smoke_clean, cc_map)
+            logger.debug('- Units combined = {}'
+                         .format(s_u - len(smoke_clean['unit_id'].unique())))
 
-        return smoke_clean[out_cols]
+        smoke_clean = smoke_clean.sort_values(by=['unit_id', 'time'])
+        smoke_clean = smoke_clean.reset_index(drop=True)[self.OUT_COLS]
+        logger.debug('- Clean points = {}'.format(len(smoke_clean)))
+        logger.debug('- Final units = {}'
+                     .format(len(smoke_clean['unit_id'].unique())))
+        return smoke_clean
 
     @classmethod
     def clean(cls, smoke, unit_attrs_path=None,
               load_multipliers={'solid': 0.925, 'liquid': 0.963},
-              hr_bounds=(4.5, 40), max_perc=0.1):
+              hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -670,6 +805,8 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
+        cc_map : path
+            Path to .csv with CEMS to EIA CC unit mapping
 
         Returns
         -------
@@ -678,5 +815,6 @@ class CleanSmoke:
         """
         smoke = cls(smoke, unit_attrs_path=unit_attrs_path)
         smoke_clean = smoke.preclean(load_multipliers=load_multipliers,
-                                     hr_bounds=hr_bounds, max_perc=max_perc)
+                                     hr_bounds=hr_bounds, max_perc=max_perc,
+                                     cc_map=cc_map)
         return smoke_clean
