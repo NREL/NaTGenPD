@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 
 def single_cluster(df, cols=None, NN=5, dist=0.1, normalize=True):
-    """Use euclidian KNN to reduce noisy dataset to one cluster.
+    """
+    Use euclidian KNN to reduce noisy dataset to one cluster.
 
     Parameters
     ----------
@@ -96,6 +97,7 @@ def knn(df, cols, return_dist=False, normalize=True, k=1):
     # take slices of df1/df2 based on col slices
     if cols is None:
         cols = df.columns.values
+
     array1 = df.loc[:, cols].values
     array2 = df.loc[:, cols].values
 
