@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Data clustering utilities
+Data cleaning utilities
 
 @author: mrossol
 """
