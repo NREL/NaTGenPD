@@ -10,6 +10,7 @@ import numpy as np
 import os
 import pandas as pd
 import warnings
+from .handler import CEMS
 
 logger = logging.getLogger(__name__)
 
@@ -785,7 +786,8 @@ class CleanSmoke:
     @classmethod
     def clean(cls, smoke, unit_attrs_path=None,
               load_multipliers={'solid': 0.925, 'liquid': 0.963},
-              hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None):
+              hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
+              out_file=None):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -817,4 +819,10 @@ class CleanSmoke:
         smoke_clean = smoke.preclean(load_multipliers=load_multipliers,
                                      hr_bounds=hr_bounds, max_perc=max_perc,
                                      cc_map=cc_map)
+
+        if out_file:
+            with CEMS(out_file, mode='w') as f:
+                for group, df in smoke_clean.groupby('group_type'):
+                    f[group] = df
+
         return smoke_clean
