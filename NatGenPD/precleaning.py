@@ -661,7 +661,7 @@ class CleanSmoke:
 
             load_pos = (smoke_df['load'] / maxes['load']) > max_perc
             ht_pos = (smoke_df['HTINPUT'] / maxes['HTINPUT']) > max_perc
-            smoke_df = smoke_df.loc[np.logical_and(load_pos, ht_pos)]
+            smoke_df = smoke_df.loc[np.logical_and(load_pos, ht_pos).values]
 
         return smoke_df.reset_index(drop=True)
 

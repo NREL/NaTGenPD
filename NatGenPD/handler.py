@@ -220,7 +220,7 @@ class CEMS:
                 out = 'int16'
             else:
                 out = 'int32'
-        elif np.issubdtype(dtype, np.object_):
+        elif np.issubdtype(dtype, (np.object_, np.datetime64)):
             size = int(col.str.len().max())
             out = 'S{:}'.format(size)
         else:
@@ -248,11 +248,13 @@ class CEMS:
         for c_name, c_data in df.iteritems():
             dtype = CEMS.get_dtype(c_data)
             if np.issubdtype(dtype, np.bytes_):
-                data = c_data.str.encode('utf-8').values
+                c_data = c_data.astype(str).fillna('None')
+                c_data = c_data.str.encode('utf-8').values
             else:
-                data = c_data.values
+                c_data = c_data.fillna(0)
+                c_data = c_data.values
 
-            arr = np.array(data, dtype=dtype)
+            arr = np.array(c_data, dtype=dtype)
             meta_arrays.append(arr)
             dtypes.append((c_name, dtype))
 
