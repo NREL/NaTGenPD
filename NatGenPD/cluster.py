@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Data clustering utilities
-
 @author: gbuster
 """
 

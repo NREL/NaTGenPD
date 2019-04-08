@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Data cleaning utilities
-
 @author: mrossol
 """
 from functools import partial
@@ -451,6 +450,7 @@ class CleanSmoke:
         unit_attrs_path : str
             Path to .csv containing facility (unit) attributes
         """
+        logger.info('Cleaning SMOKE data')
         self._smoke_df, self._unit_info = self.load_smoke_df(smoke,
                                                              unit_attrs_path)
 
@@ -504,6 +504,7 @@ class CleanSmoke:
             if unit_attrs_path is None:
                 raise ValueError('Unit attributes are needed to clean data')
             else:
+                logger.info('- Adding unit attributes to SMOKE data')
                 unit_info = ParseUnitInfo(unit_attrs_path).unit_info
                 smoke_df = pd.merge(smoke_df, unit_info, on='unit_id',
                                     how='outer')
@@ -533,6 +534,32 @@ class CleanSmoke:
         return unit_info
 
     @staticmethod
+    def remove_null_values(smoke_df):
+        """
+        Remove null values:
+        - HTINPUT <= 0
+        - HTINPUTMEASURE is not measured (1) or calculated (2)
+        - load <= 0
+
+        Parameters
+        ----------
+        smoke_df : pandas.DataFrame
+            DataFrame of performance variables from SMOKE data with unit info
+
+        Returns
+        -------
+        smoke_df : pandas.DataFrame
+            Updated DataFrame w/ null values removed
+        """
+        smoke_df = smoke_df.loc[smoke_df['HTINPUT'] > 0]
+        smoke_df = smoke_df.loc[smoke_df['HTINPUTMEASURE'].isin([1, 2])]
+        smoke_df = smoke_df.drop(columns=['HTINPUTMEASURE'])
+
+        smoke_df = smoke_df.loc[smoke_df['gload'] > 0]
+
+        return smoke_df.reset_index(drop=True)
+
+    @staticmethod
     def gross_to_net(smoke_df,
                      load_multipliers={'solid': 0.925, 'liquid': 0.963}):
         """
@@ -556,8 +583,9 @@ class CleanSmoke:
 
         def _filter(fuels, row):
             for x in fuels:
-                if x in row:
-                    return True
+                if isinstance(row, str):
+                    if x in row:
+                        return True
             return False
 
         for key, fuels in fuel_map.items():
@@ -569,13 +597,9 @@ class CleanSmoke:
         return smoke_df
 
     @staticmethod
-    def remove_null_values(smoke_df, hr_bounds=(4.5, 40), **kwargs):
+    def remove_unrealistic_hr(smoke_df, hr_bounds=(4.5, 40), **kwargs):
         """
-        Remove null values:
-        - HTINPUT <= 0
-        - HTINPUTMEASURE is not measured (1) or calculated (2)
-        - load <= 0
-        - heat_rate is outside given heat reat bounds
+        Remove null values heat_rate is outside given heat reat bounds
 
         Parameters
         ----------
@@ -591,15 +615,9 @@ class CleanSmoke:
         smoke_df : pandas.DataFrame
             Updated DataFrame w/ null values removed
         """
-        smoke_df = smoke_df.loc[smoke_df['HTINPUT'] > 0]
-        smoke_df = smoke_df.loc[smoke_df['HTINPUTMEASURE'].isin([1, 2])]
-        smoke_df = smoke_df.drop(columns=['HTINPUTMEASURE'])
-
         if 'load' not in smoke_df.columns:
             warnings.warn('Converting gload to net load')
             smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
-
-        smoke_df = smoke_df.loc[smoke_df['load'] > 0]
 
         hr_min = smoke_df['heat_rate'] > hr_bounds[0]
         hr_max = smoke_df['heat_rate'] < hr_bounds[1]
@@ -608,7 +626,7 @@ class CleanSmoke:
         return smoke_df.reset_index(drop=True)
 
     @staticmethod
-    def remove_start_stop(smoke_df, max_perc=0.1):
+    def remove_start_stop(smoke_df, max_perc=0.1, **kwargs):
         """
         Remove data associated with start-up and shut-down:
         - OPTIME < 1
@@ -621,6 +639,8 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
+        kwargs : dict
+            Internal kwargs
 
         Returns
         -------
@@ -629,6 +649,10 @@ class CleanSmoke:
         """
         smoke_df = smoke_df.loc[smoke_df['OPTIME'] == 1]
         smoke_df = smoke_df.drop(columns=['OPTIME'])
+
+        if 'load' not in smoke_df.columns:
+            warnings.warn('Converting gload to net load')
+            smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
 
         if max_perc:
             maxes = smoke_df.groupby('unit_id')[['load', 'HTINPUT']].max()
@@ -754,19 +778,23 @@ class CleanSmoke:
         smoke_clean : pandas.DataFrame
             Cleaned SMOKE data
         """
-        logger.info('Cleaning SMOKE data')
         s_p = len(self.smoke_df)
         s_u = len(self.unit_info)
         logger.debug('- Raw points = {}'.format(s_p))
         logger.debug('- Raw units = {}'.format(s_u))
-        smoke_clean = self.gross_to_net(self.smoke_df,
+        smoke_clean = self.remove_null_values(self.smoke_df)
+        smoke_clean = self.gross_to_net(smoke_clean,
                                         load_multipliers=load_multipliers)
-        smoke_clean = self.remove_null_values(smoke_clean, hr_bounds=hr_bounds)
-        s_n = len(smoke_clean)
-        logger.debug('- Null points removed = {}'.format(s_p - s_n))
+        s_i = len(smoke_clean)
+        logger.debug('- Null points removed = {}'.format(s_p - s_i))
         smoke_clean = self.remove_start_stop(smoke_clean, max_perc=max_perc)
         logger.debug('- Start/Shut-down points removed = {}'
-                     .format(s_n - len(smoke_clean)))
+                     .format(s_i - len(smoke_clean)))
+        s_i = len(smoke_clean)
+        smoke_clean = self.remove_unrealistic_hr(smoke_clean,
+                                                 hr_bounds=hr_bounds)
+        logger.debug('- Unrealistic heat rate values removed = {}'
+                     .format(s_i - len(smoke_clean)))
         logger.debug('- Clean units = {}'
                      .format(len(smoke_clean['unit_id'].unique())))
         smoke_clean = self.fill_null_units(smoke_clean, self.unit_info)

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Wrapper on .h5 to handle CEMS data
-
 @author: mrossol
 """
 import h5py
@@ -278,3 +277,9 @@ class CEMS:
         Close h5 instance
         """
         self._h5.close()
+
+    @classmethod
+    def combine_years(cls, comb_file, *year_files):
+        """
+        Combine multiple years of CEMS data into a single file
+        """
