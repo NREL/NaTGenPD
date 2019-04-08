@@ -656,7 +656,7 @@ class CleanSmoke:
 
         if max_perc:
             maxes = smoke_df.groupby('unit_id')[['load', 'HTINPUT']].max()
-            maxes = pd.merge(smoke_df['unit_id'], maxes.reset_index(),
+            maxes = pd.merge(smoke_df[['unit_id']], maxes.reset_index(),
                              on='unit_id')
 
             load_pos = (smoke_df['load'] / maxes['load']) > max_perc
