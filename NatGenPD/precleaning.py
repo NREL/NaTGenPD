@@ -731,7 +731,7 @@ class CleanSmoke:
         ----------
         smoke_df : pandas.DataFrame
             DataFrame of performance variables from SMOKE data with unit info
-        cc_map : path
+        cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
 
         Returns
@@ -770,7 +770,7 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
-        cc_map : path
+        cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
 
         Returns
@@ -835,8 +835,10 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
-        cc_map : path
+        cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
+        out_file : str
+            Path to output .h5 file to write clean-data too
 
         Returns
         -------

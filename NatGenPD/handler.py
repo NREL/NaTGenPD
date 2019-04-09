@@ -289,9 +289,17 @@ class CEMS:
         self._h5.close()
 
     @classmethod
-    def combine_years(cls, comb_file, *year_files):
+    def combine_years(cls, comb_file, year_files):
         """
         Combine multiple years of CEMS data into a single file
+
+        Parameters
+        ----------
+        comb_file : str
+            Path to .h5 file to combine data into
+        year_files : list | tuple
+            List of file paths to combine.
+            Each file should correspond to a years worth of Clean SMOKE data
         """
         years = [os.path.basename(f) for f in year_files]
         logger.info('Combining data from {} into {}'
