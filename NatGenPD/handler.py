@@ -221,6 +221,7 @@ class CEMS:
             else:
                 out = 'int32'
         elif np.issubdtype(dtype, np.object_):
+            col = col.astype(str)
             size = int(col.str.len().max())
             out = 'S{:}'.format(size)
         elif np.issubdtype(dtype, np.datetime64):
