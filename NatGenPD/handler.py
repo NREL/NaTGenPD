@@ -4,9 +4,12 @@ Wrapper on .h5 to handle CEMS data
 @author: mrossol
 """
 import h5py
+import logging
 import numpy as np
 import os
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 
 class CEMSGroup:
@@ -290,3 +293,25 @@ class CEMS:
         """
         Combine multiple years of CEMS data into a single file
         """
+        years = [os.path.basename(f) for f in year_files]
+        logger.info('Combining data from {} into {}'
+                    .format(years, comb_file))
+        with cls(comb_file, mode='w') as f_comb:
+            dsets = []
+            for file in year_files:
+                with CEMS(file, mode='r') as f:
+                    dsets.extend(f.dsets)
+
+            dsets = list(set(dsets))
+            for ds in dsets:
+                comb_arr = []
+                for file in year_files:
+                    with CEMS(file, mode='r') as f:
+                        if ds in f.dsets:
+                            comb_arr.append(f._h5[ds][...])
+                            logger.debug('- {} extracted from {}'
+                                         .format(ds, os.path.basename(file)))
+
+                comb_arr = np.hstack(comb_arr)
+                f_comb.update_dset(ds, comb_arr)
+                logger.info('{} combined'.format(ds))

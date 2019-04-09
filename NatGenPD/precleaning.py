@@ -504,7 +504,7 @@ class CleanSmoke:
             if unit_attrs_path is None:
                 raise ValueError('Unit attributes are needed to clean data')
             else:
-                logger.info('- Adding unit attributes to SMOKE data')
+                logger.info('Adding unit attributes to SMOKE data')
                 unit_info = ParseUnitInfo(unit_attrs_path).unit_info
                 smoke_df = pd.merge(smoke_df, unit_info, on='unit_id',
                                     how='outer')
@@ -850,6 +850,8 @@ class CleanSmoke:
 
         if out_file:
             with CEMS(out_file, mode='w') as f:
+                logger.info('Saving data to {}'
+                            .format(os.path.basename(out_file)))
                 for group, df in smoke_clean.groupby('group_type'):
                     f[group] = df
 
