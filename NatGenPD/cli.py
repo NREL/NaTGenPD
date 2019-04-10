@@ -6,7 +6,7 @@ Command Line Interface and Entry point
 import click
 import logging
 import os
-from .precleaning import ParseSmoke, CleanSmoke
+from .clean import ParseSmoke, CleanSmoke
 from .handler import CEMS
 
 FORMAT = '%(levelname)s - %(asctime)s [%(filename)s:%(lineno)d] : %(message)s'
