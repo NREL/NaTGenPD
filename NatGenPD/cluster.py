@@ -41,27 +41,30 @@ def single_cluster(df, cols=None, NN=5, dist=0.1, normalize=True):
         # coordinate set with only one coordinate cannot be cleaned further
         return df
 
-    N = np.min([n_dat, 100])
     NN = np.min([NN, int(n_dat / 3) + 1])
+    N = int(np.ceil(NN)) + 1
+    if N > n_dat:
+        raise ValueError('Number of nearest neighbors to retrieve (N={}) '
+                         'exceeds length of the dataframe {}'.format(N, n_dat))
     logger.debug('Set contains {} coordinates, N set to {}, '
-                 'N-neighbors required: {} at {} km'
+                 'N-neighbors required: {} at {}'
                  .format(n_dat, N, NN, dist))
 
     # get nearest neighbors
-    d, i = knn(df, cols, return_dist=True, normalize=normalize, k=N)
+    d, _ = knn(df, cols, return_dist=True, normalize=normalize, k=N)
 
-    rows = np.where(d < dist)[0]
-    counts = np.zeros((n_dat, 1))
-    for i in range(n_dat):
-        counts[i] = len(np.where(rows == i)[0])
+    # count the number of distance results per index less than the threshold
+    # (exclude the 1st dist row which is self-referential)
+    counts = np.sum(d[:, 1:] < dist, axis=1)
 
+    # find where there are NN neighbors satisfying the distance threshold
     mask = np.where(counts > NN)[0]
 
     logger.debug('{} points after cleaning'.format(len(mask)))
 
     if len(mask) > 1:
         # multiple cleaned points exist, return them
-        return df.loc[mask, :]
+        return df.iloc[mask, :]
     else:
         # Cleanup eliminated all points. Retry with less strict thresholds
         return single_cluster(df, int(NN * 0.5), dist * 2, normalize=normalize)
