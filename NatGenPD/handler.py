@@ -19,6 +19,7 @@ class CEMSGroup:
     def __init__(self, group_data):
         self._df = self._parse_group(group_data)
         self._unit_dfs = self._df.groupby('unit_id')
+        self._i = 0
 
     def __repr__(self):
         msg = "{} for {}".format(self.__class__.__name__, self.group_type)
@@ -26,9 +27,25 @@ class CEMSGroup:
 
     def __getitem__(self, unit_id):
         if unit_id in self.units:
-            group_df = self._unit_dfs.get_group(unit_id)
+            unit_df = self._unit_dfs.get_group(unit_id)
+            unit_df = unit_df.loc[unit_df['load'] > 0]
 
-        return group_df
+        return unit_df
+
+    def __len__(self):
+        return len(self.units)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._i < len(self):
+            unit = self.units[self._i]
+            unit_df = self[unit]
+            self._i += 1
+            return unit, unit_df
+        else:
+            raise StopIteration
 
     @property
     def df(self):
