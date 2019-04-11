@@ -26,9 +26,12 @@ class CEMSGroup:
         return msg
 
     def __getitem__(self, unit_id):
-        if unit_id in self.units:
-            unit_df = self._unit_dfs.get_group(unit_id)
-            unit_df = unit_df.loc[unit_df['load'] > 0]
+        if unit_id not in self.units:
+            raise KeyError('{} is not a valid unit id'
+                           .format(unit_id))
+
+        unit_df = self._unit_dfs.get_group(unit_id)
+        unit_df = unit_df.loc[unit_df['load'] > 0]
 
         return unit_df
 
