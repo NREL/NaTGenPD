@@ -110,12 +110,10 @@ def knn(df, cols, return_dist=False, normalize=True, k=1):
     if normalize:
         for i, _ in enumerate(cols):
             # get min and max values from a concatenation of both arrays
-            min_all = np.min(np.hstack(
-                (array1[~np.isnan(array1[:, i]), i],
-                 array2[~np.isnan(array2[:, i]), i])))
-            max_all = np.max(np.hstack(
-                (array1[~np.isnan(array1[:, i]), i],
-                 array2[~np.isnan(array2[:, i]), i])))
+            min_all = np.nanmin((np.nanmin(array1[:, i]),
+                                 np.nanmin(array2[:, i])))
+            max_all = np.nanmax((np.nanmax(array1[:, i]),
+                                 np.nanmax(array2[:, i])))
             range_all = max_all - min_all
 
             if range_all == 0.0:
@@ -123,8 +121,10 @@ def knn(df, cols, return_dist=False, normalize=True, k=1):
                 range_all = 1
 
             # range scale from 0 to 1
-            array1[:, i] = (array1[:, i] - min_all) / range_all
-            array2[:, i] = (array2[:, i] - min_all) / range_all
+            array1[:, i] -= min_all
+            array1[:, i] /= range_all
+            array2[:, i] -= min_all
+            array2[:, i] /= range_all
 
     # execute KNN query
     tree = cKDTree(array2)
