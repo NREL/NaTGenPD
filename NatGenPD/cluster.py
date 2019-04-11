@@ -42,7 +42,7 @@ def single_cluster(df, cols=None, NN=5, dist=0.1, normalize=True):
         return df
 
     NN = np.min([NN, int(n_dat / 3) + 1])
-    N = int(np.ceil(NN)) + 1
+    N = int(np.ceil(NN)) + 2
     if N > n_dat:
         raise ValueError('Number of nearest neighbors to retrieve (N={}) '
                          'exceeds length of the dataframe {}'.format(N, n_dat))
@@ -67,7 +67,8 @@ def single_cluster(df, cols=None, NN=5, dist=0.1, normalize=True):
         return df.iloc[mask, :]
     else:
         # Cleanup eliminated all points. Retry with less strict thresholds
-        return single_cluster(df, int(NN * 0.5), dist * 2, normalize=normalize)
+        return single_cluster(df, cols=cols, NN=int(NN * 0.8), dist=dist * 1.2,
+                              normalize=normalize)
 
 
 def knn(df, cols, return_dist=False, normalize=True, k=1):
