@@ -243,7 +243,7 @@ class Cluster:
         return dist
 
     @staticmethod
-    def cluster_score(arr, labels):
+    def cluster_score(arr, labels, outliers=False):
         """
         Modified silhouette score that excludes outliers
 
@@ -259,9 +259,12 @@ class Cluster:
         s : float
             Silhouette score computed after removing outliers (label < 0)
         """
-        pos = labels >= 0
-        s = silhouette_score(arr[pos], labels[pos])
-        return s
+        if not outliers:
+            pos = labels >= 0
+            arr = arr[pos]
+            labels = labels[pos]
+
+        return silhouette_score(arr, labels)
 
     def get_data(self, cols, normalize=True, **kwargs):
         """
@@ -340,7 +343,7 @@ class Cluster:
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples, dt=0.1):
+    def optimize_clusters(self, array, min_samples, dt=0.1, **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -356,6 +359,8 @@ class Cluster:
             If None estimate using k-n distance and min_samples
         dt : float
             Percentage eps by which it is to be incrementally increased
+        kwargs : dict
+            Internal kwargs
 
         Returns
         ---------
@@ -366,12 +371,13 @@ class Cluster:
         min_samples : int
             min_samples value used to run DBSCAN
         """
+        outliers = kwargs.get('outliers', False)
         labels, eps, _ = self._DBSCAN(array, min_samples)
         label_n = [_l for _l in np.unique(labels) if _l != -1]
         n_clusters = len(label_n)
         eps_dt = eps * dt
 
-        score = self.cluster_score(array, labels)
+        score = self.cluster_score(array, labels, outliers=outliers)
         cluster_params = labels, eps, min_samples
         while len(label_n) > 1:
             eps += eps_dt
@@ -380,7 +386,7 @@ class Cluster:
 
             label_n = [_l for _l in np.unique(labels) if _l != -1]
             if len(label_n) == n_clusters:
-                s = self.cluster_score(array, labels)
+                s = self.cluster_score(array, labels, outliers=outliers)
                 if s > score:
                     score = s
                     cluster_params = labels, eps, min_samples
@@ -419,6 +425,7 @@ class Cluster:
         min_samples : int
             min_samples value used to run DBSCAN
         """
+        outliers = kwargs.get('outliers', False)
         cluster_params = None
         score = None
         while True:
@@ -428,9 +435,10 @@ class Cluster:
             if len(label_n) == n_clusters:
                 if cluster_params is None:
                     cluster_params = labels, eps, min_samples
-                    score = self.cluster_score(array, labels)
+                    score = self.cluster_score(array, labels,
+                                               outliers=outliers)
                 else:
-                    s = self.cluster_score(array, labels)
+                    s = self.cluster_score(array, labels, outliers=outliers)
                     if s > score:
                         score = s
                         cluster_params = labels, eps, min_samples
@@ -439,7 +447,7 @@ class Cluster:
                     dt = kwargs.get('dt', 0.1)
                     cluster_params = self.optimize_clusters(array,
                                                             min_samples,
-                                                            dt=dt)
+                                                            dt=dt, **kwargs)
             elif len(label_n) < n_clusters:
                 if cluster_params is None:
                     raise RuntimeError('{:} clusters could not be found'
