@@ -352,16 +352,19 @@ class Cluster:
 
         score = silhouette_score(array, labels)
         cluster_params = labels, eps, min_samples
-        while len(label_n) == n_clusters:
+        while len(label_n) > 1:
             eps += eps_dt
             eps_dt = eps / dt
             labels, _, _ = self._DBSCAN(array, min_samples, eps=eps)
 
             label_n = [_l for _l in np.unique(labels) if _l != -1]
-            s = silhouette_score(array, labels)
-            if s > score:
-                score = s
-                cluster_params = labels, eps, min_samples
+            if len(label_n) == n_clusters:
+                s = silhouette_score(array, labels)
+                if s > score:
+                    score = s
+                    cluster_params = labels, eps, min_samples
+            else:
+                break
 
         labels, eps, min_samples = cluster_params
         return labels, eps, min_samples
