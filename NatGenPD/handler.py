@@ -33,7 +33,7 @@ class CEMSGroup:
         unit_df = self._unit_dfs.get_group(unit_id)
         unit_df = unit_df.loc[unit_df['load'] > 0]
 
-        return unit_df
+        return unit_df.reset_index(drop=True)
 
     def __len__(self):
         return len(self.units)
