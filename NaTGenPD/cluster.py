@@ -6,8 +6,11 @@ Data clustering utilities
 
 import logging
 import numpy as np
+from scipy.spatial.distance import pdist, squareform
 from scipy.spatial import cKDTree
-
+from sklearn.cluster import DBSCAN
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import normalize
 
 logger = logging.getLogger(__name__)
 
@@ -141,3 +144,293 @@ def knn(df, cols, return_dist=False, normalize=True, k=1):
         return dist_1, ind_1
     else:
         return ind_1
+
+
+class Cluster:
+    """
+    DBSCAN clustering class
+    """
+    def __init__(self, unit_df):
+        self._unit_df = unit_df
+        unit_attrs = unit_df.iloc[0]
+        self._unit_id = unit_attrs['unit_id']
+        self._type = unit_attrs['group_type']
+
+    def __repr__(self):
+        """
+        Print the Clustering class and meta shape
+
+        Returns
+        ---------
+        str
+            Clustering type and variables, farms in meta
+        """
+        name = self.__class__.__name__
+        return '{} for {} unit {}'.format(name, self._type, self._unit_id)
+
+    @staticmethod
+    def normalize_values(arr, norm='max'):
+        """
+        Normalize values in array by column
+
+        Parameters
+        ----------
+        arr : ndarray
+            ndarray of values extracted from meta
+            shape (n samples, with m features)
+        norm : str
+            Normalization method to use, see sklearn.preprocessing.normalize
+
+        Returns
+        ---------
+        arr : ndarray
+            array with values normalized by column
+            shape (n samples, with m features)
+        """
+        return normalize(arr, axis=0, norm=norm)
+
+    @staticmethod
+    def n_dist(array, n):
+        """
+        Compute the nk-nearest neighbor distance for all points in array
+
+        Parameters
+        ----------
+        array : ndarray
+            Array of n samples with m features
+        n : int
+            Number of nearest neighbors
+
+        Returns
+        ---------
+        dist : ndarray
+            1d array of nk-nearest neighbor distances
+        """
+        def n_min(v, n):
+            return np.sort(v)[1:n + 1]
+
+        dist = squareform(pdist(array))
+        dist = np.apply_along_axis(n_min, 0, dist, n).flatten()
+        return np.sort(dist)
+
+    @staticmethod
+    def line_dist(k_dist):
+        """
+        Extract the distance between each point on the nk-nearest neighbor
+        distance curve and the line connecting the min and max values. The
+        maximum distance corresponds to the knee of the curve, which can be
+        used to estimate the optimal epsilon value for DBSCAN
+
+        Parameters
+        ----------
+        k_dist : ndarray
+            1d array of nk-nearest neighbor distances
+
+        Returns
+        ---------
+        dist : ndarray
+            1d array of distances between each value and the line connecting
+            the min and max values
+        """
+        coords = np.dstack((range(len(k_dist)), k_dist))[0]
+
+        b = coords[-1] - coords[0]
+        b_hat = b / np.sqrt(np.sum(b**2))
+        p = coords - coords[0]
+
+        d = p - np.outer(np.dot(p, b_hat), b_hat)
+        dist = np.sqrt(np.sum(d**2, axis=1))
+        return dist
+
+    def get_data(self, cols, normalize=True, **kwargs):
+        """
+        Print the Clustering class and meta shape
+
+        Parameters
+        ----------
+        cols : list
+            List of columns to extract
+        normalize : bool
+            Option to normalize data or not
+        kwargs : dict
+            internal kwargs
+
+        Returns
+        ---------
+        arr : ndarray
+            Array of given column values for all farms in meta
+            shape (n samples, with m features)
+        """
+        arr = self._unit_df[cols].values
+        if normalize:
+            arr = self.normalize_values(arr, **kwargs)
+
+        return arr
+
+    def optimal_eps(self, array, k=5):
+        """
+        Use the k-nearest neighbor plot to estimate the optimal epsilon
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        k : 'int'
+            Number of nearest neighbors (corresponds to min_samples in DBSCAN)
+
+        Returns
+        ---------
+        eps : float
+            Optimal epsilon for running DBSCAN with min_samples = k
+        """
+        k_dist = self.n_dist(array, k)
+        eps_dist = self.line_dist(k_dist)
+        eps_pos = np.argmax(eps_dist)
+        eps = k_dist[eps_pos]
+        return eps
+
+    def _DBSCAN(self, array, min_samples, eps=None):
+        """
+        Run DBSCAN on array, compute eps if not supplied.
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        min_samples : int
+            min_samples value for running DBSCAN
+        eps : float
+            Epsilon value for running DBSCAN
+            If None estimate using k-n distance and min_samples
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used to run DBSCAN
+        min_samples : int
+            min_samples value used to run DBSCAN
+        """
+        if eps is None:
+            eps = self.optimal_eps(array, k=min_samples)
+
+        labels = DBSCAN(eps=eps, min_samples=min_samples).fit_predict(array)
+
+        return labels, eps, min_samples
+
+    def optimize_clusters(self, array, min_samples, dt=0.1):
+        """
+        Incrimentally increase eps from given value to optimize cluster
+        size
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        min_samples : int
+            min_samples value for running DBSCAN
+        eps : float
+            Epsilon value for running DBSCAN
+            If None estimate using k-n distance and min_samples
+        dt : float
+            Percentage eps by which it is to be incrementally increased
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used to run DBSCAN
+        min_samples : int
+            min_samples value used to run DBSCAN
+        """
+        labels, eps, _ = self._DBSCAN(array, min_samples)
+        label_n = [_l for _l in np.unique(labels) if _l != -1]
+        n_clusters = len(label_n)
+        eps_dt = eps * dt
+
+        score = silhouette_score(array, labels)
+        cluster_params = labels, eps, min_samples
+        while len(label_n) > 1:
+            eps += eps_dt
+            eps_dt = eps / dt
+            labels, _, _ = self._DBSCAN(array, min_samples, eps=eps)
+
+            label_n = [_l for _l in np.unique(labels) if _l != -1]
+            if len(label_n) == n_clusters:
+                s = silhouette_score(array, labels)
+                if s > score:
+                    score = s
+                    cluster_params = labels, eps, min_samples
+
+        labels, eps, min_samples = cluster_params
+        return labels, eps, min_samples
+
+    def get_n_clusters(self, array, n_clusters, optimize=True, min_samples=2,
+                       **kwargs):
+        """
+        Iterate through min_samples until n_clusters are identified using
+        DBSCAN
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        n_clusters : int
+            Number of clusters to try and find by iterating through
+            min_samples
+        optimize : bool
+            Optimize eps for n_clusters
+        min_samples : int
+            Starting value for min_samples
+        kwargs : dict
+            Internal kwargs
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used to run DBSCAN
+        min_samples : int
+            min_samples value used to run DBSCAN
+        """
+        cluster_params = None
+        score = None
+        while True:
+            labels, eps, _ = self._DBSCAN(array, min_samples)
+
+            label_n = [_l for _l in np.unique(labels) if _l != -1]
+            if len(label_n) == n_clusters:
+                if cluster_params is None:
+                    cluster_params = labels, eps, min_samples
+                    score = silhouette_score(array, labels)
+                else:
+                    s = silhouette_score(array, labels)
+                    if s > score:
+                        score = s
+                        cluster_params = labels, eps, min_samples
+
+                if optimize:
+                    dt = kwargs.get('dt', 0.1)
+                    cluster_params = self.optimize_clusters(array,
+                                                            min_samples,
+                                                            dt=dt)
+            elif len(label_n) < n_clusters:
+                if cluster_params is None:
+                    raise RuntimeError('{:} clusters could not be found'
+                                       .format(n_clusters))
+                else:
+                    break
+
+            min_samples += 1
+
+        labels, eps, min_samples = cluster_params
+        return labels, eps, min_samples
+
+
+class SingleCluster(Cluster):
+    """
+    Subclass to perform single cluster extraction on non-CC generators
+    """
