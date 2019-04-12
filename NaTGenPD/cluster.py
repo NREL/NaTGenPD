@@ -242,6 +242,27 @@ class Cluster:
         dist = np.sqrt(np.sum(d**2, axis=1))
         return dist
 
+    @staticmethod
+    def cluster_score(arr, labels):
+        """
+        Modified silhouette score that excludes outliers
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        labels : ndarray
+            Vector of cluster labels for each row in array
+
+        Returns
+        -------
+        s : float
+            Silhouette score computed after removing outliers (label < 0)
+        """
+        pos = labels >= 0
+        s = silhouette_score(arr[pos], labels[pos])
+        return s
+
     def get_data(self, cols, normalize=True, **kwargs):
         """
         Print the Clustering class and meta shape
@@ -350,7 +371,7 @@ class Cluster:
         n_clusters = len(label_n)
         eps_dt = eps * dt
 
-        score = silhouette_score(array, labels)
+        score = self.cluster_score(array, labels)
         cluster_params = labels, eps, min_samples
         while len(label_n) > 1:
             eps += eps_dt
@@ -359,7 +380,7 @@ class Cluster:
 
             label_n = [_l for _l in np.unique(labels) if _l != -1]
             if len(label_n) == n_clusters:
-                s = silhouette_score(array, labels)
+                s = self.cluster_score(array, labels)
                 if s > score:
                     score = s
                     cluster_params = labels, eps, min_samples
@@ -407,9 +428,9 @@ class Cluster:
             if len(label_n) == n_clusters:
                 if cluster_params is None:
                     cluster_params = labels, eps, min_samples
-                    score = silhouette_score(array, labels)
+                    score = self.cluster_score(array, labels)
                 else:
-                    s = silhouette_score(array, labels)
+                    s = self.cluster_score(array, labels)
                     if s > score:
                         score = s
                         cluster_params = labels, eps, min_samples
