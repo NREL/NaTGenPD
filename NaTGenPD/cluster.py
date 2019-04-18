@@ -8,6 +8,7 @@ import logging
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from scipy.spatial import cKDTree
+from scipy.spatial.distance import cdist
 from sklearn.cluster import DBSCAN
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import normalize
@@ -376,6 +377,31 @@ class SingleCluster(Cluster):
         logger.debug('KNN distance: \n{}'.format(dist))
 
         return dist
+
+    @staticmethod
+    def cluster_score(arr, labels, outliers=False):
+        """
+        Modified silhouette score that excludes outliers
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        labels : ndarray
+            Vector of cluster labels for each row in array
+
+        Returns
+        -------
+        s : float
+            Silhouette score computed after removing outliers (label < 0)
+        """
+        a = cdist(arr[labels == 1], arr[labels == 1])
+        a = np.sum(a, axis=0) / (len(a) - 1)
+
+        b = cdist(arr[labels == 1], arr[labels == 0])
+        b = np.mean(b, axis=0)
+
+        return (b - a) / a
 
     def _cluster(self, array, min_samples, eps=None, tree=False):
         """
