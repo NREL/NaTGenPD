@@ -398,7 +398,7 @@ class SingleCluster(Cluster):
         a = cdist(arr[labels == 1], arr[labels == 1])
         a = np.sum(a, axis=0) / (len(a) - 1)
 
-        b = cdist(arr[labels == 1], arr[labels == 0])
+        b = cdist(arr[labels == 0], arr[labels == 1])
         b = np.mean(b, axis=0)
 
         return (b - a) / a
