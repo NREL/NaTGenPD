@@ -425,7 +425,7 @@ class SingleCluster(Cluster):
         else:
             tree = self._tree
 
-        d, _ = self.knn(array, tree=tree, k=min_samples + 1)
+        d = self.knn(array, tree=tree, k=min_samples + 1)
         # count the number of distance results per index less than the
         # threshold (exclude the 1st dist row which is self-referential)
         counts = np.sum(d[:, 1:] <= eps, axis=1)
