@@ -396,10 +396,10 @@ class SingleCluster(Cluster):
             Silhouette score computed after removing outliers (label < 0)
         """
         a = cdist(arr[labels == 1], arr[labels == 1])
-        a = np.sum(a, axis=0) / (len(a) - 1)
+        a = (np.sum(a, axis=0) / (len(a) - 1)).mean()
 
-        b = cdist(arr[labels == 0], arr[labels == 1])
-        b = np.mean(b, axis=0)
+        b = cdist(arr[labels == 0], arr[labels == 0])
+        b = np.mean(b, axis=0).mean()
 
         return (b - a) / a
 
