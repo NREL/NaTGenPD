@@ -401,7 +401,7 @@ class SingleCluster(Cluster):
         b = cdist(arr[labels == 0], arr[labels == 1])
         b = np.mean(b, axis=0)
 
-        return (b - a) / a
+        return np.mean((b - a) / a)
 
     def _cluster(self, array, min_samples, eps=None, tree=False):
         """
