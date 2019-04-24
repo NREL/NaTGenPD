@@ -375,7 +375,7 @@ class SingleCluster(Cluster):
         return dist
 
     @staticmethod
-    def cluster_score(arr, labels, tree=None):
+    def cluster_score(arr, labels):
         """
         Modified silhouette score that excludes outliers
 
@@ -385,8 +385,6 @@ class SingleCluster(Cluster):
             Array to be used for clustering, shape n samples with m features
         labels : ndarray
             Vector of cluster labels for each row in array
-        tree : cKDTree
-            Pre-computed cKDTree
 
         Returns
         -------
@@ -395,9 +393,7 @@ class SingleCluster(Cluster):
         """
         cluster = arr[labels == 1]
         noise = arr[labels == 0]
-
-        if tree is None:
-            tree = cKDTree(cluster)
+        tree = cKDTree(cluster)
 
         # Compute intra-cluster nearest neighbor distance
         a = tree.query(cluster, k=2)[0][:, 1:].mean()
@@ -466,7 +462,7 @@ class SingleCluster(Cluster):
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples, dt=0.2, **kwargs):
+    def optimize_clusters(self, array, min_samples=None, dt=0.2, **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -498,13 +494,13 @@ class SingleCluster(Cluster):
             min_samples = int(len(array) / 1000)
 
         labels, eps, _ = self._cluster(array, min_samples)
-        score = self.cluster_score(array, labels, tree=self._tree)
+        score = self.cluster_score(array, labels)
         cluster_params = labels, eps, min_samples
         while True:
             eps_dt = eps * dt
             eps += eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
-            s = self.cluster_score(array, labels, tree=self._tree)
+            s = self.cluster_score(array, labels)
             if s > score:
                 score = s
                 cluster_params = labels, eps, min_samples
