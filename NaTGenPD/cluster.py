@@ -498,7 +498,7 @@ class SingleCluster(Cluster):
         cluster_params = labels, eps, min_samples
         while True:
             eps_dt = eps * dt
-            eps += eps_dt
+            eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
             s = self.cluster_score(array, labels)
             if s > score:
