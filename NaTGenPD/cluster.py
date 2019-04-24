@@ -462,7 +462,7 @@ class SingleCluster(Cluster):
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples=None, dt=0.2, **kwargs):
+    def optimize_clusters(self, array, min_samples=None, dt=0.1, **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
