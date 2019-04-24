@@ -145,7 +145,7 @@ class Cluster:
 
         return silhouette_score(arr, labels)
 
-    def get_data(self, cols, normalize=True, **kwargs):
+    def get_data(self, cols, normalize=True, noise=0.01, **kwargs):
         """
         Print the Clustering class and meta shape
 
@@ -167,6 +167,9 @@ class Cluster:
         arr = self._unit_df[cols].values
         if normalize:
             arr = self.normalize_values(arr, **kwargs)
+
+        if noise:
+            arr[:, 0] *= np.random.uniform(1 - noise, 1 + noise, len(arr))
 
         return arr
 
@@ -462,7 +465,7 @@ class SingleCluster(Cluster):
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples=None, dt=0.1, **kwargs):
+    def optimize_clusters(self, array, min_samples=None, dt=0.1):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
