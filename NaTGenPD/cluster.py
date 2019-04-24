@@ -3,7 +3,6 @@
 Data clustering utilities
 @author: gbuster
 """
-from collections.abc import Iterable
 import logging
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
@@ -261,7 +260,7 @@ class Cluster:
         cluster_params = labels, eps, min_samples
         while len(label_n) > 1:
             eps += eps_dt
-            eps_dt = eps / dt
+            eps_dt = eps * dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
 
             label_n = [_l for _l in np.unique(labels) if _l != -1]
@@ -467,8 +466,7 @@ class SingleCluster(Cluster):
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples=None,
-                          eps=slice(0.005, 0.105, 0.005)):
+    def optimize_clusters(self, array, min_samples, dt=0.2, **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -482,6 +480,10 @@ class SingleCluster(Cluster):
         eps : float
             Epsilon value for running DBSCAN
             If None estimate using k-n distance and min_samples
+        dt : float
+            Percentage eps by which it is to be incrementally increased
+        kwargs : dict
+            Internal kwargs
 
         Returns
         ---------
@@ -492,23 +494,21 @@ class SingleCluster(Cluster):
         min_samples : int
             min_samples value used to run DBSCAN
         """
-        if isinstance(eps, slice):
-            eps_range = np.arange(eps.start, eps.stop, eps.step)
-        elif isinstance(eps, Iterable):
-            eps_range = eps
-        else:
-            raise ValueError("eps must be a slice or an iterable")
-
         if min_samples is None:
             min_samples = int(len(array) / 1000)
 
-        score = 0
-        for e in eps_range:
-            labels, _, _ = self._cluster(array, min_samples, eps=e)
-
+        labels, eps, _ = self._cluster(array, min_samples)
+        score = self.cluster_score(array, labels, tree=self._tree)
+        cluster_params = labels, eps, min_samples
+        while True:
+            eps_dt = eps * dt
+            eps += eps_dt
+            labels, _, _ = self._cluster(array, min_samples, eps=eps)
             s = self.cluster_score(array, labels, tree=self._tree)
             if s > score:
                 score = s
-                cluster_params = labels, e, min_samples
+                cluster_params = labels, eps, min_samples
+            else:
+                break
 
         return cluster_params
