@@ -3,12 +3,11 @@
 Data clustering utilities
 @author: gbuster
 """
-
+from collections.abc import Iterable
 import logging
 import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from scipy.spatial import cKDTree
-from scipy.spatial.distance import cdist
 from sklearn.cluster import DBSCAN
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import normalize
@@ -274,8 +273,7 @@ class Cluster:
             else:
                 break
 
-        labels, eps, min_samples = cluster_params
-        return labels, eps, min_samples
+        return cluster_params
 
     def get_n_clusters(self, array, n_clusters, optimize=True, min_samples=2,
                        **kwargs):
@@ -338,8 +336,7 @@ class Cluster:
 
             min_samples += 1
 
-        labels, eps, min_samples = cluster_params
-        return labels, eps, min_samples
+        return cluster_params
 
 
 class SingleCluster(Cluster):
@@ -379,7 +376,7 @@ class SingleCluster(Cluster):
         return dist
 
     @staticmethod
-    def cluster_score(arr, labels, outliers=False):
+    def cluster_score(arr, labels, tree=None):
         """
         Modified silhouette score that excludes outliers
 
@@ -389,19 +386,26 @@ class SingleCluster(Cluster):
             Array to be used for clustering, shape n samples with m features
         labels : ndarray
             Vector of cluster labels for each row in array
+        tree : cKDTree
+            Pre-computed cKDTree
 
         Returns
         -------
         s : float
             Silhouette score computed after removing outliers (label < 0)
         """
-        a = cdist(arr[labels == 1], arr[labels == 1])
-        a = (np.sum(a, axis=0) / (len(a) - 1)).mean()
+        cluster = arr[labels == 1]
+        noise = arr[labels == 0]
 
-        b = cdist(arr[labels == 0], arr[labels == 0])
-        b = np.mean(b, axis=0).mean()
+        if tree is None:
+            tree = cKDTree(cluster)
 
-        return np.mean((b - a) / a)
+        # Compute intra-cluster nearest neighbor distance
+        a = tree.query(cluster, k=2)[0][:, 1:].mean()
+        # Compute nearest neighbor distance between cluster and noise
+        b = tree.query(noise, k=1)[0].mean()
+
+        return b / a
 
     def _cluster(self, array, min_samples, eps=None, tree=False):
         """
@@ -462,3 +466,49 @@ class SingleCluster(Cluster):
         labels[mask] = 1
 
         return labels, eps, min_samples
+
+    def optimize_clusters(self, array, min_samples=None,
+                          eps=slice(0.005, 0.105, 0.005)):
+        """
+        Incrimentally increase eps from given value to optimize cluster
+        size
+
+        Parameters
+        ----------
+        array : ndarray
+            Array to be used for clustering, shape n samples with m features
+        min_samples : int
+            min_samples value for running DBSCAN
+        eps : float
+            Epsilon value for running DBSCAN
+            If None estimate using k-n distance and min_samples
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used to run DBSCAN
+        min_samples : int
+            min_samples value used to run DBSCAN
+        """
+        if isinstance(eps, slice):
+            eps_range = np.arange(eps.start, eps.stop, eps.step)
+        elif isinstance(eps, Iterable):
+            eps_range = eps
+        else:
+            raise ValueError("eps must be a slice or an iterable")
+
+        if min_samples is None:
+            min_samples = int(len(array) / 1000)
+
+        score = 0
+        for e in eps_range:
+            labels, _, _ = self._cluster(array, min_samples, eps=e)
+
+            s = self.cluster_score(array, labels, tree=self._tree)
+            if s > score:
+                score = s
+                cluster_params = labels, e, min_samples
+
+        return cluster_params
