@@ -439,7 +439,7 @@ class CleanSmoke:
     """
     OUT_COLS = ['unit_id', 'time', 'load', 'HTINPUT', 'heat_rate',
                 'latitude', 'longitude', 'state', 'EPA_region', 'NERC_region',
-                'unit_type', 'fuel_type', 'group_type']
+                'unit_type', 'fuel_type', 'group_type', 'cts']
 
     def __init__(self, smoke, unit_attrs_path=None):
         """
