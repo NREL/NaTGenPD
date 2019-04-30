@@ -713,14 +713,15 @@ class CleanSmoke:
         cc_unit = group[['load', 'HTINPUT']].sum()
         cc_unit = cc_unit.reset_index()
         cc_unit['heat_rate'] = cc_unit['HTINPUT'] / cc_unit['load']
-        cts = group.apply(lambda x: len(x['load'].nonzero()[0]))
+        cts = group.apply(lambda x: len(x['load'].to_numpy().nonzero()[0]))
         cc_unit['cts'] = cts.values
-        cc_unit['unit_id'] = cc_df.name
+
         info_cols = ['latitude', 'longitude', 'state', 'EPA_region',
                      'NERC_region', 'unit_type', 'fuel_type', 'group_type']
         series = cc_df.iloc[0]
+        cc_unit.loc[:, 'unit_id'] = series['cc_unit']
         for col in info_cols:
-            cc_unit[col] = series[col]
+            cc_unit.loc[:, col] = series[col]
 
         return cc_unit
 
