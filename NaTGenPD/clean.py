@@ -707,6 +707,11 @@ class CleanSmoke:
         cc_unit : pandas.DataFrame
             CC unit data after aggregation of CT data
         """
+        try:
+            unit_id = cc_df.name
+        except AttributeError:
+            unit_id = cc_df.iloc[0]['cc_unit']
+
         cc_df.loc[cc_df['load'] <= 0, 'load'] = None
         cc_df = cc_df.fillna(0)
         group = cc_df.groupby('time')
@@ -715,11 +720,11 @@ class CleanSmoke:
         cc_unit['heat_rate'] = cc_unit['HTINPUT'] / cc_unit['load']
         cts = group.apply(lambda x: len(x['load'].to_numpy().nonzero()[0]))
         cc_unit['cts'] = cts.values
+        cc_unit['unit_id'] = unit_id
 
         info_cols = ['latitude', 'longitude', 'state', 'EPA_region',
                      'NERC_region', 'unit_type', 'fuel_type', 'group_type']
         series = cc_df.iloc[0]
-        cc_unit.loc[:, 'unit_id'] = series['cc_unit']
         for col in info_cols:
             cc_unit.loc[:, col] = series[col]
 
