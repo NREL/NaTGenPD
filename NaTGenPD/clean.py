@@ -707,10 +707,14 @@ class CleanSmoke:
         cc_unit : pandas.DataFrame
             CC unit data after aggregation of CT data
         """
-        cc_unit = cc_df.groupby('time')[['load', 'HTINPUT']].sum()
+        cc_df.loc[cc_df['load'] <= 0, 'load'] = None
+        cc_df = cc_df.fillna(0)
+        group = cc_df.groupby('time')
+        cc_unit = group[['load', 'HTINPUT']].sum()
         cc_unit = cc_unit.reset_index()
         cc_unit['heat_rate'] = cc_unit['HTINPUT'] / cc_unit['load']
-        cc_unit['cts'] = len(cc_df['unit_id'].unique())
+        cts = group.apply(lambda x: len(x['load'].nonzero()[0]))
+        cc_unit['cts'] = cts.values
         cc_unit['unit_id'] = cc_df.name
         info_cols = ['latitude', 'longitude', 'state', 'EPA_region',
                      'NERC_region', 'unit_type', 'fuel_type', 'group_type']
@@ -721,7 +725,7 @@ class CleanSmoke:
         return cc_unit
 
     @staticmethod
-    def aggregate_ccs(smoke_df, cc_map):
+    def aggregate_ccs(smoke_df, cc_map, **kwargs):
         """
         Aggregate CEMS CC 'units' into EIA CC 'units'
         NOTE: CEMS reports CC on a CT by CT basis with the combined steam
@@ -744,6 +748,10 @@ class CleanSmoke:
                              cc_map['EIAUnit'].astype(str))
         cc_map['unit_id'] = cc_map['CEMSUnit']
         cc_map = cc_map[['unit_id', 'cc_unit']]
+
+        if 'load' not in smoke_df.columns:
+            warnings.warn('Converting gload to net load')
+            smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
 
         cc_df = pd.merge(smoke_df, cc_map, on='unit_id', how='right')
         cc_df = cc_df.groupby('cc_unit').apply(CleanSmoke.cts_to_cc)
