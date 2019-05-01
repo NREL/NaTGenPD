@@ -132,6 +132,8 @@ class Cluster:
             Array to be used for clustering, shape n samples with m features
         labels : ndarray
             Vector of cluster labels for each row in array
+        outliers : bool
+            Boolean flag to use outliers in silhouette_score calculation
 
         Returns
         -------
@@ -225,121 +227,6 @@ class Cluster:
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples, dt=0.1, **kwargs):
-        """
-        Incrimentally increase eps from given value to optimize cluster
-        size
-
-        Parameters
-        ----------
-        array : ndarray
-            Array to be used for clustering, shape n samples with m features
-        min_samples : int
-            min_samples value for running DBSCAN
-        eps : float
-            Epsilon value for running DBSCAN
-            If None estimate using k-n distance and min_samples
-        dt : float
-            Percentage eps by which it is to be incrementally increased
-        kwargs : dict
-            Internal kwargs
-
-        Returns
-        ---------
-        labels : ndarray
-            Vector of cluster labels for each row in array
-        eps : float
-            eps value used to run DBSCAN
-        min_samples : int
-            min_samples value used to run DBSCAN
-        """
-        outliers = kwargs.get('outliers', False)
-        labels, eps, _ = self._cluster(array, min_samples)
-        label_n = [_l for _l in np.unique(labels) if _l != -1]
-        n_clusters = len(label_n)
-        eps_dt = eps * dt
-
-        score = self.cluster_score(array, labels, outliers=outliers)
-        cluster_params = labels, eps, min_samples
-        while len(label_n) > 1:
-            eps += eps_dt
-            eps_dt = eps * dt
-            labels, _, _ = self._cluster(array, min_samples, eps=eps)
-
-            label_n = [_l for _l in np.unique(labels) if _l != -1]
-            if len(label_n) == n_clusters:
-                s = self.cluster_score(array, labels, outliers=outliers)
-                if s > score:
-                    score = s
-                    cluster_params = labels, eps, min_samples
-            else:
-                break
-
-        return cluster_params
-
-    def get_n_clusters(self, array, n_clusters, optimize=True, min_samples=2,
-                       **kwargs):
-        """
-        Iterate through min_samples until n_clusters are identified using
-        DBSCAN
-
-        Parameters
-        ----------
-        array : ndarray
-            Array to be used for clustering, shape n samples with m features
-        n_clusters : int
-            Number of clusters to try and find by iterating through
-            min_samples
-        optimize : bool
-            Optimize eps for n_clusters
-        min_samples : int
-            Starting value for min_samples
-        kwargs : dict
-            Internal kwargs
-
-        Returns
-        ---------
-        labels : ndarray
-            Vector of cluster labels for each row in array
-        eps : float
-            eps value used to run DBSCAN
-        min_samples : int
-            min_samples value used to run DBSCAN
-        """
-        outliers = kwargs.get('outliers', False)
-        cluster_params = None
-        score = None
-        while True:
-            labels, eps, _ = self._cluster(array, min_samples)
-
-            label_n = [_l for _l in np.unique(labels) if _l != -1]
-            if len(label_n) == n_clusters:
-                if cluster_params is None:
-                    cluster_params = labels, eps, min_samples
-                    score = self.cluster_score(array, labels,
-                                               outliers=outliers)
-                else:
-                    s = self.cluster_score(array, labels, outliers=outliers)
-                    if s > score:
-                        score = s
-                        cluster_params = labels, eps, min_samples
-
-                if optimize:
-                    dt = kwargs.get('dt', 0.1)
-                    cluster_params = self.optimize_clusters(array,
-                                                            min_samples,
-                                                            dt=dt, **kwargs)
-            elif len(label_n) < n_clusters:
-                if cluster_params is None:
-                    raise RuntimeError('{:} clusters could not be found'
-                                       .format(n_clusters))
-                else:
-                    break
-
-            min_samples += 1
-
-        return cluster_params
-
 
 class SingleCluster(Cluster):
     """
@@ -351,7 +238,8 @@ class SingleCluster(Cluster):
 
     @staticmethod
     def knn(arr, tree=None, k=1):
-        """Get euclidian distance nearest neighbors for numerical column data.
+        """
+        Get euclidian distance nearest neighbors for numerical column data.
 
         Parameters
         ----------
@@ -407,16 +295,16 @@ class SingleCluster(Cluster):
 
     def _cluster(self, array, min_samples, eps=None, tree=False):
         """
-        Run DBSCAN on array, compute eps if not supplied.
+        Find single cluster for array, compute eps if not supplied.
 
         Parameters
         ----------
         array : ndarray
             Array to be used for clustering, shape n samples with m features
         min_samples : int
-            min_samples value for running DBSCAN
+            min_samples value for clustering
         eps : float
-            Epsilon value for running DBSCAN
+            Epsilon value for clustering
             If None estimate using k-n distance and min_samples
         tree : bool
             Compute tree, if False use pre-computed tree
@@ -426,14 +314,12 @@ class SingleCluster(Cluster):
         labels : ndarray
             Vector of cluster labels for each row in array
         eps : float
-            eps value used to run DBSCAN
+            eps value used to cluster
         min_samples : int
-            min_samples value used to run DBSCAN
+            min_samples value used to cluster
         """
         if eps is None:
             eps = self.optimal_eps(array, k=min_samples)
-
-        labels = DBSCAN(eps=eps, min_samples=min_samples).fit_predict(array)
 
         n_dat = len(array)
         if min_samples > n_dat:
@@ -465,15 +351,65 @@ class SingleCluster(Cluster):
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, array, min_samples=None, dt=0.1):
+    def optimize_clusters(self, min_samples=None, dt=0.1):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
 
         Parameters
         ----------
-        array : ndarray
-            Array to be used for clustering, shape n samples with m features
+        min_samples : int
+            min_samples value for clustering, if None set as len(array) / 1000
+        eps : float
+            Epsilon value for clustering
+            If None estimate using k-n distance and min_samples
+        dt : float
+            Percentage eps by which it is to be incrementally increased
+        kwargs : dict
+            Internal kwargs
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used for clustering
+        min_samples : int
+            min_samples value used for clustering
+        """
+        array = self.get_data(['load', 'heat_rate'])
+        if min_samples is None:
+            min_samples = int(len(array) / 1000)
+
+        labels, eps, _ = self._cluster(array, min_samples)
+        score = self.cluster_score(array, labels)
+        cluster_params = labels, eps, min_samples
+        while True:
+            eps_dt = eps * dt
+            eps = eps + eps_dt
+            labels, _, _ = self._cluster(array, min_samples, eps=eps)
+            s = self.cluster_score(array, labels)
+            if s < score:
+                break
+            else:
+                score = s
+                cluster_params = labels, eps, min_samples
+
+        return cluster_params
+
+
+class CCsCluster(Cluster):
+    """
+    Subclass for finding operating modes in CCs
+    """
+
+    def optimize_clusters(self, min_samples=None, dt=0.1):
+        """
+        Incrimentally increase eps from given value to optimize cluster
+        size
+
+        Parameters
+        ----------
         min_samples : int
             min_samples value for running DBSCAN
         eps : float
@@ -493,6 +429,8 @@ class SingleCluster(Cluster):
         min_samples : int
             min_samples value used to run DBSCAN
         """
+        array = self.get_data(['load', 'heat_rate', 'cts'], norm='max')
+        cts = len(np.unique(array[:, -1]))
         if min_samples is None:
             min_samples = int(len(array) / 1000)
 
@@ -504,10 +442,12 @@ class SingleCluster(Cluster):
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
             s = self.cluster_score(array, labels)
-            if s >= score:
+            n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
+            if s < score:
+                if n_clusters <= cts:
+                    break
+            else:
                 score = s
                 cluster_params = labels, eps, min_samples
-            else:
-                break
 
         return cluster_params
