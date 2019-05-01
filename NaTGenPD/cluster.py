@@ -19,6 +19,12 @@ class Cluster:
     DBSCAN clustering class
     """
     def __init__(self, unit_df):
+        """
+        Parameters
+        ----------
+        unit_df : pandas.DataFrame
+            DataFrame of timeseries heat rate data for unit of interest
+        """
         self._unit_df = unit_df
         unit_attrs = unit_df.iloc[0]
         self._unit_id = unit_attrs['unit_id']
@@ -227,6 +233,77 @@ class Cluster:
 
         return labels, eps, min_samples
 
+    def optimize_clusters(self, min_samples=None, dt=0.1, **kwargs):
+        """
+        Incrimentally increase eps from given value to optimize cluster
+        size
+
+        Parameters
+        ----------
+        min_samples : int
+            min_samples value for clustering, if None set as len(array) / 1000
+        eps : float
+            Epsilon value for clustering
+            If None estimate using k-n distance and min_samples
+        dt : float
+            Percentage eps by which it is to be incrementally increased
+        kwargs : dict
+            Internal kwargs
+
+        Returns
+        ---------
+        labels : ndarray
+            Vector of cluster labels for each row in array
+        eps : float
+            eps value used for clustering
+        min_samples : int
+            min_samples value used for clustering
+        """
+        array = self.get_data(['load', 'heat_rate'])
+        if min_samples is None:
+            min_samples = int(len(array) / 1000)
+
+        labels, eps, _ = self._cluster(array, min_samples)
+        score = self.cluster_score(array, labels, **kwargs)
+        cluster_params = labels, eps, min_samples
+        while True:
+            eps_dt = eps * dt
+            eps = eps + eps_dt
+            labels, _, _ = self._cluster(array, min_samples, eps=eps)
+            n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
+            if n_clusters > 1:
+                s = self.cluster_score(array, labels, **kwargs)
+                if s >= score:
+                    score = s
+                    cluster_params = labels, eps, min_samples
+            else:
+                break
+
+        return cluster_params
+
+    @classmethod
+    def filter(cls, unit_df, **kwargs):
+        """
+        Parameters
+        ----------
+        unit_df : pandas.DataFrame
+            DataFrame of timeseries heat rate data for unit of interest
+
+        Returns
+        -------
+        unit_df : pandas.DataFrame
+            Updated DataFrame with cluster labels added for optimal cluster
+        kwargs : dict
+            Internal kwargs for optimize_clusters
+        """
+        cluster = cls(unit_df)
+        labels, eps, min_samples = cluster.optimize_clusters(**kwargs)
+        logger.debug('Optimal eps = {}, min_samples = {}'
+                     .format(eps, min_samples))
+        unit_df['cluster'] = labels
+
+        return unit_df
+
 
 class SingleCluster(Cluster):
     """
@@ -346,7 +423,7 @@ class SingleCluster(Cluster):
 
         # find where there are NN neighbors satisfying the distance threshold
         mask = counts >= min_samples
-        labels = np.zeros(len(array))
+        labels = np.full(len(array), -1)
         labels[mask] = 1
 
         return labels, eps, min_samples
@@ -365,8 +442,6 @@ class SingleCluster(Cluster):
             If None estimate using k-n distance and min_samples
         dt : float
             Percentage eps by which it is to be incrementally increased
-        kwargs : dict
-            Internal kwargs
 
         Returns
         ---------
@@ -398,7 +473,7 @@ class SingleCluster(Cluster):
         return cluster_params
 
 
-class CCsCluster(Cluster):
+class ClusterCC(Cluster):
     """
     Subclass for finding operating modes in CCs
     """
@@ -417,8 +492,6 @@ class CCsCluster(Cluster):
             If None estimate using k-n distance and min_samples
         dt : float
             Percentage eps by which it is to be incrementally increased
-        kwargs : dict
-            Internal kwargs
 
         Returns
         ---------
