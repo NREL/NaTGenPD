@@ -709,24 +709,28 @@ class CleanSmoke:
         """
         cc_unit = cc_df.groupby('time')[['load', 'HTINPUT']].sum()
         cc_unit = cc_unit.reset_index()
+
         cc_unit['heat_rate'] = cc_unit['HTINPUT'] / cc_unit['load']
         try:
             unit_id = cc_df.name
         except AttributeError:
             unit_id = cc_df.iloc[0]['cc_unit']
 
+        if cc_unit.shape[0]:
+            cts_df = cc_df[['time', 'load']].copy()
+            cts_df.loc[cts_df['load'] <= 0, 'load'] = None
+
+            def get_cts(x):
+                cts = x['load'].fillna(0)
+                return len(cts.to_numpy().nonzero()[0])
+
+            cts = cts_df.groupby('time').apply(get_cts)
+            cc_unit['cts'] = cts.values
+        else:
+            cc_unit = cc_df.iloc[[0]][['time', 'load', 'HTINPUT', 'heat_rate']]
+            cc_unit['cts'] = cc_df.shape[0]
+
         cc_unit['unit_id'] = unit_id
-
-        cts_df = cc_df[['time', 'load']].copy()
-        cts_df.loc[cts_df['load'] <= 0, 'load'] = None
-
-        def get_cts(x):
-            cts = x['load'].fillna(0)
-            return len(cts.to_numpy().nonzero()[0])
-
-        cts = cts_df.groupby('time').apply(get_cts)
-        cc_unit['cts'] = cts.values
-
         info_cols = ['latitude', 'longitude', 'state', 'EPA_region',
                      'NERC_region', 'unit_type', 'fuel_type', 'group_type']
         series = cc_df.iloc[0]
