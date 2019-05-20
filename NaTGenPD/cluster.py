@@ -233,7 +233,7 @@ class Cluster:
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, min_samples=None, dt=0.1, **kwargs):
+    def optimize_clusters(self, min_samples, dt=0.1, **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -260,8 +260,6 @@ class Cluster:
             min_samples value used for clustering
         """
         array = self.get_data(['load', 'heat_rate'])
-        if min_samples is None:
-            min_samples = int(len(array) / 1000)
 
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels, **kwargs)
@@ -359,8 +357,8 @@ class SingleCluster(Cluster):
         s : float
             Silhouette score computed after removing outliers (label < 0)
         """
-        cluster = arr[labels == 1]
-        noise = arr[labels == 0]
+        cluster = arr[labels == 0]
+        noise = arr[labels == -1]
         tree = cKDTree(cluster)
 
         # Compute intra-cluster nearest neighbor distance
@@ -424,11 +422,11 @@ class SingleCluster(Cluster):
         # find where there are NN neighbors satisfying the distance threshold
         mask = counts >= min_samples
         labels = np.full(len(array), -1)
-        labels[mask] = 1
+        labels[mask] = 0
 
         return labels, eps, min_samples
 
-    def optimize_clusters(self, min_samples=None, dt=0.1):
+    def optimize_clusters(self, min_samples, dt=0.1):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -453,8 +451,6 @@ class SingleCluster(Cluster):
             min_samples value used for clustering
         """
         array = self.get_data(['load', 'heat_rate'])
-        if min_samples is None:
-            min_samples = int(len(array) / 1000)
 
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
@@ -478,7 +474,7 @@ class ClusterCC(Cluster):
     Subclass for finding operating modes in CCs
     """
 
-    def optimize_clusters(self, min_samples=None, dt=0.1):
+    def optimize_clusters(self, min_samples, dt=0.1):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -504,8 +500,6 @@ class ClusterCC(Cluster):
         """
         array = self.get_data(['load', 'heat_rate', 'cts'], norm='max')
         cts = len(np.unique(array[:, -1]))
-        if min_samples is None:
-            min_samples = int(len(array) / 1000)
 
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
