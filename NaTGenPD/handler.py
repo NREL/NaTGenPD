@@ -339,16 +339,16 @@ class CEMS:
         with cls(comb_file, mode='w') as f_comb:
             dsets = []
             for file in year_files:
-                with CEMS(file, mode='r') as f:
-                    dsets.extend(f.dsets)
+                with h5py.File(file, mode='r') as f:
+                    dsets.extend(list(f))
 
             dsets = list(set(dsets))
             for ds in dsets:
                 comb_arr = []
                 for file in year_files:
-                    with CEMS(file, mode='r') as f:
-                        if ds in f.dsets:
-                            comb_arr.append(f._h5[ds][...])
+                    with h5py.File(file, mode='r') as f:
+                        if ds in f:
+                            comb_arr.append(f[ds][...])
                             logger.debug('- {} extracted from {}'
                                          .format(ds, os.path.basename(file)))
 
