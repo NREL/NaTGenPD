@@ -181,7 +181,8 @@ class Cluster:
 
         return arr
 
-    def optimal_eps(self, array, k=5):
+    @staticmethod
+    def optimal_eps(array, k=5):
         """
         Use the k-nearest neighbor plot to estimate the optimal epsilon
 
@@ -197,8 +198,8 @@ class Cluster:
         eps : float
             Optimal epsilon for running DBSCAN with min_samples = k
         """
-        k_dist = self.n_dist(array, k)
-        eps_dist = self.line_dist(k_dist)
+        k_dist = Cluster.n_dist(array, k)
+        eps_dist = Cluster.line_dist(k_dist)
         eps_pos = np.argmax(eps_dist)
         eps = k_dist[eps_pos]
         return eps
@@ -242,9 +243,6 @@ class Cluster:
         ----------
         min_samples : int
             min_samples value for clustering, if None set as len(array) / 1000
-        eps : float
-            Epsilon value for clustering
-            If None estimate using k-n distance and min_samples
         dt : float
             Percentage eps by which it is to be incrementally increased
         kwargs : dict
@@ -280,12 +278,18 @@ class Cluster:
         return cluster_params
 
     @classmethod
-    def filter(cls, unit_df, **kwargs):
+    def filter(cls, unit_df, min_samples, threshold=10, **kwargs):
         """
         Parameters
         ----------
         unit_df : pandas.DataFrame
             DataFrame of timeseries heat rate data for unit of interest
+        min_samples : int
+            Min_samples value for clustering
+        threshold : int
+            Theshold for minimum number of points to filter unit
+        kwargs : dict
+            Internal kwargs
 
         Returns
         -------
@@ -294,11 +298,17 @@ class Cluster:
         kwargs : dict
             Internal kwargs for optimize_clusters
         """
-        cluster = cls(unit_df)
-        labels, eps, min_samples = cluster.optimize_clusters(**kwargs)
-        logger.debug('Optimal eps = {}, min_samples = {}'
-                     .format(eps, min_samples))
-        unit_df['cluster'] = labels
+        if len(unit_df) < threshold:
+            unit_df['cluster'] = 0
+            logger.debug('Unit only has {} points and will not be filtered'
+                         .format(len(unit_df)))
+        else:
+            cluster = cls(unit_df)
+            labels, eps, min_samples = cluster.optimize_clusters(min_samples,
+                                                                 **kwargs)
+            logger.debug('Optimal eps = {}, min_samples = {}'
+                         .format(eps, min_samples))
+            unit_df['cluster'] = labels
 
         return unit_df
 

@@ -57,10 +57,22 @@ class CEMSGroup:
 
         Returns
         -------
-        df : pd.DataFrame
+        _df : pd.DataFrame
             DataFrame of group data
         """
         return self._df
+
+    @property
+    def unit_dfs(self):
+        """
+        Group of unit DataFrames
+
+        Returns
+        -------
+        _unit_dfs : pd.Groupby
+            Group of unit DataFrames
+        """
+        return self._unit_dfs
 
     @property
     def units(self):
