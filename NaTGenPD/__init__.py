@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 The National Thermal Generator Performance Database.
 """
