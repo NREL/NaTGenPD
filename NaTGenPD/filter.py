@@ -24,7 +24,7 @@ class Filter:
         clean_h5 : str
             Path to .h5 file with pre-cleaned CEMS data
         years : int
-            Number of years of data in .h5 file
+            Number of years of data being filtered
         """
         self._clean_h5 = clean_h5
         self._years = years
@@ -67,7 +67,7 @@ class Filter:
             group = f[group_type]
 
         if workers:
-            with cf.ProcessPoolExecutor() as executor:
+            with cf.ProcessPoolExecutor(max_workers=workers) as executor:
                 futures = []
                 for _, unit_df in group.unit_dfs:
                     futures.append(executor.submit(filter, unit_df,
@@ -83,3 +83,40 @@ class Filter:
                                        threshold=threshold, **kwargs))
 
         return pd.concat(group_df)
+
+    def filter_all(self, out_h5, **kwargs):
+        """
+        Filter all groups in clean_h5 and save to out_h5
+
+        Parameters
+        ----------
+        out_h5 : str
+            Path to .h5 file into which filtered data should be saved
+        kwargs : dict
+            Internal kwargs
+        """
+        with CEMS(self._clean_h5, mode='r') as f_in:
+            group_types = f_in.dsets
+
+        with CEMS(out_h5, mode='w') as f_out:
+            for g_type in group_types:
+                f_out[g_type] = self.filter_group(g_type, **kwargs)
+
+    @classmethod
+    def run(cls, clean_h5, out_h5, years=1, **kwargs):
+        """
+        Filter all groups in clean_h5 and save to out_h5
+
+        Parameters
+        ----------
+        clean_h5 : str
+            Path to .h5 file with pre-cleaned CEMS data
+        out_h5 : str
+            Path to .h5 file into which filtered data should be saved
+        years : int
+            Number of years worth of data being filtered
+        kwargs : dict
+            Internal kwargs
+        """
+        f = cls(clean_h5, years=years)
+        f.filter_all(out_h5, **kwargs)
