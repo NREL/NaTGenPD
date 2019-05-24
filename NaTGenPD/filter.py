@@ -334,3 +334,65 @@ class PolyFit:
         """
         fit = cls(filtered_h5, order=order)
         fit.fit_all(out_dir, **kwargs)
+
+
+def get_hr_min(unit, points=100):
+    """
+    Extract minimum heat rate from unit fits
+
+    Parameters
+    ----------
+    unit : pandas.Series
+        Row containing the fit stats and parameters for a single unit
+
+    Returns
+    -------
+    hr_min: float
+        Minimum heat rate from heat rate curve fit
+    """
+    if not unit['a4'].isnull():
+        fit_params = unit[['a4', 'a3', 'a2', 'a1', 'a0']].values
+        poly_fit = np.poly1d(fit_params)
+        load_min, load_max = unit[['load_min', 'load_max']].values
+        x = np.linspace(load_min, load_max, points)
+        hr_min = poly_fit(x).min()
+    else:
+        hr_min = None
+
+    return hr_min
+
+
+def min_hr_filter(group_fits, stdev_multiplier=2, threshold=(None, None)):
+    """
+    Filter out the most and least efficient units based on multiples of the
+    standard deviation from the mean
+
+    Parameters
+    ----------
+    group_fits : pandas.DataFrame
+        DataFrame of fits to filter
+    stdev_multiplier : float
+        Multiple of the stdev from the mean to use as the filter thresholds
+    threshold : tuple
+        Threshold(s) to use instead of the above multiplier
+
+    Returns
+    -------
+    group_fits : pandas.DataFrame
+        Filtered group fits
+    """
+    min_hr = group_fits.apply(get_hr_min, axis=1).dropna()
+    mean = min_hr.mean()
+    stdev = min_hr.stdev()
+    thresh = np.array([-stdev_multiplier, stdev_multiplier]) * stdev + mean
+    for i, t in enumerate(threshold):
+        if t is not None:
+            thresh[i] = t
+
+    pos = np.logical_or(min_hr < thresh[0], min_hr > thresh[1])
+    idx = min_hr[~pos].index
+    null_cols = [c for c in group_fits.columns
+                 if c.startswith(('a', 'heat_rate'))]
+    group_fits.loc[idx, null_cols] = None
+
+    return group_fits
