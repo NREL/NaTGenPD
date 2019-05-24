@@ -4,9 +4,12 @@ Data filtering utilities
 @author: mrossol
 """
 import concurrent.futures as cf
+import logging
 import pandas as pd
 from .cluster import SingleCluster, ClusterCC
 from .handler import CEMS
+
+logger = logging.getLogger(__name__)
 
 
 class Filter:
@@ -58,9 +61,12 @@ class Filter:
         group_df : pd.DataFrame
             Updated group DataFrame with cluster labels post filtering
         """
+        logger.info('Filtering all {} units'.format(group_type))
         total_points = self.total_points
-        min_samples = total_points / 1000
-        threshold = total_points / 100
+        min_samples = int(total_points / 1000)
+        logger.debug('\t- Using min_samples = {}'.format(min_samples))
+        threshold = int(total_points / 100)
+        logger.debug('\t- Skipping units with < {} points'.format(threshold))
         filter = self.FILTERS[group_type.split(' (')[0]]
 
         with CEMS(self._clean_h5, mode='r') as f:
@@ -69,7 +75,8 @@ class Filter:
         if workers:
             with cf.ProcessPoolExecutor(max_workers=workers) as executor:
                 futures = []
-                for _, unit_df in group.unit_dfs:
+                for unit_id, unit_df in group.unit_dfs:
+                    logger.debug('- Filtering unit {}'.format(unit_id))
                     futures.append(executor.submit(filter, unit_df,
                                                    min_samples,
                                                    threshold=threshold,
@@ -78,7 +85,8 @@ class Filter:
                 group_df = [future.result() for future in futures]
         else:
             group_df = []
-            for _, unit_df in group.unit_dfs:
+            for unit_id, unit_df in group.unit_dfs:
+                logger.debug('- Filtering unit {}'.format(unit_id))
                 group_df.append(filter(unit_df, min_samples,
                                        threshold=threshold, **kwargs))
 

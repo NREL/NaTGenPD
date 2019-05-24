@@ -300,13 +300,13 @@ class Cluster:
         """
         if len(unit_df) < threshold:
             unit_df['cluster'] = 0
-            logger.debug('Unit only has {} points and will not be filtered'
+            logger.debug('\t- Unit only has {} points and will not be filtered'
                          .format(len(unit_df)))
         else:
             cluster = cls(unit_df)
             labels, eps, min_samples = cluster.optimize_clusters(min_samples,
                                                                  **kwargs)
-            logger.debug('Optimal eps = {}, min_samples = {}'
+            logger.debug('\t- Optimal eps = {}, min_samples = {}'
                          .format(eps, min_samples))
             unit_df['cluster'] = labels
 
