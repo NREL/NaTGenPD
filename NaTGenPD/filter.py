@@ -5,6 +5,7 @@ Data filtering utilities
 """
 import concurrent.futures as cf
 import logging
+import numpy as np
 import pandas as pd
 from .cluster import SingleCluster, ClusterCC
 from .handler import CEMS
@@ -128,3 +129,46 @@ class Filter:
         """
         f = cls(clean_h5, years=years)
         f.filter_all(out_h5, **kwargs)
+
+
+class PolyFit:
+    """
+    Fit filtered units to a polynomial
+    """
+
+    def __init__(self, filtered_h5, order=4):
+        """
+        Parameters
+        ----------
+        filtered_h5 : str
+            Path to .h5 file containing filtered CEMS data
+        order : int
+            Order of the polynomial fit
+        """
+        self._h5 = filtered_h5
+        self._order = order
+
+    @staticmethod
+    def fit_unit(unit_df, order=4):
+        """
+        Fit unit to a polynomial of given order
+
+       Parameters
+        ----------
+        unit_df : pandas.DataFrame
+            Pandas DataFrame for individual generator unit
+        order : int
+            Order/degree of the polynomial fit
+
+        Returns
+        -------
+        fit: ndarray
+            Fit parameters p = [p_n, p_n-1, ...]
+            Such that y = p_n x^n + p_n-1 x^n-1 ...
+        """
+        unit_df = unit_df.sort_values(['load', 'heat_rate'])
+        load = unit_df['load']
+        heat_rate = unit_df['heat_rate']
+
+        fit = np.polyfit(load, heat_rate, order)
+        return fit

@@ -299,7 +299,7 @@ class Cluster:
             Internal kwargs for optimize_clusters
         """
         if len(unit_df) < threshold:
-            unit_df['cluster'] = 0
+            unit_df['cluster'] = -1
             logger.debug('\t- Unit only has {} points and will not be filtered'
                          .format(len(unit_df)))
         else:
