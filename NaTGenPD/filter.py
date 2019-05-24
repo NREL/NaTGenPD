@@ -18,9 +18,9 @@ class Filter:
     """
     Run Cluster filters on all units
     """
-    FILTERS = {'Boiler': SingleCluster,
-               'CT': SingleCluster,
-               'CC': ClusterCC}
+    FILTERS = {'Boiler': SingleCluster.filter,
+               'CT': SingleCluster.filter,
+               'CC': ClusterCC.filter}
 
     def __init__(self, clean_h5, years=1):
         """
