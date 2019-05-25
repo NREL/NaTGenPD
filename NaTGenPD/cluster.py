@@ -301,7 +301,7 @@ class Cluster:
             Internal kwargs for optimize_clusters
         """
         if len(unit_df) < threshold:
-            unit_df['cluster'] = -1
+            unit_df.loc[:, 'cluster'] = -1
             logger.debug('\t- Unit only has {} points and will not be filtered'
                          .format(len(unit_df)))
         else:
@@ -310,7 +310,7 @@ class Cluster:
                                                                  **kwargs)
             logger.debug('\t- Optimal eps = {}, min_samples = {}'
                          .format(eps, min_samples))
-            unit_df['cluster'] = labels
+            unit_df.loc[:, 'cluster'] = labels
 
         return unit_df
 
