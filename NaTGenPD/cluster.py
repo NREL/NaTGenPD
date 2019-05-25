@@ -272,6 +272,8 @@ class Cluster:
                 if s >= score:
                     score = s
                     cluster_params = labels, eps, min_samples
+                    logger.debug('New best fit: min_samples={}, eps={}, s={}'
+                                 .format(min_samples, eps, score))
             else:
                 break
 
@@ -343,10 +345,7 @@ class SingleCluster(Cluster):
         if tree is None:
             tree = cKDTree(arr)
 
-        dist, ind = tree.query(arr, k=k)
-
-        logger.debug('KNN index nearest neighbors: \n{}'.format(ind))
-        logger.debug('KNN distance: \n{}'.format(dist))
+        dist, _ = tree.query(arr, k=k)
 
         return dist
 
@@ -475,6 +474,8 @@ class SingleCluster(Cluster):
             else:
                 score = s
                 cluster_params = labels, eps, min_samples
+                logger.debug('New best fit: min_samples={}, eps={}, score={}'
+                             .format(min_samples, eps, score))
 
         return cluster_params
 
@@ -526,5 +527,7 @@ class ClusterCC(Cluster):
             else:
                 score = s
                 cluster_params = labels, eps, min_samples
+                logger.debug('New best fit: min_samples={}, eps={}, score={}'
+                             .format(min_samples, eps, score))
 
         return cluster_params
