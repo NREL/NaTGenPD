@@ -138,7 +138,7 @@ class PolyFit:
     Fit filtered units to a polynomial
     """
     META_COLS = ['latitude', 'longitude', 'state', 'EPA_region', 'NERC_region',
-                 'unit_type', 'fuel_type', 'group_type', 'cts']
+                 'unit_type', 'fuel_type', 'group_type']
 
     def __init__(self, filtered_h5, order=4):
         """
