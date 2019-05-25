@@ -92,7 +92,8 @@ class Filter:
                 group_df.append(filter(unit_df, min_samples,
                                        threshold=threshold, **kwargs))
 
-        return pd.concat(group_df)
+        group_df = pd.concat(group_df).sort_values(['unit_id', 'time'])
+        return group_df.reset_index(drop=True)
 
     def filter_all(self, out_h5, **kwargs):
         """
