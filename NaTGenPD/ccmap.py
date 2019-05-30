@@ -6,7 +6,7 @@ def method_1(boilers, eia_plants):
 
     # Create boiler-specific unit (Method 1)
     no_eia_plant = boilers.loc[~np.in1d(boilers["Plant Code"], eia_plants), :].reset_index()
-    no_eia_plant["Unit Code"] = "~" + no_eia_plant["Boiler ID"]
+    no_eia_plant["Unit Code"] = no_eia_plant["Boiler ID"]
     no_eia_plant["Unit Code Method"] = 1
 
     return no_eia_plant
@@ -27,7 +27,7 @@ def method_2_3(boilers23, boilers_generators, generators):
 
     # Create generator-specific unit (Method 3)
     direct_nounit_result = boilers_units.loc[gen_missing_unit_code, :].copy()
-    direct_nounit_result["Unit Code"] = "~" + direct_nounit_result["Generator ID"]
+    direct_nounit_result["Unit Code"] = direct_nounit_result["Generator ID"]
     direct_nounit_result["Unit Code Method"] = 3
 
     return direct_result, direct_nounit_result
@@ -40,7 +40,7 @@ def method_4(boilers4567, generators_cc):
         ~np.in1d(boilers4567["Plant Code"], generators_cc["Plant Code"]), :].copy()
 
     # Create boiler-specific unit (Method 4)
-    boilers_plants["Unit Code"] = "~" + boilers_plants["Plant Code"].astype(str)
+    boilers_plants["Unit Code"] = boilers_plants["Boiler ID"].astype(str)
     boilers_plants["Unit Code Method"] = 4
 
     return boilers_plants.reset_index()
@@ -91,7 +91,7 @@ def method_6_7(boilers4567, generators_cc):
         n_bs = len(bs.index)
         n_gs = len(gs.index)
 
-        # Match boilers to generator unit codes (Method 4)
+        # Match boilers to generator unit codes (Method 6)
         if n_bs <= n_gs: 
             gs = gs.head(n_bs)
             result6 = result6.append(pd.DataFrame({
@@ -102,7 +102,7 @@ def method_6_7(boilers4567, generators_cc):
                 "Unit Code": np.array(gs["Unit Code"])}), sort=True)
 
         # Match boilers to generator unit codes,
-        # creating new units for extra boilers (Method 5)
+        # creating new units for extra boilers (Method 7)
         else:
             bs_rem = bs.tail(n_bs - n_gs)
             bs = bs.head(n_gs)
@@ -116,7 +116,7 @@ def method_6_7(boilers4567, generators_cc):
                 "CEMSUnit": np.array(bs_rem["CEMSUnit"]),
                 "Plant Code": plant,
                 "Boiler ID": np.array(bs_rem["Boiler ID"]),
-                "Unit Code": "~" + np.array(bs_rem["Boiler ID"])}), sort=True)
+                "Unit Code": np.array(bs_rem["Boiler ID"])}), sort=True)
 
     result6["Unit Code Method"] = 6
     result7["Unit Code Method"] = 7
@@ -155,8 +155,7 @@ if __name__ == "__main__":
 
     # Any CC CA/CTs without a unit code are assigned to a plant-wide unit
     gcc_nounitcode = generators_cc["Unit Code"].isna()
-    generators_cc.loc[gcc_nounitcode, "Unit Code"] = \
-        "~" + generators_cc.loc[gcc_nounitcode, "Plant Code"].astype(str)
+    generators_cc.loc[gcc_nounitcode, "Unit Code"] = ""
 
     eia_plants = [p for (p, g) in generators.index]
     eia_plants_boilers = list(boilers_generators.index)
@@ -178,6 +177,7 @@ if __name__ == "__main__":
     result = pd.concat([result1, result2, result3, result4,
                         result5, result6, result7], sort=True).set_index("CEMSUnit")[
                         ["Plant Code", "Boiler ID", "Generator ID", "Unit Code", "Unit Code Method"]]
+    result["CCUnit"] = result["Plant Code"].astype(str) + "_" + result["Unit Code"].astype(str)
 
     print(str(len(boilers.index)) + " input boilers")
     print(str(len(result.index)) + " output mappings")
