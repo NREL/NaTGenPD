@@ -218,6 +218,11 @@ if __name__ == "__main__":
     unit_code = result["Unit Code"].astype(str)
     result["CCUnit"] = plant_code + "_" + unit_code
 
+    for i in range(4, 8):
+        unit_info = results[results['CEMSUnit'] == '2393_0{}'.format(i)]
+        unit_info['CEMSUnit'] = '2393_{}'.format(i)
+        results = results.append(unit_info)
+
     logger.info("{} input boilers".format(len(boilers.index)))
     logger.info("{} output mappings".format(len(result.index)))
     outputs = len(result.drop_duplicates(["Plant Code", "Boiler ID"]).index)

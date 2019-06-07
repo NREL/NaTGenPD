@@ -3,6 +3,7 @@
 Data cleaning utilities
 @author: mrossol
 """
+import concurrent.futures as cf
 from functools import partial
 import logging
 import numpy as np
@@ -689,6 +690,23 @@ class CleanSmoke:
         return smoke_df.reset_index(drop=True)
 
     @staticmethod
+    def get_cts(cc_ts):
+        """
+        Determine number of cts running at given time-step
+
+        Parameters
+        ----------
+        cc_ts : Unit time-step for a pre-aggregated CC
+
+        Returns
+        -------
+        cts : int
+            Number of cts running during time-step
+        """
+        cts = cc_ts['load'].fillna(0)
+        return len(cts.to_numpy().nonzero()[0])
+
+    @staticmethod
     def cts_to_cc(cc_df):
         """
         Combine multiple CTs into a single CC by:
@@ -719,12 +737,7 @@ class CleanSmoke:
         if cc_unit.shape[0]:
             cts_df = cc_df[['time', 'load']].copy()
             cts_df.loc[cts_df['load'] <= 0, 'load'] = None
-
-            def get_cts(x):
-                cts = x['load'].fillna(0)
-                return len(cts.to_numpy().nonzero()[0])
-
-            cts = cts_df.groupby('time').apply(get_cts)
+            cts = cts_df.groupby('time').apply(CleanSmoke.get_cts)
             cc_unit['cts'] = cts.values
         else:
             cc_unit = cc_df.iloc[[0]][['time', 'load', 'HTINPUT', 'heat_rate']]
@@ -737,10 +750,12 @@ class CleanSmoke:
         for col in info_cols:
             cc_unit.loc[:, col] = series[col]
 
+        print('{} aggregated to cc'.format(unit_id))
+
         return cc_unit
 
     @staticmethod
-    def aggregate_ccs(smoke_df, cc_map, **kwargs):
+    def aggregate_ccs(smoke_df, cc_map, parallel=False, **kwargs):
         """
         Aggregate CEMS CC 'units' into EIA CC 'units'
         NOTE: CEMS reports CC on a CT by CT basis with the combined steam
@@ -752,6 +767,10 @@ class CleanSmoke:
             DataFrame of performance variables from SMOKE data with unit info
         cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
+        parallel : bool
+            Run cts_to_cc in parallel
+        kwargs : dict
+            Internal kwargs for gross_to_net
 
         Returns
         -------
@@ -767,7 +786,16 @@ class CleanSmoke:
             smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
 
         cc_df = pd.merge(smoke_df, cc_map, on='unit_id', how='right')
-        cc_df = cc_df.groupby('cc_unit').apply(CleanSmoke.cts_to_cc)
+
+        cc_df = cc_df.groupby('cc_unit')
+        if parallel:
+            with cf.ProcessPoolExecutor() as executor:
+                futures = [executor.submit(CleanSmoke.cts_to_cc, cc_g)
+                           for _, cc_g in cc_df]
+                cc_df = pd.concat([f.results() for f in futures])
+        else:
+            cc_df = cc_df.apply(CleanSmoke.cts_to_cc)
+
         cc_df = cc_df.reset_index(drop=True)
 
         pos = smoke_df['unit_id'].isin(cc_map['unit_id'])
@@ -775,7 +803,8 @@ class CleanSmoke:
         return smoke_df.reset_index(drop=True)
 
     def preclean(self, load_multipliers={'solid': 0.925, 'liquid': 0.963},
-                 hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None):
+                 hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
+                 parallel=False):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -793,6 +822,8 @@ class CleanSmoke:
             with start-up and shut-down
         cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
+        parallel : bool
+            Run cts_to_cc in parallel
 
         Returns
         -------
@@ -821,7 +852,8 @@ class CleanSmoke:
         smoke_clean = self.fill_null_units(smoke_clean, self.unit_info)
         if cc_map:
             logger.info('Combining CC units')
-            smoke_clean = self.aggregate_ccs(smoke_clean, cc_map)
+            smoke_clean = self.aggregate_ccs(smoke_clean, cc_map,
+                                             parallel=parallel)
             logger.debug('- Units combined = {}'
                          .format(s_u - len(smoke_clean['unit_id'].unique())))
 
@@ -836,7 +868,7 @@ class CleanSmoke:
     def clean(cls, smoke, unit_attrs_path=None,
               load_multipliers={'solid': 0.925, 'liquid': 0.963},
               hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
-              out_file=None):
+              parallel=False, out_file=None):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -858,6 +890,8 @@ class CleanSmoke:
             with start-up and shut-down
         cc_map : str
             Path to .csv with CEMS to EIA CC unit mapping
+        parallel : bool
+            Run cts_to_cc in parallel
         out_file : str
             Path to output .h5 file to write clean-data too
 
@@ -869,7 +903,7 @@ class CleanSmoke:
         smoke = cls(smoke, unit_attrs_path=unit_attrs_path)
         smoke_clean = smoke.preclean(load_multipliers=load_multipliers,
                                      hr_bounds=hr_bounds, max_perc=max_perc,
-                                     cc_map=cc_map)
+                                     cc_map=cc_map, parallel=parallel)
 
         if out_file:
             with CEMS(out_file, mode='w') as f:
