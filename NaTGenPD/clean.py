@@ -750,8 +750,6 @@ class CleanSmoke:
         for col in info_cols:
             cc_unit.loc[:, col] = series[col]
 
-        print('{} aggregated to cc'.format(unit_id))
-
         return cc_unit
 
     @staticmethod
@@ -792,7 +790,7 @@ class CleanSmoke:
             with cf.ProcessPoolExecutor() as executor:
                 futures = [executor.submit(CleanSmoke.cts_to_cc, cc_g)
                            for _, cc_g in cc_df]
-                cc_df = pd.concat([f.results() for f in futures])
+                cc_df = pd.concat([f.result() for f in futures])
         else:
             cc_df = cc_df.apply(CleanSmoke.cts_to_cc)
 
@@ -856,6 +854,8 @@ class CleanSmoke:
                                              parallel=parallel)
             logger.debug('- Units combined = {}'
                          .format(s_u - len(smoke_clean['unit_id'].unique())))
+        else:
+            self.OUT_COLS.remove('cts')
 
         smoke_clean = smoke_clean.sort_values(by=['unit_id', 'time'])
         smoke_clean = smoke_clean.reset_index(drop=True)[self.OUT_COLS]
