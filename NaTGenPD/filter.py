@@ -47,7 +47,7 @@ class Filter:
         points = self._years * 8760
         return points
 
-    def filter_group(self, group_type, workers=None, **kwargs):
+    def filter_group(self, group_type, parallel=False, **kwargs):
         """
         Filter all units of given group_type
 
@@ -55,8 +55,8 @@ class Filter:
         ----------
         group_type : str
             Group type (generator type + fuel type) to filter
-        workers : int | NoneType
-            If not None, number of parallel workers to use
+        parallel : bool
+            For each group filter units in parallel
 
         Returns
         -------
@@ -74,8 +74,8 @@ class Filter:
         with CEMS(self._clean_h5, mode='r') as f:
             group = f[group_type]
 
-        if workers:
-            with cf.ProcessPoolExecutor(max_workers=workers) as executor:
+        if parallel:
+            with cf.ProcessPoolExecutor() as executor:
                 futures = []
                 for unit_id, unit_df in group.unit_dfs:
                     logger.debug('- Filtering unit {}'.format(unit_id))
@@ -95,7 +95,7 @@ class Filter:
         group_df = pd.concat(group_df).sort_values(['unit_id', 'time'])
         return group_df.reset_index(drop=True)
 
-    def filter_all(self, out_h5, **kwargs):
+    def filter_all(self, out_h5, parallel=False, **kwargs):
         """
         Filter all groups in clean_h5 and save to out_h5
 
@@ -103,6 +103,8 @@ class Filter:
         ----------
         out_h5 : str
             Path to .h5 file into which filtered data should be saved
+        parallel : bool
+            For each group filter units in parallel
         kwargs : dict
             Internal kwargs
         """
@@ -111,10 +113,11 @@ class Filter:
 
         with CEMS(out_h5, mode='w') as f_out:
             for g_type in group_types:
-                f_out[g_type] = self.filter_group(g_type, **kwargs)
+                f_out[g_type] = self.filter_group(g_type, parallel=parallel,
+                                                  **kwargs)
 
     @classmethod
-    def run(cls, clean_h5, out_h5, years=1, **kwargs):
+    def run(cls, clean_h5, out_h5, years=1, parallel=False, **kwargs):
         """
         Filter all groups in clean_h5 and save to out_h5
 
@@ -126,11 +129,13 @@ class Filter:
             Path to .h5 file into which filtered data should be saved
         years : int
             Number of years worth of data being filtered
+        parallel : bool
+            For each group filter units in parallel
         kwargs : dict
             Internal kwargs
         """
         f = cls(clean_h5, years=years)
-        f.filter_all(out_h5, **kwargs)
+        f.filter_all(out_h5, parallel=parallel, **kwargs)
 
 
 class PolyFit:
