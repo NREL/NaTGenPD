@@ -758,10 +758,8 @@ class CleanSmoke:
         smoke_df : pandas.DataFrame
             Updated DataFrame with CCs aggregated to EIA units
         """
-        cc_map = pd.read_csv(cc_map)
-        cc_map['cc_unit'] = (cc_map['EIAPlant'].astype(str) + '_' +
-                             cc_map['EIAUnit'].astype(str))
-        cc_map['unit_id'] = cc_map['CEMSUnit']
+        cc_map = pd.read_csv(cc_map).rename(columns={'CCUnit': 'cc_unit',
+                                                     'CEMSUnit': 'unit_id'})
         cc_map = cc_map[['unit_id', 'cc_unit']]
 
         if 'load' not in smoke_df.columns:
