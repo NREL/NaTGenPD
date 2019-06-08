@@ -3,7 +3,7 @@ HPC Script to parse, clean, filter, and fit CEMS data
 """
 import os
 import sys
-PKG_DIR = os.path.dirname(os.path.abspath(__file__))
+PKG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PKG_DIR)
 import NaTGenPD as npd
 
