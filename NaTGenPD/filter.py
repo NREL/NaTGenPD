@@ -47,7 +47,7 @@ class Filter:
         points = self._years * 8760
         return points
 
-    def filter_group(self, group_type, parallel=False, **kwargs):
+    def filter_group(self, group_type, parallel=True, **kwargs):
         """
         Filter all units of given group_type
 
@@ -95,7 +95,27 @@ class Filter:
         group_df = pd.concat(group_df).sort_values(['unit_id', 'time'])
         return group_df.reset_index(drop=True)
 
-    def filter_all(self, out_h5, parallel=False, **kwargs):
+    def filter_groups(self, out_h5, group_types, parallel=True, **kwargs):
+        """
+        Filter given group_types from clean_h5 and save to out_h5
+
+        Parameters
+        ----------
+        out_h5 : str
+            Path to .h5 file into which filtered data should be saved
+        group_types : list
+            Group types to filter
+        parallel : bool
+            For each group filter units in parallel
+        kwargs : dict
+            Internal kwargs
+        """
+        with CEMS(out_h5, mode='a') as f_out:
+            for g_type in group_types:
+                f_out[g_type] = self.filter_group(g_type, parallel=parallel,
+                                                  **kwargs)
+
+    def filter_all(self, out_h5, parallel=True, **kwargs):
         """
         Filter all groups in clean_h5 and save to out_h5
 
@@ -117,7 +137,8 @@ class Filter:
                                                   **kwargs)
 
     @classmethod
-    def run(cls, clean_h5, out_h5, years=1, parallel=False, **kwargs):
+    def run(cls, clean_h5, out_h5, group_types=None, years=1, parallel=True,
+            **kwargs):
         """
         Filter all groups in clean_h5 and save to out_h5
 
@@ -127,6 +148,8 @@ class Filter:
             Path to .h5 file with pre-cleaned CEMS data
         out_h5 : str
             Path to .h5 file into which filtered data should be saved
+        group_types : list
+            Group types to filter, if None, filter all
         years : int
             Number of years worth of data being filtered
         parallel : bool
@@ -135,7 +158,10 @@ class Filter:
             Internal kwargs
         """
         f = cls(clean_h5, years=years)
-        f.filter_all(out_h5, parallel=parallel, **kwargs)
+        if group_types is not None:
+            f.filter_groups(out_h5, group_types, parallel=parallel, **kwargs)
+        else:
+            f.filter_all(out_h5, parallel=parallel, **kwargs)
 
 
 class PolyFit:

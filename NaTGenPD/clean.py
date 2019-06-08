@@ -753,7 +753,7 @@ class CleanSmoke:
         return cc_unit
 
     @staticmethod
-    def aggregate_ccs(smoke_df, cc_map, parallel=False, **kwargs):
+    def aggregate_ccs(smoke_df, cc_map, parallel=True, **kwargs):
         """
         Aggregate CEMS CC 'units' into EIA CC 'units'
         NOTE: CEMS reports CC on a CT by CT basis with the combined steam
@@ -802,7 +802,7 @@ class CleanSmoke:
 
     def preclean(self, load_multipliers={'solid': 0.925, 'liquid': 0.963},
                  hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
-                 parallel=False):
+                 parallel=True):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
@@ -868,7 +868,7 @@ class CleanSmoke:
     def clean(cls, smoke, unit_attrs_path=None,
               load_multipliers={'solid': 0.925, 'liquid': 0.963},
               hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
-              parallel=False, out_file=None):
+              parallel=True, out_file=None):
         """
         Clean-up SMOKE data for heat rate analysis:
         - Convert gross load to net load
