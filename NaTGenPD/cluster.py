@@ -515,6 +515,10 @@ class ClusterCC(Cluster):
         """
         array = self.get_data(['load', 'heat_rate', 'cts'], norm='max')
         cts = len(np.unique(array[:, -1]))
+        if cts < 2:
+            # silhouette_score requires a minimum of 2 clusters
+            # Assumes a minimum of 2 operating moves 1x0 and 1x1
+            cts = 2
 
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
