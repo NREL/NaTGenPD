@@ -5,4 +5,4 @@
 #PBS -e $PBS_JOBNAME-$PBS_JOBID.err
 #PBS -o $PBS_JOBNAME-$PBS_JOBID.out
 
-python run_CEMS.py
+python filter_CEMS.py
