@@ -5,6 +5,7 @@ Data clustering utilities
 """
 import logging
 import numpy as np
+import warnings
 from scipy.spatial.distance import pdist, squareform
 from scipy.spatial import cKDTree
 from sklearn.cluster import DBSCAN
@@ -151,7 +152,14 @@ class Cluster:
             arr = arr[pos]
             labels = labels[pos]
 
-        return silhouette_score(arr, labels)
+        n_labels = np.unique(labels)
+        if n_labels > 2:
+            s = silhouette_score(arr, labels)
+        else:
+            warnings.warn('Number of clusters: {} < 2'.format(n_labels))
+            s = None
+
+        return s
 
     def get_data(self, cols, normalize=True, noise=0.01, **kwargs):
         """
@@ -262,7 +270,7 @@ class Cluster:
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels, **kwargs)
         cluster_params = labels, eps, min_samples
-        while True:
+        while score is not None:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
@@ -523,13 +531,15 @@ class ClusterCC(Cluster):
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
         cluster_params = labels, eps, min_samples
-        while True:
+        while score is not None:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
             s = self.cluster_score(array, labels)
             n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
-            if s < score:
+            if s is None:
+                break
+            elif s < score:
                 if n_clusters <= cts:
                     break
             else:
