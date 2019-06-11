@@ -269,8 +269,7 @@ class Cluster:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
-            n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
-            if n_clusters > 1:
+            if len(np.unique(labels)) > 1:
                 s = self.cluster_score(array, labels, **kwargs)
                 if s >= score:
                     score = s
