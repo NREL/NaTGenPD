@@ -323,7 +323,7 @@ class PolyFit:
             group_fits.append(self.fit_unit(unit_df, **kwargs))
 
         group_fits = pd.concat(group_fits)
-        group_fits.index.name('unit_id')
+        group_fits.index.name = 'unit_id'
         if out_file:
             logger.debug('- Saving fits to {}'
                          .format(out_file))
