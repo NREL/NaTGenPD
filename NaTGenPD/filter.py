@@ -215,12 +215,10 @@ class PolyFit:
             load_max = load.max()
             try:
                 fit = np.polyfit(load, heat_rate, order, full=True)
-                if fit[2] <= 1:
-                    raise RuntimeError('Final fit is poorly conditioned!')
-
-                fit_params = fit[0]
-                load_range = np.linspace(load_min, load_max, points)
-                hr_range = np.poly1d(fit_params)(load_range)
+                if fit[2] > 1:
+                    fit_params = fit[0]
+                    load_range = np.linspace(load_min, load_max, points)
+                    hr_range = np.poly1d(fit_params)(load_range)
             except Exception:
                 logger.exception('Cannot fit unit')
         else:
@@ -263,31 +261,35 @@ class PolyFit:
         unit_id = unit_meta['unit_id']
         clusters = sorted([label for label in unit_df['cluster'].unique()
                            if label >= 0])
-        if not clusters:
-            clusters = [0]
 
-        unit_fit = []
         if len(clusters) > 1:
-            cluster_id = True
+            unit_fit = []
+            for label in clusters:
+                fit_id += '-{}'.format(label)
+
+                pos = unit_df['cluster'] == label
+                cluster_df = unit_df.loc[pos, ['load', 'heat_rate']]
+                cluster_df = cluster_df.sort_values(['load', 'heat_rate'])
+                load = cluster_df['load'].values
+                heat_rate = cluster_df['heat_rate'].values
+                cluster_fit = self.extract_fit(load, heat_rate,
+                                               order=self._order, **kwargs)
+                cluster_fit.name = fit_id
+                unit_fit.append(cluster_fit.to_frame().T)
+
+            unit_fit = pd.concat(unit_fit)
         else:
-            cluster_id = False
-
-        for label in clusters:
-            id = '{}'.format(unit_id)
-            if cluster_id:
-                id += '-{}'.format(label)
-
-            pos = unit_df['cluster'] == label
+            fit_id = '{}'.format(unit_id)
+            pos = unit_df['cluster'] >= 0
             cluster_df = unit_df.loc[pos, ['load', 'heat_rate']]
             cluster_df = cluster_df.sort_values(['load', 'heat_rate'])
             load = cluster_df['load'].values
             heat_rate = cluster_df['heat_rate'].values
             cluster_fit = self.extract_fit(load, heat_rate,
                                            order=self._order, **kwargs)
-            cluster_fit.name = id
-            unit_fit.append(cluster_fit.to_frame().T)
+            cluster_fit.name = fit_id
+            unit_fit = cluster_fit.to_frame().T
 
-        unit_fit = pd.concat(unit_fit)
         for col in self.META_COLS:
             unit_fit.loc[:, col] = unit_meta[col]
 
