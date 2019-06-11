@@ -69,7 +69,8 @@ class Filter:
         logger.debug('\t- Using min_samples = {}'.format(min_samples))
         threshold = int(total_points / 100)
         logger.debug('\t- Skipping units with < {} points'.format(threshold))
-        filter = self.FILTERS[group_type.split(' (')[0]]
+        filter = self.FILTERS.get(group_type.split(' (')[0],
+                                  SingleCluster.filter)
 
         with CEMS(self._clean_h5, mode='r') as f:
             group = f[group_type]
