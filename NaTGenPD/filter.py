@@ -261,8 +261,8 @@ class PolyFit:
         """
         unit_meta = unit_df.iloc[0]
         unit_id = unit_meta['unit_id']
-        clusters = [label for label in unit_df['cluster'].unique()
-                    if label >= 0]
+        clusters = sorted([label for label in unit_df['cluster'].unique()
+                           if label >= 0])
         if not clusters:
             clusters = [0]
 
@@ -321,6 +321,7 @@ class PolyFit:
             group_fits.append(self.fit_unit(unit_df, **kwargs))
 
         group_fits = pd.concat(group_fits)
+        group_fits.index.name('unit_id')
         if out_file:
             logger.debug('- Saving fits to {}'
                          .format(out_file))
