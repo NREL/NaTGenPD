@@ -277,7 +277,9 @@ class Cluster:
             n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
             if n_clusters > 1:
                 s = self.cluster_score(array, labels, **kwargs)
-                if s >= score:
+                if s is None:
+                    break
+                elif s >= score:
                     score = s
                     cluster_params = labels, eps, min_samples
                     logger.debug('New best fit: min_samples={}, eps={}, s={}'
