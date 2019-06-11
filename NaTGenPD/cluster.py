@@ -152,7 +152,7 @@ class Cluster:
             arr = arr[pos]
             labels = labels[pos]
 
-        n_labels = np.unique(labels)
+        n_labels = len(np.unique(labels))
         if n_labels > 2:
             s = silhouette_score(arr, labels)
         else:
