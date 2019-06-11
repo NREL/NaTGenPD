@@ -307,13 +307,13 @@ class PolyFit:
         group_fits : pandas.DataFrame
             DataFrame of fit information
         """
-        logger.info('Filtering all {} units'.format(group_type))
+        logger.info('Fitting all {} units'.format(group_type))
         with CEMS(self._h5, mode='r') as f:
             group = f[group_type]
 
         group_fits = []
         for unit_id, unit_df in group.unit_dfs:
-            logger.debug('- Filtering unit {}'.format(unit_id))
+            logger.debug('- Fitting unit {}'.format(unit_id))
             group_fits.append(self.fit_unit(unit_df, **kwargs))
 
         group_fits = pd.concat(group_fits)
