@@ -265,7 +265,7 @@ class PolyFit:
         if len(clusters) > 1:
             unit_fit = []
             for label in clusters:
-                fit_id += '-{}'.format(label)
+                fit_id = '{}-{}'.format(unit_id, label)
 
                 pos = unit_df['cluster'] == label
                 cluster_df = unit_df.loc[pos, ['load', 'heat_rate']]
