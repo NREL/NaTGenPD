@@ -5,7 +5,6 @@ Data clustering utilities
 """
 import logging
 import numpy as np
-import warnings
 from scipy.spatial.distance import pdist, squareform
 from scipy.spatial import cKDTree
 from sklearn.cluster import DBSCAN
@@ -147,17 +146,13 @@ class Cluster:
         s : float
             Silhouette score computed after removing outliers (label < 0)
         """
-        if not outliers:
+        n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
+        if not outliers and n_clusters > 1:
             pos = labels >= 0
             arr = arr[pos]
             labels = labels[pos]
 
-        n_labels = len(np.unique(labels))
-        if n_labels >= 2:
-            s = silhouette_score(arr, labels)
-        else:
-            warnings.warn('Number of clusters: {} < 2'.format(n_labels))
-            s = None
+        s = silhouette_score(arr, labels)
 
         return s
 
@@ -270,16 +265,14 @@ class Cluster:
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels, **kwargs)
         cluster_params = labels, eps, min_samples
-        while score is not None:
+        while True:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
             n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
             if n_clusters > 1:
                 s = self.cluster_score(array, labels, **kwargs)
-                if s is None:
-                    break
-                elif s >= score:
+                if s >= score:
                     score = s
                     cluster_params = labels, eps, min_samples
                     logger.debug('New best fit: min_samples={}, eps={}, s={}'
@@ -533,15 +526,13 @@ class ClusterCC(Cluster):
         labels, eps, _ = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
         cluster_params = labels, eps, min_samples
-        while score is not None:
+        while True:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
             s = self.cluster_score(array, labels)
             n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
-            if s is None:
-                break
-            elif s < score:
+            if s < score:
                 if n_clusters <= cts:
                     break
             else:
