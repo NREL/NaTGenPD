@@ -263,10 +263,14 @@ class PolyFit:
         unit_id = unit_meta['unit_id']
         clusters = [label for label in unit_df['cluster'].unique()
                     if label >= 0]
+        if not clusters:
+            clusters = [0]
 
         unit_fit = []
         if len(clusters) > 1:
             cluster_id = True
+        else:
+            cluster_id = False
 
         for label in clusters:
             id = '{}'.format(unit_id)
