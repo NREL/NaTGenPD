@@ -269,14 +269,15 @@ class Cluster:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _, _ = self._cluster(array, min_samples, eps=eps)
-            if len(np.unique(labels)) > 1:
+            n_clusters = np.unique(labels)
+            if n_clusters > 2:
                 s = self.cluster_score(array, labels, **kwargs)
                 if s >= score:
                     score = s
                     cluster_params = labels, eps, min_samples
                     logger.debug('New best fit: min_samples={}, eps={}, s={}'
                                  .format(min_samples, eps, score))
-            else:
+            elif n_clusters == 1:
                 break
 
         return cluster_params
