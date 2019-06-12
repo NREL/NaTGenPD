@@ -188,7 +188,10 @@ class Cluster:
             arr = arr[pos]
             labels = labels[pos]
 
-        s = silhouette_score(arr, labels)
+        try:
+            s = silhouette_score(arr, labels)
+        except ValueError:
+            s = None
 
         return s
 
@@ -300,7 +303,7 @@ class Cluster:
         labels, eps = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels, **kwargs)
         cluster_params = labels, eps
-        while True:
+        while score is not None:
             eps_dt = eps * dt
             eps = eps + eps_dt
             labels, _ = self._cluster(array, min_samples, eps=eps)
