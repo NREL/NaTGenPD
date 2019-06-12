@@ -552,6 +552,9 @@ class ClusterCC(Cluster):
             Updated cluster labels
         """
         _l = labels.max()
+        if _l < 0:
+            _l = 0
+
         outliers = ct_labels < 0
         ct_labels[outliers] = -1
         ct_labels[~outliers] += _l
