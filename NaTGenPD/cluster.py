@@ -551,10 +551,7 @@ class ClusterCC(Cluster):
         labels : ndarray
             Updated cluster labels
         """
-        _l = labels.max()
-        if _l < 0:
-            _l = 0
-
+        _l = labels.max() + 1
         outliers = ct_labels < 0
         ct_labels[outliers] = -1
         ct_labels[~outliers] += _l
