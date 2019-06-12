@@ -584,7 +584,7 @@ class ClusterCC(Cluster):
             eps value used for clustering
         """
         cts = self.unit_df['cts'].unique()
-        labels = np.empty(len(self.unit_df), dtype='int8')
+        labels = np.full(len(self.unit_df), -1)
         eps = []
         _l = 0
         for n_cts in cts:
