@@ -589,15 +589,21 @@ class ClusterCC(Cluster):
         cts = self.unit_df['cts'].unique()
         labels = np.full(len(self.unit_df), -1)
         eps = []
-        _l = 0
         for n_cts in cts:
-            pos = self.unit_df['cts'] == n_cts
-            ct_df = self.unit_df.loc[pos]
-            c = Cluster(ct_df)
-            ct_labels, ct_eps = c.optimize_clusters(min_samples, dt=dt,
-                                                    return_eps=True, **kwargs)
-            labels = self.update_labels(labels, pos.values, ct_labels)
-            eps.append(ct_eps)
+            try:
+                pos = self.unit_df['cts'] == n_cts
+                ct_df = self.unit_df.loc[pos]
+                c = Cluster(ct_df)
+                ct_labels, ct_eps = c.optimize_clusters(min_samples, dt=dt,
+                                                        return_eps=True,
+                                                        **kwargs)
+                labels = self.update_labels(labels, pos.values, ct_labels)
+                eps.append(ct_eps)
+            except Exception as ex:
+                logger.warning('Could not find an optimal cluster for '
+                               '{} w/ {} cts: {}'.format(self.unit_id, n_cts,
+                                                         ex))
+                eps.append(None)
 
         if return_eps:
             logger.debug('\t- Optimal eps = {}, min_samples = {}'
