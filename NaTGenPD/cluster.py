@@ -531,6 +531,34 @@ class ClusterCC(Cluster):
     Subclass for finding operating modes in CCs
     """
 
+    @staticmethod
+    def update_labels(labels, ct_pos, ct_labels):
+        """
+        Update labels vectors with labels from clustering on each unique
+        number of cts
+
+        Parameters
+        ----------
+        labels : ndarray
+            Vector of cluster labels
+        ct_pos : ndarray
+            Boolean vector indicating with positions correspond to ct_labels
+        ct_labels: ndarray
+            Labels from cluster of subset of points for a given number of cts
+
+        Returns
+        -------
+        labels : ndarray
+            Updated cluster labels
+        """
+        _l = labels.max()
+        outliers = ct_labels < 0
+        ct_labels[outliers] = -1
+        ct_labels[~outliers] += _l
+        labels[ct_pos] = ct_labels
+
+        return labels
+
     def optimize_clusters(self, min_samples, dt=0.1, return_eps=False,
                           **kwargs):
         """
@@ -565,8 +593,7 @@ class ClusterCC(Cluster):
             c = Cluster(ct_df)
             ct_labels, ct_eps = c.optimize_clusters(min_samples, dt=dt,
                                                     return_eps=True, **kwargs)
-            labels[pos.values] = ct_labels + _l
-            _l = labels.max() + 1
+            labels = self.update_labels(labels, pos.values, ct_labels)
             eps.append(ct_eps)
 
         if return_eps:
