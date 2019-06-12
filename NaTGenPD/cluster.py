@@ -558,13 +558,15 @@ class ClusterCC(Cluster):
         cts = self.unit_df['cts'].unique()
         labels = np.empty(len(self.unit_df), dtype='int8')
         eps = []
+        _l = 0
         for n_cts in cts:
             pos = self.unit_df['cts'] == n_cts
             ct_df = self.unit_df.loc[pos]
             c = Cluster(ct_df)
             ct_labels, ct_eps = c.optimize_clusters(min_samples, dt=dt,
                                                     return_eps=True, **kwargs)
-            labels[pos.values] = ct_labels
+            labels[pos.values] = ct_labels + _l
+            _l = labels.max() + 1
             eps.append(ct_eps)
 
         if return_eps:
