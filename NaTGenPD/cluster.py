@@ -42,6 +42,42 @@ class Cluster:
         name = self.__class__.__name__
         return '{} for {} unit {}'.format(name, self._type, self._unit_id)
 
+    @property
+    def unit_df(self):
+        """
+        DataFrame for unit being clustered on
+
+        Returns
+        -------
+        unit_df : pandas.DataFrame
+            DataFrame for unit being clustered on
+        """
+        return self._unit_df
+
+    @property
+    def unit_id(self):
+        """
+        Id of unit being clustered on
+
+        Returns
+        -------
+        unit_id : str
+            Id of unit being clustered on
+        """
+        return self._unit_id
+
+    @property
+    def type(self):
+        """
+        Group type (generator + fuel) of unit being clustered on
+
+        Returns
+        -------
+        type : string
+            Group type (generator + fuel) of unit being clustered on
+        """
+        return self._type
+
     @staticmethod
     def normalize_values(arr, norm=None):
         """
@@ -227,17 +263,16 @@ class Cluster:
             Vector of cluster labels for each row in array
         eps : float
             eps value used to run DBSCAN
-        min_samples : int
-            min_samples value used to run DBSCAN
         """
         if eps is None:
             eps = self.optimal_eps(array, k=min_samples)
 
         labels = DBSCAN(eps=eps, min_samples=min_samples).fit_predict(array)
 
-        return labels, eps, min_samples
+        return labels, eps
 
-    def optimize_clusters(self, min_samples, dt=0.1, **kwargs):
+    def optimize_clusters(self, min_samples, dt=0.1, return_eps=False,
+                          **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -248,6 +283,8 @@ class Cluster:
             min_samples value for clustering, if None set as len(array) / 1000
         dt : float
             Percentage eps by which it is to be incrementally increased
+        return_eps : bool
+            Flag to return optimal eps
         kwargs : dict
             Internal kwargs
 
@@ -255,32 +292,35 @@ class Cluster:
         ---------
         labels : ndarray
             Vector of cluster labels for each row in array
-        eps : float
+        eps : float (optional)
             eps value used for clustering
-        min_samples : int
-            min_samples value used for clustering
         """
         array = self.get_data(['load', 'heat_rate'])
 
-        labels, eps, _ = self._cluster(array, min_samples)
+        labels, eps = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels, **kwargs)
-        cluster_params = labels, eps, min_samples
+        cluster_params = labels, eps
         while True:
             eps_dt = eps * dt
             eps = eps + eps_dt
-            labels, _, _ = self._cluster(array, min_samples, eps=eps)
+            labels, _ = self._cluster(array, min_samples, eps=eps)
             n_clusters = len(np.unique(labels))
             if n_clusters > 2:
                 s = self.cluster_score(array, labels, **kwargs)
                 if s >= score:
                     score = s
-                    cluster_params = labels, eps, min_samples
+                    cluster_params = labels, eps
                     logger.debug('New best fit: min_samples={}, eps={}, s={}'
                                  .format(min_samples, eps, score))
             elif n_clusters == 1:
                 break
 
-        return cluster_params
+        if return_eps:
+            logger.debug('\t- Optimal eps = {}, min_samples = {}'
+                         .format(eps, min_samples))
+            return cluster_params
+        else:
+            return cluster_params[0]
 
     @classmethod
     def filter(cls, unit_df, min_samples, threshold=10, **kwargs):
@@ -309,10 +349,7 @@ class Cluster:
                          .format(len(unit_df)))
         else:
             cluster = cls(unit_df)
-            labels, eps, min_samples = cluster.optimize_clusters(min_samples,
-                                                                 **kwargs)
-            logger.debug('\t- Optimal eps = {}, min_samples = {}'
-                         .format(eps, min_samples))
+            labels = cluster.optimize_clusters(min_samples, **kwargs)
             unit_df.loc[:, 'cluster'] = labels
 
         return unit_df
@@ -402,8 +439,6 @@ class SingleCluster(Cluster):
             Vector of cluster labels for each row in array
         eps : float
             eps value used to cluster
-        min_samples : int
-            min_samples value used to cluster
         """
         if eps is None:
             eps = self.optimal_eps(array, k=min_samples)
@@ -436,9 +471,9 @@ class SingleCluster(Cluster):
         labels = np.full(len(array), -1)
         labels[mask] = 0
 
-        return labels, eps, min_samples
+        return labels, eps
 
-    def optimize_clusters(self, min_samples, dt=0.1):
+    def optimize_clusters(self, min_samples, dt=0.1, return_eps=False):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -447,30 +482,29 @@ class SingleCluster(Cluster):
         ----------
         min_samples : int
             min_samples value for clustering, if None set as len(array) / 1000
-        eps : float
-            Epsilon value for clustering
-            If None estimate using k-n distance and min_samples
         dt : float
             Percentage eps by which it is to be incrementally increased
+        return_eps : bool
+            Flag to return optimal eps
+        kwargs : dict
+            Internal kwargs
 
         Returns
         ---------
         labels : ndarray
             Vector of cluster labels for each row in array
-        eps : float
+        eps : float (optional)
             eps value used for clustering
-        min_samples : int
-            min_samples value used for clustering
         """
         array = self.get_data(['load', 'heat_rate'])
 
-        labels, eps, _ = self._cluster(array, min_samples)
+        labels, eps = self._cluster(array, min_samples)
         score = self.cluster_score(array, labels)
-        cluster_params = labels, eps, min_samples
+        cluster_params = labels, eps
         while True:
             eps_dt = eps * dt
             eps = eps + eps_dt
-            labels, _, _ = self._cluster(array, min_samples, eps=eps)
+            labels, _ = self._cluster(array, min_samples, eps=eps)
 
             if len(np.unique(labels)) == 1:
                 break
@@ -480,11 +514,16 @@ class SingleCluster(Cluster):
                 break
             else:
                 score = s
-                cluster_params = labels, eps, min_samples
+                cluster_params = labels, eps
                 logger.debug('New best fit: min_samples={}, eps={}, score={}'
                              .format(min_samples, eps, score))
 
-        return cluster_params
+        if return_eps:
+            logger.debug('\t- Optimal eps = {}, min_samples = {}'
+                         .format(eps, min_samples))
+            return cluster_params
+        else:
+            return cluster_params[0]
 
 
 class ClusterCC(Cluster):
@@ -492,7 +531,8 @@ class ClusterCC(Cluster):
     Subclass for finding operating modes in CCs
     """
 
-    def optimize_clusters(self, min_samples, dt=0.1):
+    def optimize_clusters(self, min_samples, dt=0.1, return_eps=False,
+                          **kwargs):
         """
         Incrimentally increase eps from given value to optimize cluster
         size
@@ -500,45 +540,36 @@ class ClusterCC(Cluster):
         Parameters
         ----------
         min_samples : int
-            min_samples value for running DBSCAN
-        eps : float
-            Epsilon value for running DBSCAN
-            If None estimate using k-n distance and min_samples
+            min_samples value for clustering, if None set as len(array) / 1000
         dt : float
             Percentage eps by which it is to be incrementally increased
+        return_eps : bool
+            Flag to return optimal eps
+        kwargs : dict
+            Internal kwargs
 
         Returns
         ---------
         labels : ndarray
             Vector of cluster labels for each row in array
-        eps : float
-            eps value used to run DBSCAN
-        min_samples : int
-            min_samples value used to run DBSCAN
+        eps : float (optional)
+            eps value used for clustering
         """
-        array = self.get_data(['load', 'heat_rate', 'cts'], norm='max')
-        cts = len(np.unique(array[:, -1]))
-        if cts < 2:
-            # silhouette_score requires a minimum of 2 clusters
-            # Assumes a minimum of 2 operating moves 1x0 and 1x1
-            cts = 2
+        cts = self.unit_df['cts'].unique()
+        labels = np.empty(len(self.unit_df), dtype='int8')
+        eps = []
+        for n_cts in cts:
+            pos = self.unit_df['cts'] == n_cts
+            ct_df = self.unit_df.loc[pos]
+            c = Cluster(ct_df)
+            ct_labels, ct_eps = c.optimize_clusters(min_samples, dt=dt,
+                                                    return_eps=True, **kwargs)
+            labels[pos.values] = ct_labels
+            eps.append(ct_eps)
 
-        labels, eps, _ = self._cluster(array, min_samples)
-        score = self.cluster_score(array, labels)
-        cluster_params = labels, eps, min_samples
-        while True:
-            eps_dt = eps * dt
-            eps = eps + eps_dt
-            labels, _, _ = self._cluster(array, min_samples, eps=eps)
-            s = self.cluster_score(array, labels)
-            n_clusters = len([_l for _l in np.unique(labels) if _l >= 0])
-            if s < score:
-                if n_clusters <= cts:
-                    break
-            else:
-                score = s
-                cluster_params = labels, eps, min_samples
-                logger.debug('New best fit: min_samples={}, eps={}, score={}'
-                             .format(min_samples, eps, score))
-
-        return cluster_params
+        if return_eps:
+            logger.debug('\t- Optimal eps = {}, min_samples = {}'
+                         .format(eps, min_samples))
+            return labels, eps
+        else:
+            return labels
