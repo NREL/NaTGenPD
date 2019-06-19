@@ -355,3 +355,75 @@ class CEMS:
                 comb_arr = np.hstack(comb_arr)
                 f_comb.update_dset(ds, comb_arr)
                 logger.info('{} combined'.format(ds))
+
+
+class Fits:
+    """
+    Class to handle heat reate fits
+    """
+    def __init__(self, fit_dir):
+        """
+        Parameters
+        ----------
+        fit_dir : str
+            Path to directory containing heat rate fit files
+        """
+        self._fit_dir = fit_dir
+        self._group_fits = self._find_group_fits(fit_dir)
+
+    def __repr__(self):
+        msg = "{} w/ {} fits".format(self.__class__.__name__,
+                                     len(self._group_fits))
+        return msg
+
+    def __getitem__(self, g_type):
+        if g_type in self.group_types:
+            fit_df = pd.read_csv(self._group_fits[g_type])
+        else:
+            raise KeyError('{} is not a valid group_type'
+                           .format(g_type))
+
+        return fit_df
+
+    def __setitem__(self, g_type, df):
+        if g_type in self.group_types:
+            path = self._group_fits[g_type]
+        else:
+            path = os.path.join(self._fit_dir, '{}_fits.csv'.format(g_type))
+
+        df.to_csv(path, index=False)
+
+    @property
+    def group_types(self):
+        """
+        Datasets available in .h5 file
+
+        Returns
+        -------
+        list
+            List of group_types stored as individual DataSets
+        """
+        return list(self._group_fits)
+
+    @staticmethod
+    def _find_group_fits(fit_dir):
+        """
+        Identify all heat rate fit files
+
+        Parameters
+        ----------
+        fit_dir : str
+            Path to directory containing heat rate fit files
+
+        Returns
+        -------
+        group_fits : dict
+            Dictionary of group types and their corresponding fit file
+        """
+        group_fits = {}
+        for f_name in os.listdir(fit_dir):
+            if f_name.endswith(".csv"):
+                group_type = f_name.split('_')[0]
+                group_fits[group_type] = os.path.join(fit_dir, f_name)
+
+        return group_fits

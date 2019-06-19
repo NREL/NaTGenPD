@@ -132,8 +132,8 @@ class ParseSmoke:
         unit_ids : pd.DataFrame
             unit ids
         """
-        unit_ids = (smoke_raw['ORISID'].astype(str) + '_' +
-                    smoke_raw['BLRID'].astype(str))
+        unit_ids = (smoke_raw['ORISID'].astype(str) + '_'
+                    + smoke_raw['BLRID'].astype(str))
 
         return unit_ids
 
@@ -354,8 +354,8 @@ class ParseUnitInfo:
         """
         tech = unit_attrs['unit_type'].copy()
         # Combine boilers and tangentially-fired units
-        pos = tech.apply(lambda unit_type: 'boiler' in unit_type or
-                         unit_type == 'Tangentially-fired')
+        pos = tech.apply(lambda unit_type: 'boiler' in unit_type
+                         or unit_type == 'Tangentially-fired')
         tech[pos] = 'Boiler'
         # Combine Combined cycle units
         pos = tech.apply(lambda unit_type: 'cycle' in unit_type)
@@ -366,8 +366,8 @@ class ParseUnitInfo:
 
         fuel = unit_attrs['fuel_type'].copy()
         # Combine Coals and petroleum coke
-        pos = fuel.apply(lambda fuel_type: 'Coal' in fuel_type or
-                         fuel_type == 'Petroleum Coke')
+        pos = fuel.apply(lambda fuel_type: 'Coal' in fuel_type
+                         or fuel_type == 'Petroleum Coke')
         fuel[pos] = 'Coal'
         # Combine Natural Gas and all other gases
         pos = fuel.apply(lambda fuel_type: 'Gas' in fuel_type)

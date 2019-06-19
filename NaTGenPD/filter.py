@@ -9,7 +9,7 @@ import numpy as np
 import os
 import pandas as pd
 from .cluster import SingleCluster, ClusterCC
-from .handler import CEMS
+from .handler import CEMS, Fits
 
 logger = logging.getLogger(__name__)
 
@@ -376,63 +376,222 @@ class PolyFit:
         fit.fit_all(out_dir, **kwargs)
 
 
-def get_hr_min(unit, points=100):
+class FitFilter:
     """
-    Extract minimum heat rate from unit fits
-
-    Parameters
-    ----------
-    unit : pandas.Series
-        Row containing the fit stats and parameters for a single unit
-
-    Returns
-    -------
-    hr_min: float
-        Minimum heat rate from heat rate curve fit
+    Filter Heat Rate fits
     """
-    if not unit['a4'].isnull():
-        fit_params = unit[['a4', 'a3', 'a2', 'a1', 'a0']].values
-        poly_fit = np.poly1d(fit_params)
-        load_min, load_max = unit[['load_min', 'load_max']].values
-        x = np.linspace(load_min, load_max, points)
-        hr_min = poly_fit(x).min()
-    else:
-        hr_min = None
+    def __init__(self, fit_dir):
+        """
+        Parameters
+        ----------
+        fit_dir : str
+            Path to directory containing heat rate fit files
+        """
+        self._hr_fits = Fits(fit_dir)
 
-    return hr_min
+    @property
+    def hr_fits(self):
+        """
+        Returns
+        -------
+        _hr_fits : Fits
+            Instance of Fits handler class
+        """
+        return self._hr_fits
 
+    @staticmethod
+    def _get_hr_min(unit, points=100):
+        """
+        Extract minimum heat rate from unit fits
 
-def min_hr_filter(group_fits, stdev_multiplier=2, threshold=(None, None)):
-    """
-    Filter out the most and least efficient units based on multiples of the
-    standard deviation from the mean
+        Parameters
+        ----------
+        unit : pandas.Series
+            Row containing the fit stats and parameters for a single unit
 
-    Parameters
-    ----------
-    group_fits : pandas.DataFrame
-        DataFrame of fits to filter
-    stdev_multiplier : float
-        Multiple of the stdev from the mean to use as the filter thresholds
-    threshold : tuple
-        Threshold(s) to use instead of the above multiplier
+        Returns
+        -------
+        hr_min: float
+            Minimum heat rate from heat rate curve fit
+        """
+        params = [i for i in unit.index if i.startswith('a')]
+        fit_params = unit[params]
+        if not fit_params.isnull().any():
+            fit_params = fit_params.values
+            poly_fit = np.poly1d(fit_params)
+            load_min, load_max = unit[['load_min', 'load_max']].values
+            x = np.linspace(load_min, load_max, points)
+            hr_min = poly_fit(x).min()
+            if hr_min < 4.5:
+                logger.warning('\t- Minimun heat rate value is < 4.5!')
+                hr_min = None
+        else:
+            hr_min = None
 
-    Returns
-    -------
-    group_fits : pandas.DataFrame
-        Filtered group fits
-    """
-    min_hr = group_fits.apply(get_hr_min, axis=1).dropna()
-    mean = min_hr.mean()
-    stdev = min_hr.stdev()
-    thresh = np.array([-stdev_multiplier, stdev_multiplier]) * stdev + mean
-    for i, t in enumerate(threshold):
-        if t is not None:
-            thresh[i] = t
+        return hr_min
 
-    pos = np.logical_or(min_hr < thresh[0], min_hr > thresh[1])
-    idx = min_hr[~pos].index
-    null_cols = [c for c in group_fits.columns
-                 if c.startswith(('a', 'heat_rate'))]
-    group_fits.loc[idx, null_cols] = None
+    @staticmethod
+    def _min_hr_filter(min_hr, stdev_multiplier=2, threshold=(None, None)):
+        """
+        Filter out the most and least efficient units based on multiples of the
+        standard deviation from the mean
 
-    return group_fits
+        Parameters
+        ----------
+        min_hr : pd.Series
+            Series of minimum heat_rate values for all generators with a
+            valid fit
+        stdev_multiplier : float
+            Multiple of the stdev from the mean to use as the filter thresholds
+        threshold : tuple
+            Pre-impossed limits for the filter threshold
+
+        Returns
+        -------
+        failed_units : ndarray
+            Array of units that failed the filter
+        """
+        min_hr_values = min_hr.values
+        if threshold[0]:
+            min_hr_values = min_hr_values[min_hr_values > threshold[0]]
+
+        if threshold[1]:
+            min_hr_values = min_hr_values[min_hr_values < threshold[1]]
+
+        mean = min_hr_values.mean()
+        stdev = min_hr_values.std()
+        thresh = np.array([-stdev_multiplier, stdev_multiplier]) * stdev + mean
+
+        if threshold[0]:
+            thresh[0] = threshold[0]
+
+        if threshold[1]:
+            thresh[1] = thresh[1]
+
+        pos = np.logical_or(min_hr < thresh[0], min_hr > thresh[1])
+        failed_units = min_hr[pos].index
+
+        return failed_units
+
+    @staticmethod
+    def _filter(group_df, **kwargs):
+        """
+        Filter units of given group
+
+        Parameters
+        ----------
+        group_df : pd.DataFrame
+            DataFrame of fits for a given group types
+        kwargs : dict
+            Internal kwargs
+
+        Returns
+        -------
+        group_df : pd.DataFrame
+            Updated DataFrame of fits with filtered units fit values
+            (load, heat_rate, and params) set to None
+        """
+        group_df = group_df.set_index('unit_id')
+        min_hr = group_df.apply(FitFilter._get_hr_min, axis=1).dropna()
+
+        failed_units = FitFilter._min_hr_filter(min_hr, **kwargs)
+        filter_cols = [c for c in group_df.columns
+                       if c.startswith(('a', 'heat_rate', 'load'))
+                       and c not in ['load_min', 'load_max']]
+        logger.debug('\t- {} units being filtered'.format(len(failed_units)))
+        group_df.loc[failed_units, filter_cols] = None
+
+        return group_df.reset_index(drop=True)
+
+    @staticmethod
+    def _filer_CCs(cc_df, cut_off=9, **kwargs):
+        """
+        Filter CC units
+
+        Parameters
+        ----------
+        cc_df : pd.DataFrame
+            DataFrame of CC fits for each operating mode
+        cut_off : float
+            Threshold above which units should not be included in filter.
+            These units did not report the steam generation and are thus
+            appear overly in-efficient for a CC
+        kwargs : dict
+            Internal kwargs
+
+        Returns
+        -------
+        cc_df : pd.DataFrame
+            Updated DataFrame of CC fits with filtered units fit values
+            (load, heat_rate, and params) set to None
+        """
+        cc_df['cc_id'] = cc_df['unit_id'].str.split('-').str[0]
+        cc_df = cc_df.set_index('cc_id')
+        cc_min_hr = cc_df.apply(FitFilter._get_hr_min, axis=1)
+        cc_min_hr = cc_min_hr.dropna().to_frame().reset_index()
+        cc_min_hr = cc_min_hr.groupby('cc_id').min()
+
+        failed_units = FitFilter._min_hr_filter(cc_min_hr,
+                                                threshold=(None, cut_off),
+                                                **kwargs)
+        filter_cols = [c for c in cc_df.columns
+                       if c.startswith(('a', 'heat_rate', 'load'))
+                       and c not in ['load_min', 'load_max']]
+        logger.debug('\t- {} units being filtered'.format(len(failed_units)))
+        cc_df.loc[failed_units, filter_cols] = None
+
+        return cc_df.reset_index(drop=True)
+
+    def filter(self, out_dir=None, min_units=100, **kwargs):
+        """
+        Filter all group types
+
+        Parameters
+        ----------
+        out_dir : str | NoneType
+            Output directory to save filtered fits to, if None update in-place
+        min_units : int
+            Minimum number of units with fits needed for filtering
+        kwargs : dict
+            internal kwargs
+        """
+        logger.info('Filtering out the most and least efficient heat '
+                    'rate fits')
+        out_fits = None
+        if out_dir is not None:
+            out_fits = Fits(out_dir)
+
+        for g_type in self._hr_fits.group_types:
+            group_df = self._hr_fits[g_type]
+            fit_units = np.sum(~group_df['a0'].isnull())
+            if fit_units > min_units:
+                logger.info('- Filtering {}'.format(g_type))
+                if 'CC' in g_type:
+                    group_df = self._filer_CCs(group_df, **kwargs)
+                else:
+                    group_df = self._filter(group_df, **kwargs)
+
+                if out_fits is not None:
+                    out_fits[g_type] = group_df
+                else:
+                    self._hr_fits[g_type] = group_df
+            else:
+                logger.warning('- Skipping {} as it only has {} unique fits'
+                               .format(g_type, fit_units))
+                if out_fits is not None:
+                    out_fits[g_type] = group_df
+
+    @classmethod
+    def run(cls, fit_dir, out_dir=None, **kwargs):
+        """
+        Filter all group types in fit_dir and save to disk
+
+        Parameters
+        ----------
+        fit_dir : str
+            Path to directory containing heat rate fit files
+        out_dir : str | NoneType
+            Output directory to save filtered fits to, if None update in-place
+        """
+        ff = cls(fit_dir)
+        ff.filter(out_dir=out_dir, **kwargs)
