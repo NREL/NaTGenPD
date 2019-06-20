@@ -235,7 +235,10 @@ class ParseSmoke:
         out_file : str
             Path to output file
         """
-        self.smoke_df.to_hdf(out_file, key='smoke_df', mode='w')
+        with CEMS(out_file, mode='w') as f:
+            logger.info('Saving data to {}'
+                        .format(os.path.basename(out_file)))
+            f['raw_CEMS'] = self.smoke_df
 
     @classmethod
     def performance_vars(cls, dir_path, year, save=True):
@@ -499,7 +502,8 @@ class CleanSmoke:
             DataFrame of unique units and their attributes
         """
         if isinstance(smoke_df, str):
-            smoke_df = pd.read_hdf(smoke_df, 'smoke_df')
+            with CEMS(smoke_df, mode='r') as f:
+                smoke_df = f['raw_CEMS']
 
         if 'group_type' not in smoke_df.columns:
             if unit_attrs_path is None:
