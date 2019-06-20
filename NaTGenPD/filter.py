@@ -452,23 +452,24 @@ class FitFilter:
             Array of units that failed the filter
         """
         min_hr_values = min_hr.values
-        if threshold[0]:
+        if threshold[0] is not None:
             min_hr_values = min_hr_values[min_hr_values > threshold[0]]
 
-        if threshold[1]:
+        if threshold[1] is not None:
             min_hr_values = min_hr_values[min_hr_values < threshold[1]]
 
         mean = min_hr_values.mean()
         stdev = min_hr_values.std()
         thresh = np.array([-stdev_multiplier, stdev_multiplier]) * stdev + mean
 
-        if threshold[0]:
+        if threshold[0] is not None:
             thresh[0] = threshold[0]
 
-        if threshold[1]:
-            thresh[1] = thresh[1]
+        if threshold[1] is not None:
+            thresh[1] = threshold[1]
 
-        pos = np.logical_or(min_hr < thresh[0], min_hr > thresh[1])
+        pos = np.logical_or(min_hr.values < thresh[0],
+                            min_hr.values > thresh[1])
         failed_units = min_hr[pos].index
 
         return failed_units

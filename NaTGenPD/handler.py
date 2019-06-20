@@ -403,7 +403,7 @@ class Fits:
         list
             List of group_types stored as individual DataSets
         """
-        return list(self._group_fits)
+        return sorted(list(self._group_fits))
 
     @staticmethod
     def _find_group_fits(fit_dir):
