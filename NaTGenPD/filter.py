@@ -501,7 +501,7 @@ class FitFilter:
         logger.debug('\t- {} units being filtered'.format(len(failed_units)))
         group_df.loc[failed_units, filter_cols] = None
 
-        return group_df.reset_index(drop=True)
+        return group_df.reset_index()
 
     @staticmethod
     def _filer_CCs(cc_df, cut_off=9, **kwargs):
