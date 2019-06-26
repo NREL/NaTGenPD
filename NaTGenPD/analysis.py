@@ -3,7 +3,6 @@
 Heat Rate Analysis utilities
 @author: mrossol
 """
-import concurrent.futures as cf
 import logging
 import numpy as np
 import os
@@ -358,7 +357,7 @@ class ProcedureAnalysis:
 
         return group_stats, group_unit_stats
 
-    def process_stats(self, out_file, parallel=True):
+    def process_stats(self, out_file):
         """
         Compute process stats for all available group types in CEMS data
 
@@ -366,40 +365,23 @@ class ProcedureAnalysis:
         ----------
         out_file : str
             Path to output file to save stats to
-        parallel : bool
-            Compute process stats is parallel
         """
         process_stats = []
-        if parallel:
-            with cf.ProcessPoolExecutor() as executor:
-                futures = []
-                for g_type in self._fits.group_types:
-                    logger.info('Extracting stats for {}'.format(g_type))
-                    f_name = os.path.basename(out_file)
-                    units_file = "{}_{}".format(g_type, f_name)
-                    units_file = out_file.replace(f_name, units_file)
-                    futures.append(executor.submit(self._group_stats, g_type))
-
-                for future in futures:
-                    group_stats, group_unit_stats = future.results()
-                    process_stats.append(group_stats)
-                    group_unit_stats.to_csv(units_file)
-        else:
-            for g_type in self._fits.group_types:
-                logger.info('Extracting stats for {}'.format(g_type))
-                f_name = os.path.basename(out_file)
-                units_file = "{}_{}".format(g_type, f_name)
-                units_file = out_file.replace(f_name, units_file)
-                group_stats, group_unit_stats = self._group_stats(g_type)
-                process_stats.append(group_stats)
-                group_unit_stats.to_csv(units_file)
+        for g_type in self._fits.group_types:
+            logger.info('Extracting stats for {}'.format(g_type))
+            f_name = os.path.basename(out_file)
+            units_file = "{}_{}".format(g_type, f_name)
+            units_file = out_file.replace(f_name, units_file)
+            group_stats, group_unit_stats = self._group_stats(g_type)
+            process_stats.append(group_stats)
+            group_unit_stats.to_csv(units_file)
 
         process_stats = pd.concat(process_stats, axis=1).T
         process_stats.to_csv(out_file)
 
     @classmethod
     def stats(cls, hr_fits, raw_cems, cleaned_cems, filtered_cems, out_file,
-              cc_map_path=None, parallel=True):
+              cc_map_path=None):
         """
         Compute process stats for all available group types in CEMS data
 
@@ -417,9 +399,7 @@ class ProcedureAnalysis:
             Path to output file to save stats to
         cc_map_path : str
             Path to cc_mapping
-        parallel : bool
-            Compute process stats is parallel
         """
         process = cls(hr_fits, raw_cems, cleaned_cems, filtered_cems,
                       cc_map_path=cc_map_path)
-        process.process_stats(out_file, parallel=parallel)
+        process.process_stats(out_file)
