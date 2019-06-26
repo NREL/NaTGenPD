@@ -31,7 +31,6 @@ class CEMSGroup:
                            .format(unit_id))
 
         unit_df = self._unit_dfs.get_group(unit_id)
-        unit_df = unit_df.loc[unit_df['load'] > 0]
 
         return unit_df.reset_index(drop=True)
 
@@ -43,10 +42,10 @@ class CEMSGroup:
 
     def __next__(self):
         if self._i < len(self):
-            unit = self.units[self._i]
-            unit_df = self[unit]
+            unit_id = self.units[self._i]
+            unit_df = self[unit_id]
             self._i += 1
-            return unit, unit_df
+            return unit_id, unit_df
         else:
             raise StopIteration
 

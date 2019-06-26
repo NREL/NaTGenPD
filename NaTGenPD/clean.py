@@ -10,7 +10,8 @@ import numpy as np
 import os
 import pandas as pd
 import warnings
-from .handler import CEMS
+from NaTGenPD import PROJECT_ROOT
+from NaTGenPD.handler import CEMS
 
 logger = logging.getLogger(__name__)
 
@@ -767,7 +768,7 @@ class CleanSmoke:
         ----------
         smoke_df : pandas.DataFrame
             DataFrame of performance variables from SMOKE data with unit info
-        cc_map : str
+        cc_map : pd.DataFrame
             Path to .csv with CEMS to EIA CC unit mapping
         parallel : bool
             Run cts_to_cc in parallel
@@ -779,10 +780,6 @@ class CleanSmoke:
         smoke_df : pandas.DataFrame
             Updated DataFrame with CCs aggregated to EIA units
         """
-        cc_map = pd.read_csv(cc_map).rename(columns={'CCUnit': 'cc_unit',
-                                                     'CEMSUnit': 'unit_id'})
-        cc_map = cc_map[['unit_id', 'cc_unit']]
-
         if 'load' not in smoke_df.columns:
             warnings.warn('Converting gload to net load')
             smoke_df = CleanSmoke.gross_to_net(smoke_df, **kwargs)
@@ -822,8 +819,9 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
-        cc_map : str
-            Path to .csv with CEMS to EIA CC unit mapping
+        cc_map : bool | str
+            Path to .csv with CEMS to EIA CC unit mapping if True use provided
+            mapping in bin/cems_cc_mapping.csv
         parallel : bool
             Run cts_to_cc in parallel
 
@@ -854,6 +852,14 @@ class CleanSmoke:
         smoke_clean = self.fill_null_units(smoke_clean, self.unit_info)
         if cc_map:
             logger.info('Combining CC units')
+            if not isinstance(cc_map):
+                cc_map = os.path.join(os.path.dirname(PROJECT_ROOT), 'bin',
+                                      'cems_cc_mapping.csv')
+
+            cc_map = pd.read_csv(cc_map)
+            cc_map = cc_map.rename(columns={'CCUnit': 'cc_unit',
+                                            'CEMSUnit': 'unit_id'})
+            cc_map = cc_map[['unit_id', 'cc_unit']]
             smoke_clean = self.aggregate_ccs(smoke_clean, cc_map,
                                              parallel=parallel)
             logger.debug('- Units combined = {}'
@@ -871,7 +877,7 @@ class CleanSmoke:
     @classmethod
     def clean(cls, smoke, unit_attrs_path=None,
               load_multipliers={'solid': 0.925, 'liquid': 0.963},
-              hr_bounds=(4.5, 40), max_perc=0.1, cc_map=None,
+              hr_bounds=(4.5, 40), max_perc=0.1, cc_map=True,
               parallel=True, out_file=None):
         """
         Clean-up SMOKE data for heat rate analysis:
@@ -892,8 +898,9 @@ class CleanSmoke:
         max_perc : float
             Percentage (as a float) of max load and max HTINPUT to associate
             with start-up and shut-down
-        cc_map : str
-            Path to .csv with CEMS to EIA CC unit mapping
+        cc_map : bool | str
+            Path to .csv with CEMS to EIA CC unit mapping if True use provided
+            mapping in bin/cems_cc_mapping.csv
         parallel : bool
             Run cts_to_cc in parallel
         out_file : str

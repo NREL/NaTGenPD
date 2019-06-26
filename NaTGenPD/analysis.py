@@ -1,0 +1,396 @@
+# -*- coding: utf-8 -*-
+"""
+Heat Rate Analysis utilities
+@author: mrossol
+"""
+import logging
+import numpy as np
+import os
+import pandas as pd
+from NaTGenPD import PROJECT_ROOT
+from NaTGenPD.handler import Fits, CEMS, CEMSGroup
+
+logger = logging.getLogger(__name__)
+
+
+class ProcedureAnalysis:
+    """
+    Heat Rate Analysis Class
+    """
+    def __init__(self, hr_fits, raw_cems, cleaned_cems, filtered_cems,
+                 cc_map_path=None):
+        """
+        Parameters
+        ----------
+        hr_fits : str
+            Path to heat rate fit .csv(s)
+        raw_cems : str
+            Path to raw CEMS .h5 file(s)
+        cleaned_cems : str
+            Path to cleaned CEMS .h5 file
+        filtered_cems : str
+            Path to filtered CEMS .h5 file
+        cc_map_path : str
+            Path to cc_mapping
+        """
+        self._fits = Fits(hr_fits)
+        self._raw_df = self.parse_raw_CEMS(raw_cems)
+        self._cleaned_path = cleaned_cems
+        self._filtered_path = filtered_cems
+        if cc_map_path is None:
+            cc_map_path = os.path.join(os.path.dirname(PROJECT_ROOT), 'bin',
+                                       'cems_cc_mapping.csv')
+
+        self._cc_map = self.load_cc_map(cc_map_path)
+
+    @staticmethod
+    def parse_raw_CEMS(raw_cems):
+        """
+        Combine multiple years of raw CEMS data
+
+        Parameters
+        ----------
+        raw_cems : list | str
+            Path to single or multiple .h5 files containing raw CEMS data
+
+        Returns
+        -------
+        raw_df : pd.DataFrame
+            DataFrame of raw CEMS data from all input years
+        """
+        if not isinstance(raw_cems, list):
+            raw_cems = [raw_cems]
+
+        raw_df = []
+        for raw_file in raw_cems:
+            with CEMS(raw_file, 'r') as f:
+                raw_df.append(f['raw_CEMS'].df)
+
+        return pd.concat(raw_df)
+
+    @staticmethod
+    def load_cc_map(cc_map_path=None):
+        """
+        Load cc_mapping, if path is None use provided mapping in bin
+
+        Parameters
+        ----------
+        cc_map_path : str
+            Path to .csv with CEMS to EIA CC unit mapping
+
+        Returns
+        -------
+        cc_map : pd.DataFrame
+            Mapping of CEMS cc generators (CTs) to final CC units
+        """
+        if cc_map_path is None:
+            cc_map_path = os.path.join(os.path.dirname(PROJECT_ROOT), 'bin',
+                                       'cems_cc_mapping.csv')
+
+        cc_map = pd.read_csv(cc_map_path)
+        cc_map = cc_map.rename(columns={'CCUnit': 'cc_unit',
+                                        'CEMSUnit': 'unit_id'})
+        cc_map = cc_map[['unit_id', 'cc_unit']]
+        return cc_map
+
+    def _get_fits(self, group_type):
+        """
+        Extract desired group type from heat rate fits
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/Generator type of interest
+
+        Returns
+        -------
+        group_fits : pd.DataFrame
+        """
+        group_fits = self._fits[group_type]
+
+        return group_fits
+
+    def _get_raw(self, group_type):
+        """
+        Extract desired group type from raw CEMS data
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/Generator type of interest
+
+        Returns
+        -------
+        raw : CEMSGroup
+        """
+        group_fits = self._get_fits(group_type)
+        units = list(group_fits['unit_id'].values)
+        if "CC" in group_type:
+            pos = self._cc_map['cc_unit'].isin(units)
+            units = self._cc_map.loc[pos, 'unit_id'].to_list()
+
+        pos = self._raw_df['unit_id'].isin(units)
+        raw = CEMSGroup(self._raw_df.loc[pos])
+
+        return raw
+
+    def _get_cleaned(self, group_type):
+        """
+        Extract desired group type from cleaned CEMS data
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/Generator type of interest
+
+        Returns
+        -------
+        cleaned : CEMSGroup
+        """
+        with CEMS(self._cleaned_path, mode='r') as f:
+            cleaned = f[group_type]
+
+        return cleaned
+
+    def _get_filtered(self, group_type):
+        """
+        Extract desired group type from filtered CEMS data
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/Generator type of interest
+
+        Returns
+        -------
+        filtered : CEMSGroup
+        """
+        with CEMS(self._filtered_path, mode='r') as f:
+            filtered = f[group_type]
+
+        return filtered
+
+    @staticmethod
+    def _raw_stats(raw_df, unit_id, group_stats, unit_stats):
+        """
+        Compute raw stats for desired unit
+
+        Parameters
+        ----------
+        raw_df : CEMSGroup
+            Instance of CEMSGroup containing raw CEMS data
+        unit_id : str
+            Unit id of interest
+        group_stats : pd.Series
+            Aggregate stats
+        unit_stats : pd.Series
+            Stats for individual units
+
+        Returns
+        -------
+        group_stats : pd.Series
+            Updated aggregate stats
+        unit_stats : pd.Series
+            Updated stats for individual units
+        """
+        try:
+            unit_df = raw_df[unit_id]
+            group_stats['unit_dfs'] += 1
+            gen = unit_df['gload'].max()
+            group_stats['raw_gen'] += gen
+            unit_stats['raw_gen'] = gen
+            points = len(unit_df)
+            group_stats['total_points'] += points
+            unit_stats['total_points'] = points
+            non_zero = (unit_df['gload'] > 0).sum()
+            group_stats['non_zero_points'] += non_zero
+            unit_stats['non_zero_points'] = non_zero
+        except KeyError:
+            logger.warning('- {} is not present in Raw CEMS data'
+                           .format(unit_id))
+
+        return group_stats, unit_stats
+
+    @staticmethod
+    def _clean_stats(clean_df, unit_id, group_stats, unit_stats):
+        """
+        Compute cleaning stats for desired unit
+
+        Parameters
+        ----------
+        clean_df : CEMSGroup
+            Instance of CEMSGroup containing cleaned CEMS data
+        unit_id : str
+            Unit id of interest
+        group_stats : pd.Series
+            Aggregate stats
+        unit_stats : pd.Series
+            Stats for individual units
+
+        Returns
+        -------
+        group_stats : pd.Series
+            Updated aggregate stats
+        unit_stats : pd.Series
+            Updated stats for individual units
+        """
+        try:
+            unit_df = clean_df[unit_id]
+            if unit_df['load'].nonzero()[0].any():
+                group_stats['clean_units'] += 1
+                gen = np.nanmax(unit_df['load'])
+                group_stats['clean_gen'] += gen
+                unit_stats['clean_gen'] = gen
+        except KeyError:
+            logger.warning('- {} is not present in Clean CEMS data'
+                           .format(unit_id))
+
+        return group_stats, unit_stats
+
+    @staticmethod
+    def _filter_stats(filtered_df, unit_id, unit_fit, group_stats, unit_stats):
+        """
+        Compute filtering stats for desired unit
+
+        Parameters
+        ----------
+        filtered_df : CEMSGroup
+            Instance of CEMSGroup containing filtered CEMS data
+        unit_id : str
+            Unit id of interest
+        unit_fit : pd.Series
+            Unit fit data
+        group_stats : pd.Series
+            Aggregate stats
+        unit_stats : pd.Series
+            Stats for individual units
+
+        Returns
+        -------
+        group_stats : pd.Series
+            Updated aggregate stats
+        unit_stats : pd.Series
+            Updated stats for individual units
+        """
+        try:
+            unit_df = filtered_df[unit_id]
+            pos = unit_df['cluster'] >= 0
+            unit_df = unit_df.loc[pos]
+            if unit_df['load'].nonzero()[0].any():
+                group_stats['filtered_units'] += 1
+                gen = np.nanmax(unit_df['load'])
+                group_stats['filtered_gen'] += gen
+                unit_stats['filtered_gen'] = gen
+                if not np.isnan(unit_fit['a0']):
+                    group_stats['final_units'] += 1
+                    group_stats['final_gen'] += gen
+                    unit_stats['final_gen'] = gen
+                    f_points = len(unit_df.loc[unit_df['load'] > 0])
+                    unit_stats['final_points'] = f_points
+                    group_stats['final_points'] += f_points
+        except KeyError:
+            logger.warning('- {} is not present in Filtered CEMS data'
+                           .format(unit_id))
+
+        return group_stats, unit_stats
+
+    def _group_stats(self, group_type):
+        """
+        Compute process stats for group in aggregate and each unit in
+        group type
+
+        Parameters
+        ----------
+        group_type : str
+            Group (fuel/generator) type to analyze
+
+        Returns
+        -------
+        group_stats : pd.Series
+            Aggregated processing stats
+        group_unit_stats : pd.DataFrame
+            Processing stats for each unit
+        """
+        group_stats = pd.Series(0, index=['unit_dfs', 'raw_gen',
+                                          'total_points', 'non_zero_points',
+                                          'clean_units', 'clean_gen',
+                                          'filtered_units', 'filtered_gen',
+                                          'final_units', 'final_gen',
+                                          'final_points'])
+        stats = group_stats.copy().drop(labels=['unit_dfs', 'clean_units',
+                                                'filtered_units',
+                                                'final_units'])
+        group_stats.name = group_type
+
+        group_fits = self._get_fits(group_type).set_index('unit_id')
+        raw_df = self._get_raw(group_type)
+        clean_df = self._get_cleaned(group_type)
+        filtered_df = self._get_filtered(group_type)
+
+        group_unit_stats = []
+        for unit_id, unit_fit in group_fits.iterrows():
+            unit_stats = stats.copy()
+            unit_stats.name = unit_id
+            # Raw Dat Stats
+            group_stats, unit_stats = self._raw_stats(raw_df, unit_id,
+                                                      group_stats, unit_stats)
+            # Clean Data Stats
+            group_stats, unit_stats = self._clean_stats(clean_df, unit_id,
+                                                        group_stats,
+                                                        unit_stats)
+            # Filtered and Final data Stats
+            group_stats, unit_stats = self._filter_stats(filtered_df, unit_id,
+                                                         unit_fit,
+                                                         group_stats,
+                                                         unit_stats)
+            group_unit_stats.append(unit_stats)
+
+        group_unit_stats = pd.concat(group_unit_stats, axis=1).T
+
+        return group_stats, group_unit_stats
+
+    def process_stats(self, out_file):
+        """
+        Compute process stats for all available group types in CEMS data
+
+        Parameters
+        ----------
+        out_file : str
+            Path to output file to save stats to
+        """
+        process_stats = []
+        for g_type in self._fits.group_types:
+            f_name = os.path.basename(out_file)
+            units_file = "{}_{}".format(g_type, f_name)
+            units_file = out_file.replace(f_name, units_file)
+            group_stats, group_unit_stats = self._group_stats(g_type)
+            process_stats.append(group_stats)
+            group_unit_stats.to_csv(units_file)
+
+        process_stats = pd.concat(process_stats, axis=1).T
+        process_stats.to_csv(out_file)
+
+    @classmethod
+    def stats(cls, hr_fits, raw_cems, cleaned_cems, filtered_cems, out_file,
+              cc_map_path=None):
+        """
+        Compute process stats for all available group types in CEMS data
+
+        Parameters
+        ----------
+        hr_fits : str
+            Path to heat rate fit .csv(s)
+        raw_cems : str
+            Path to raw CEMS .h5 file(s)
+        cleaned_cems : str
+            Path to cleaned CEMS .h5 file
+        filtered_cems : str
+            Path to filtered CEMS .h5 file
+        out_file : str
+            Path to output file to save stats to
+        cc_map_path : str
+            Path to cc_mapping
+        """
+        process = cls(hr_fits, raw_cems, cleaned_cems, filtered_cems,
+                      cc_map_path=cc_map_path)
+        process.process_stats(out_file)
