@@ -8,8 +8,9 @@ import logging
 import numpy as np
 import os
 import pandas as pd
-from .cluster import SingleCluster, ClusterCC
-from .handler import CEMS, Fits
+
+from NaTGenPD.cluster import SingleCluster, ClusterCC
+from NaTGenPD.handler import CEMS, Fits
 
 logger = logging.getLogger(__name__)
 

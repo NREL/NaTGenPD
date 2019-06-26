@@ -7,9 +7,10 @@ import logging
 import numpy as np
 import os
 import pandas as pd
-from NaTGenPD import PROJECT_ROOT
+
 from NaTGenPD.handler import Fits, CEMS, CEMSGroup
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 logger = logging.getLogger(__name__)
 
 

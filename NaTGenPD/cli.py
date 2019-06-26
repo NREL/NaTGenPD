@@ -6,8 +6,9 @@ Command Line Interface and Entry point
 import click
 import logging
 import os
-from .clean import ParseSmoke, CleanSmoke
-from .handler import CEMS
+
+from NaTGenPD.clean import ParseSmoke, CleanSmoke
+from NaTGenPD.handler import CEMS
 
 FORMAT = '%(levelname)s - %(asctime)s [%(filename)s:%(lineno)d] : %(message)s'
 LOG_LEVEL = {'INFO': logging.INFO,
