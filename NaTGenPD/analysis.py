@@ -63,6 +63,7 @@ class ProcedureAnalysis:
 
         raw_df = []
         for raw_file in raw_cems:
+            logger.debug('\t- Loading {}'.format(os.path.basename(raw_file)))
             with CEMS(raw_file, 'r') as f:
                 raw_df.append(f['raw_CEMS'].df)
 
@@ -194,6 +195,7 @@ class ProcedureAnalysis:
             Updated stats for individual units
         """
         try:
+            logger.debug('\t-- Extracting raw stats')
             unit_df = raw_df[unit_id]
             group_stats['unit_dfs'] += 1
             gen = unit_df['gload'].max()
@@ -237,6 +239,7 @@ class ProcedureAnalysis:
         try:
             unit_df = clean_df[unit_id]
             if unit_df['load'].nonzero()[0].any():
+                logger.debug('\t-- Extracting clean stats')
                 group_stats['clean_units'] += 1
                 gen = np.nanmax(unit_df['load'])
                 group_stats['clean_gen'] += gen
@@ -277,11 +280,13 @@ class ProcedureAnalysis:
             pos = unit_df['cluster'] >= 0
             unit_df = unit_df.loc[pos]
             if unit_df['load'].nonzero()[0].any():
+                logger.debug('\t-- Extracting filter stats')
                 group_stats['filtered_units'] += 1
                 gen = np.nanmax(unit_df['load'])
                 group_stats['filtered_gen'] += gen
                 unit_stats['filtered_gen'] = gen
                 if not np.isnan(unit_fit['a0']):
+                    logger.debug('\t-- Extracting final stats')
                     group_stats['final_units'] += 1
                     group_stats['final_gen'] += gen
                     unit_stats['final_gen'] = gen
@@ -329,12 +334,14 @@ class ProcedureAnalysis:
 
         group_unit_stats = []
         for unit_id, unit_fit in group_fits.iterrows():
+            logger.debug('\t- Extracting stats for unit: {}'.format(unit_id))
             unit_stats = stats.copy()
             unit_stats.name = unit_id
             # Raw Dat Stats
             group_stats, unit_stats = self._raw_stats(raw_df, unit_id,
                                                       group_stats, unit_stats)
             # Clean Data Stats
+
             group_stats, unit_stats = self._clean_stats(clean_df, unit_id,
                                                         group_stats,
                                                         unit_stats)
@@ -360,6 +367,7 @@ class ProcedureAnalysis:
         """
         process_stats = []
         for g_type in self._fits.group_types:
+            logger.info('Extracting stats for {}'.format(g_type))
             f_name = os.path.basename(out_file)
             units_file = "{}_{}".format(g_type, f_name)
             units_file = out_file.replace(f_name, units_file)
