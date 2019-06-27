@@ -547,7 +547,7 @@ class QuartileAnalysis:
             logger.info('Extracting stats for {}'.format(g_type))
             group_filtered = self[g_type]
             group_stats = self._compute_stats(group_filtered)
-            quartile_stats.name = g_type
+            group_stats.name = g_type
             quartile_stats.append(group_stats)
 
             f_name = os.path.basename(out_file)
