@@ -1,0 +1,2007 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD package &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="NaTGenPD" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">NaTGenPD</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../NaTGenPD.html">&lt;no title&gt;</a> &raquo;</li>
+        
+          <li><a href="modules.html">NaTGenPD</a> &raquo;</li>
+        
+      <li>NaTGenPD package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/NaTGenPD/NaTGenPD.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="natgenpd-package">
+<h1>NaTGenPD package<a class="headerlink" href="#natgenpd-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-NaTGenPD.analysis">
+<span id="natgenpd-analysis-module"></span><h2>NaTGenPD.analysis module<a class="headerlink" href="#module-NaTGenPD.analysis" title="Permalink to this headline">¶</a></h2>
+<p>Heat Rate Analysis utilities
+&#64;author: mrossol</p>
+<dl class="data">
+<dt id="NaTGenPD.analysis.PROJECT_ROOT">
+<code class="sig-prename descclassname">NaTGenPD.analysis.</code><code class="sig-name descname">PROJECT_ROOT</code><em class="property"> = '/Users/mrossol/Git_Repos/NaTGenPD/NaTGenPD'</em><a class="headerlink" href="#NaTGenPD.analysis.PROJECT_ROOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.analysis.logger">
+<code class="sig-prename descclassname">NaTGenPD.analysis.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.analysis (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.analysis.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.analysis.ProcedureAnalysis">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.analysis.</code><code class="sig-name descname">ProcedureAnalysis</code><span class="sig-paren">(</span><em class="sig-param">hr_fits</em>, <em class="sig-param">raw_cems</em>, <em class="sig-param">cleaned_cems</em>, <em class="sig-param">filtered_cems</em>, <em class="sig-param">cc_map_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#ProcedureAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.ProcedureAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Analyze cleaning and filtering procedure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hr_fits</strong> (<em>str</em>) – Path to heat rate fit .csv(s)</p></li>
+<li><p><strong>raw_cems</strong> (<em>str</em>) – Path to raw CEMS .h5 file(s)</p></li>
+<li><p><strong>cleaned_cems</strong> (<em>str</em>) – Path to cleaned CEMS .h5 file</p></li>
+<li><p><strong>filtered_cems</strong> (<em>str</em>) – Path to filtered CEMS .h5 file</p></li>
+<li><p><strong>cc_map_path</strong> (<em>str</em>) – Path to cc_mapping</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.analysis.ProcedureAnalysis.parse_raw_CEMS">
+<em class="property">static </em><code class="sig-name descname">parse_raw_CEMS</code><span class="sig-paren">(</span><em class="sig-param">raw_cems</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#ProcedureAnalysis.parse_raw_CEMS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.ProcedureAnalysis.parse_raw_CEMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine multiple years of raw CEMS data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_cems</strong> (<em>list | str</em>) – Path to single or multiple .h5 files containing raw CEMS data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>raw_df</strong> – DataFrame of raw CEMS data from all input years</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.analysis.ProcedureAnalysis.load_cc_map">
+<em class="property">static </em><code class="sig-name descname">load_cc_map</code><span class="sig-paren">(</span><em class="sig-param">cc_map_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#ProcedureAnalysis.load_cc_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.ProcedureAnalysis.load_cc_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load cc_mapping, if path is None use provided mapping in bin</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cc_map_path</strong> (<em>str</em>) – Path to .csv with CEMS to EIA CC unit mapping</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cc_map</strong> – Mapping of CEMS cc cferators (CTs) to final CC units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.analysis.ProcedureAnalysis.process_stats">
+<code class="sig-name descname">process_stats</code><span class="sig-paren">(</span><em class="sig-param">out_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#ProcedureAnalysis.process_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.ProcedureAnalysis.process_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute process stats for all available group types in CEMS data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out_file</strong> (<em>str</em>) – Path to output file to save stats to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.analysis.ProcedureAnalysis.stats">
+<em class="property">classmethod </em><code class="sig-name descname">stats</code><span class="sig-paren">(</span><em class="sig-param">hr_fits</em>, <em class="sig-param">raw_cems</em>, <em class="sig-param">cleaned_cems</em>, <em class="sig-param">filtered_cems</em>, <em class="sig-param">out_file</em>, <em class="sig-param">cc_map_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#ProcedureAnalysis.stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.ProcedureAnalysis.stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute process stats for all available group types in CEMS data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hr_fits</strong> (<em>str</em>) – Path to heat rate fit .csv(s)</p></li>
+<li><p><strong>raw_cems</strong> (<em>str</em>) – Path to raw CEMS .h5 file(s)</p></li>
+<li><p><strong>cleaned_cems</strong> (<em>str</em>) – Path to cleaned CEMS .h5 file</p></li>
+<li><p><strong>filtered_cems</strong> (<em>str</em>) – Path to filtered CEMS .h5 file</p></li>
+<li><p><strong>out_file</strong> (<em>str</em>) – Path to output file to save stats to</p></li>
+<li><p><strong>cc_map_path</strong> (<em>str</em>) – Path to cc_mapping</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.analysis.QuartileAnalysis">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.analysis.</code><code class="sig-name descname">QuartileAnalysis</code><span class="sig-paren">(</span><em class="sig-param">hr_fits</em>, <em class="sig-param">filtered_cems</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#QuartileAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.QuartileAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Analyze cferation and operation time by load quartile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hr_fits</strong> (<em>str</em>) – Path to heat rate fit .csv(s)</p></li>
+<li><p><strong>filtered_cems</strong> (<em>str</em>) – Path to filtered CEMS .h5 file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.analysis.QuartileAnalysis.quartile_stats">
+<code class="sig-name descname">quartile_stats</code><span class="sig-paren">(</span><em class="sig-param">out_file</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#QuartileAnalysis.quartile_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.QuartileAnalysis.quartile_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute process stats for all available group types in CEMS data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_file</strong> (<em>str</em>) – Path to output file to save stats to</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.analysis.QuartileAnalysis.stats">
+<em class="property">classmethod </em><code class="sig-name descname">stats</code><span class="sig-paren">(</span><em class="sig-param">hr_fits</em>, <em class="sig-param">filtered_cems</em>, <em class="sig-param">out_file</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/analysis.html#QuartileAnalysis.stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.analysis.QuartileAnalysis.stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute quartile stats for all available group types in CEMS data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hr_fits</strong> (<em>str</em>) – Path to heat rate fit .csv(s)</p></li>
+<li><p><strong>filtered_cems</strong> (<em>str</em>) – Path to filtered CEMS .h5 file</p></li>
+<li><p><strong>out_file</strong> (<em>str</em>) – Path to output file to save stats to</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.ccmap">
+<span id="natgenpd-ccmap-module"></span><h2>NaTGenPD.ccmap module<a class="headerlink" href="#module-NaTGenPD.ccmap" title="Permalink to this headline">¶</a></h2>
+<p>Map CEMS CC generators to EIA CC units</p>
+<dl class="data">
+<dt id="NaTGenPD.ccmap.logger">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.ccmap (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.ccmap.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.ccmap.method_1">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">method_1</code><span class="sig-paren">(</span><em class="sig-param">boilers</em>, <em class="sig-param">eia_plants</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/ccmap.html#method_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.ccmap.method_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method 1 to map boilers to eia plants</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.ccmap.method_2_3">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">method_2_3</code><span class="sig-paren">(</span><em class="sig-param">boilers23</em>, <em class="sig-param">boilers_generators</em>, <em class="sig-param">generators</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/ccmap.html#method_2_3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.ccmap.method_2_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method 2 and 3</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.ccmap.method_4">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">method_4</code><span class="sig-paren">(</span><em class="sig-param">boilers4567</em>, <em class="sig-param">generators_cc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/ccmap.html#method_4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.ccmap.method_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method 4</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.ccmap.method_5">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">method_5</code><span class="sig-paren">(</span><em class="sig-param">boilers4567</em>, <em class="sig-param">generators_cc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/ccmap.html#method_5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.ccmap.method_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method 5</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.ccmap.method_6_7">
+<code class="sig-prename descclassname">NaTGenPD.ccmap.</code><code class="sig-name descname">method_6_7</code><span class="sig-paren">(</span><em class="sig-param">boilers4567</em>, <em class="sig-param">generators_cc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/ccmap.html#method_6_7"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.ccmap.method_6_7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method 6 and 7</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.clean">
+<span id="natgenpd-clean-module"></span><h2>NaTGenPD.clean module<a class="headerlink" href="#module-NaTGenPD.clean" title="Permalink to this headline">¶</a></h2>
+<p>Data cleaning utilities
+&#64;author: mrossol</p>
+<dl class="data">
+<dt id="NaTGenPD.clean.PROJECT_ROOT">
+<code class="sig-prename descclassname">NaTGenPD.clean.</code><code class="sig-name descname">PROJECT_ROOT</code><em class="property"> = '/Users/mrossol/Git_Repos/NaTGenPD/NaTGenPD'</em><a class="headerlink" href="#NaTGenPD.clean.PROJECT_ROOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.clean.logger">
+<code class="sig-prename descclassname">NaTGenPD.clean.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.clean (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.clean.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.clean.ParseSmoke">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.clean.</code><code class="sig-name descname">ParseSmoke</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">year</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parse and combine SMOKE .txt files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> (<em>str</em>) – Path to root directory containing SMOKE .txt files</p></li>
+<li><p><strong>year</strong> (<em>int | str</em>) – Year to parse</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="NaTGenPD.clean.ParseSmoke.SMOKE_HEADER">
+<code class="sig-name descname">SMOKE_HEADER</code><em class="property"> = ['ORISID', 'BLRID', 'YYMMDD', 'HOUR', 'NOXMASS', 'SO2MASS', 'NOXRATE', 'OPTIME', 'GLOAD', 'SLOAD', 'HTINPUT', 'HTINPUTMEASURE', 'SO2MEASURE', 'NOXMMEASURE', 'NOXRMEASURE', 'UNITFLOW']</em><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.SMOKE_HEADER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.smoke_raw">
+<em class="property">property </em><code class="sig-name descname">smoke_raw</code><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.smoke_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame of raw SMOKE data parsed from .txt files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_smoke_df</strong> – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.smoke_df">
+<em class="property">property </em><code class="sig-name descname">smoke_df</code><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.smoke_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame of performance variables derived from SMOKE data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>performance_df</strong> – DataFrame of performance varialbes derived from SMOKE data
+(unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.get_smoke_files">
+<em class="property">static </em><code class="sig-name descname">get_smoke_files</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">year</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.get_smoke_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.get_smoke_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all .txt files in dir_path associated with year</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> (<em>str</em>) – Path to root directory containing SMOKE .txt files</p></li>
+<li><p><strong>year</strong> (<em>int | str</em>) – Year to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_files</strong> – List of .txt files for given year</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.combine_smoke_files">
+<code class="sig-name descname">combine_smoke_files</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">year</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.combine_smoke_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.combine_smoke_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine all .txt files for given year into a single DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> (<em>str</em>) – Path to root directory containing SMOKE .txt files</p></li>
+<li><p><strong>year</strong> (<em>int | str</em>) – Year to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – DataFrame of Smoke data for given year</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.create_unit_ids">
+<em class="property">static </em><code class="sig-name descname">create_unit_ids</code><span class="sig-paren">(</span><em class="sig-param">smoke_raw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.create_unit_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.create_unit_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create unit ids from ORISID and BLRD ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_raw</strong> (<em>pandas.DataFrame</em>) – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>unit_ids</strong> – unit ids</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.create_datetime">
+<em class="property">static </em><code class="sig-name descname">create_datetime</code><span class="sig-paren">(</span><em class="sig-param">smoke_raw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.create_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.create_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create timestamps from YYMMDD and HOUR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_raw</strong> (<em>pandas.DataFrame</em>) – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>time_stamps</strong> – Datetime Stamps</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DateTimeIndex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.calc_gross_load">
+<em class="property">static </em><code class="sig-name descname">calc_gross_load</code><span class="sig-paren">(</span><em class="sig-param">smoke_raw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.calc_gross_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.calc_gross_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute gross load from GLOAD and OPTIME</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_raw</strong> (<em>pandas.DataFrame</em>) – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>gload</strong> – gross load</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.calc_heat_rate">
+<em class="property">static </em><code class="sig-name descname">calc_heat_rate</code><span class="sig-paren">(</span><em class="sig-param">smoke_raw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.calc_heat_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.calc_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute heat rate in (mmBTU/MWh)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_raw</strong> (<em>pandas.DataFrame</em>) – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>heat_rate</strong> – heat rate in mmBTU/MWh</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.extract_performance_vars">
+<em class="property">static </em><code class="sig-name descname">extract_performance_vars</code><span class="sig-paren">(</span><em class="sig-param">smoke_raw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.extract_performance_vars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.extract_performance_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract and compute variable needed for heat rate analysis
+(unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_raw</strong> (<em>pandas.DataFrame</em>) – DataFrame of raw SMOKE data (loaded from .txt files)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – DataFrame of performance variables from SMOKE data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.save_peformance_vars">
+<code class="sig-name descname">save_peformance_vars</code><span class="sig-paren">(</span><em class="sig-param">out_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.save_peformance_vars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.save_peformance_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract and compute variable needed for heat rate analysis and save
+as a .h5 file
+(unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out_file</strong> (<em>str</em>) – Path to output file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseSmoke.performance_vars">
+<em class="property">classmethod </em><code class="sig-name descname">performance_vars</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">year</em>, <em class="sig-param">save=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseSmoke.performance_vars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseSmoke.performance_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Smoke data from .txt, extract performance variables, and save
+to disc as a .h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> (<em>str</em>) – Path to root directory containing SMOKE .txt files</p></li>
+<li><p><strong>year</strong> (<em>int | str</em>) – Year to parse</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – Flag to save data to .h5 file in dir_path</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – DataFrame of performance variables from SMOKE data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.clean.ParseUnitInfo">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.clean.</code><code class="sig-name descname">ParseUnitInfo</code><span class="sig-paren">(</span><em class="sig-param">unit_attrs_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseUnitInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Extract Unit locational (coordinate, state, regions) and
+type (fuel, technology)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit_attrs_path</strong> (<em>str</em>) – Path to .csv containing facility (unit) attributes</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="NaTGenPD.clean.ParseUnitInfo.COLS">
+<code class="sig-name descname">COLS</code><em class="property"> = {' EPA Region': 'EPA_region', ' Facility ID (ORISPL)': 'ORISID', ' Facility Latitude': 'latitude', ' Facility Longitude': 'longitude', ' Fuel Type (Primary)': 'fuel_type', ' NERC Region': 'NERC_region', ' Unit ID': 'BLRID', ' Unit Type': 'unit_type', 'State': 'state'}</em><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.COLS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseUnitInfo.unit_attrs">
+<em class="property">property </em><code class="sig-name descname">unit_attrs</code><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.unit_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unit attributes parsed from .csv</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_unit_attrs</strong> – DataFrame of unit attributes parsed from .csv</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseUnitInfo.unit_info">
+<em class="property">property </em><code class="sig-name descname">unit_info</code><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.unit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unit info:
+(‘unit_id’, ‘latitude’, ‘longitude’, ‘state’, ‘EPA_region’</p>
+<blockquote>
+<div><p>‘NERC_region’, ‘unit_type’, ‘fuel_type’, ‘group_type’)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>unit_info</strong> – DataFrame of unit info</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseUnitInfo.create_group_types">
+<em class="property">static </em><code class="sig-name descname">create_group_types</code><span class="sig-paren">(</span><em class="sig-param">unit_attrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseUnitInfo.create_group_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.create_group_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create technology (fuel) groups from fuel and unit types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit_attrs</strong> (<em>pandas.DataFrame</em>) – DataFrame of unit attributes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>group_types</strong> – Unit technology and fuel group type</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseUnitInfo.create_unit_info">
+<em class="property">static </em><code class="sig-name descname">create_unit_info</code><span class="sig-paren">(</span><em class="sig-param">unit_attrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseUnitInfo.create_unit_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.create_unit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add unit_ids and group_types to unit_attrs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit_attrs</strong> (<em>pandas.DataFrame</em>) – DataFrame of unit attributes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>unit_attrs</strong> – Updated and cleaned up unit attributes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.ParseUnitInfo.add_unit_info">
+<em class="property">classmethod </em><code class="sig-name descname">add_unit_info</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">unit_attrs_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#ParseUnitInfo.add_unit_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.ParseUnitInfo.add_unit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse unit info and add it to smoke_df</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data</p></li>
+<li><p><strong>unit_attrs_path</strong> (<em>str</em>) – Path to .csv containing facility (unit) attributes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – DataFrame of performance variables from SMOKE data with unit info</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.clean.CleanSmoke">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.clean.</code><code class="sig-name descname">CleanSmoke</code><span class="sig-paren">(</span><em class="sig-param">smoke</em>, <em class="sig-param">unit_attrs_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Pre-clean Smoke data prior to Heat Rate analysis
+- Convert gross load to net load
+- Remove null value
+- Remove start-up and shut-down
+- Remove unrealistic values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke</strong> (<em>pandas.DataFrame | str</em>) – DataFrame of performance variables or path to .h5 file</p></li>
+<li><p><strong>unit_attrs_path</strong> (<em>str</em>) – Path to .csv containing facility (unit) attributes</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="NaTGenPD.clean.CleanSmoke.OUT_COLS">
+<code class="sig-name descname">OUT_COLS</code><em class="property"> = ['unit_id', 'time', 'load', 'HTINPUT', 'heat_rate', 'latitude', 'longitude', 'state', 'EPA_region', 'NERC_region', 'unit_type', 'fuel_type', 'group_type', 'cts']</em><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.OUT_COLS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.smoke_df">
+<em class="property">property </em><code class="sig-name descname">smoke_df</code><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.smoke_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame of performance variables from SMOKE data with unit info</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_smoke_df</strong> – DataFrame of performance variables from SMOKE data with unit info</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.unit_info">
+<em class="property">property </em><code class="sig-name descname">unit_info</code><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.unit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame of unique units and their attributes (type, fuel, location)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_unit_info</strong> – DataFrame of unique units and their attributes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.load_smoke_df">
+<em class="property">static </em><code class="sig-name descname">load_smoke_df</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">unit_attrs_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.load_smoke_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.load_smoke_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load smoke data if needed and combine unit info if needed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame | str</em>) – DataFrame of performance variables or path to .h5 file</p></li>
+<li><p><strong>unit_attrs_path</strong> (<em>str</em>) – Path to .csv containing facility (unit) attributes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p></li>
+<li><p><strong>unit_info</strong> (<em>pandas.DataFrame</em>) – DataFrame of unique units and their attributes</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.get_unit_info">
+<em class="property">static </em><code class="sig-name descname">get_unit_info</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.get_unit_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.get_unit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract unit attributes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>unit_info</strong> – DataFrame of unique units and their attributes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.remove_null_values">
+<em class="property">static </em><code class="sig-name descname">remove_null_values</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.remove_null_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.remove_null_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove null values:
+- HTINPUT &lt;= 0
+- HTINPUTMEASURE is not measured (1) or calculated (2)
+- load &lt;= 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – Updated DataFrame w/ null values removed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.gross_to_net">
+<em class="property">static </em><code class="sig-name descname">gross_to_net</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">load_multipliers={'liquid': 0.963</em>, <em class="sig-param">'solid': 0.925}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.gross_to_net"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.gross_to_net" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert gross load to net load using given multipliers for
+solid and liquid fuel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p></li>
+<li><p><strong>load_multipliers</strong> (<em>dict</em>) – Gross to net multipliers for solid and liquid/gas fuel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – Updated DataFrame w/ net load and updated heat rate</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.remove_unrealistic_hr">
+<em class="property">static </em><code class="sig-name descname">remove_unrealistic_hr</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">hr_bounds=(4.5</em>, <em class="sig-param">40)</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.remove_unrealistic_hr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.remove_unrealistic_hr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove null values heat_rate is outside given heat reat bounds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p></li>
+<li><p><strong>hr_bounds</strong> (<em>tuple</em>) – Bounds (min, max) of realistic heat_rate values</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – Updated DataFrame w/ null values removed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.remove_start_stop">
+<em class="property">static </em><code class="sig-name descname">remove_start_stop</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">max_perc=0.1</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.remove_start_stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.remove_start_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove data associated with start-up and shut-down:
+- OPTIME &lt; 1
+- Data with &lt; max_perc of max load or max HTINPUT</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p></li>
+<li><p><strong>max_perc</strong> (<em>float</em>) – Percentage (as a float) of max load and max HTINPUT to associate
+with start-up and shut-down</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – Updated DataFrame with start-up and shut-down removed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.fill_null_units">
+<em class="property">static </em><code class="sig-name descname">fill_null_units</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">unit_info</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.fill_null_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.fill_null_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert place-holders for units removed during cleaning</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of cleaned SMOKE data</p></li>
+<li><p><strong>unit_info</strong> (<em>pandas.DataFrame</em>) – DataFrame of unique units and their attributes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – DataFrame of cleaned SMOKE data with null units filled in</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.get_cts">
+<em class="property">static </em><code class="sig-name descname">get_cts</code><span class="sig-paren">(</span><em class="sig-param">cc_ts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.get_cts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.get_cts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine number of cts running at given time-step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cc_ts</strong> (<em>Unit time-step for a pre-aggregated CC</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cts</strong> – Number of cts running during time-step</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.cts_to_cc">
+<em class="property">static </em><code class="sig-name descname">cts_to_cc</code><span class="sig-paren">(</span><em class="sig-param">cc_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.cts_to_cc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.cts_to_cc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine multiple CTs into a single CC by:
+- Aggregating load and htinput
+- Re-computing heat_rate
+- Renaming unit
+- Transfering unit info</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cc_df</strong> (<em>pandas.DataFrame</em>) – DataFrame containing data points for all CTs that make up a EIA CC</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cc_unit</strong> – CC unit data after aggregation of CT data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.aggregate_ccs">
+<em class="property">static </em><code class="sig-name descname">aggregate_ccs</code><span class="sig-paren">(</span><em class="sig-param">smoke_df</em>, <em class="sig-param">cc_map</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.aggregate_ccs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.aggregate_ccs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate CEMS CC ‘units’ into EIA CC ‘units’
+NOTE: CEMS reports CC on a CT by CT basis with the combined steam
+generation disaggregated between the CTs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of performance variables from SMOKE data with unit info</p></li>
+<li><p><strong>cc_map</strong> (<em>pd.DataFrame</em>) – Path to .csv with CEMS to EIA CC unit mapping</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – Run cts_to_cc in parallel</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs for gross_to_net</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_df</strong> – Updated DataFrame with CCs aggregated to EIA units</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.preclean">
+<code class="sig-name descname">preclean</code><span class="sig-paren">(</span><em class="sig-param">load_multipliers={'liquid': 0.963</em>, <em class="sig-param">'solid': 0.925}</em>, <em class="sig-param">hr_bounds=(4.5</em>, <em class="sig-param">40)</em>, <em class="sig-param">max_perc=0.1</em>, <em class="sig-param">cc_map=None</em>, <em class="sig-param">parallel=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.preclean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.preclean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean-up SMOKE data for heat rate analysis:
+- Convert gross load to net load
+- Remove null/unrealistic values
+- Remove start-up and shut-down</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_multipliers</strong> (<em>dict</em>) – Gross to net multipliers for solid and liquid/gas fuel</p></li>
+<li><p><strong>hr_bounds</strong> (<em>tuple</em>) – Bounds (min, max) of realistic heat_rate values</p></li>
+<li><p><strong>max_perc</strong> (<em>float</em>) – Percentage (as a float) of max load and max HTINPUT to associate
+with start-up and shut-down</p></li>
+<li><p><strong>cc_map</strong> (<em>bool | str</em>) – Path to .csv with CEMS to EIA CC unit mapping if True use provided
+mapping in bin/cems_cc_mapping.csv</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – Run cts_to_cc in parallel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_clean</strong> – Cleaned SMOKE data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.clean.CleanSmoke.clean">
+<em class="property">classmethod </em><code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param">smoke</em>, <em class="sig-param">unit_attrs_path=None</em>, <em class="sig-param">load_multipliers={'liquid': 0.963</em>, <em class="sig-param">'solid': 0.925}</em>, <em class="sig-param">hr_bounds=(4.5</em>, <em class="sig-param">40)</em>, <em class="sig-param">max_perc=0.1</em>, <em class="sig-param">cc_map=True</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">out_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/clean.html#CleanSmoke.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.clean.CleanSmoke.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean-up SMOKE data for heat rate analysis:
+- Convert gross load to net load
+- Remove null/unrealistic values
+- Remove start-up and shut-down</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smoke</strong> (<em>pandas.DataFrame | str</em>) – DataFrame of performance variables or path to .h5 file</p></li>
+<li><p><strong>unit_attrs_path</strong> (<em>str</em>) – Path to .csv containing facility (unit) attributes</p></li>
+<li><p><strong>load_multipliers</strong> (<em>dict</em>) – Gross to net multipliers for solid and liquid/gas fuel</p></li>
+<li><p><strong>hr_bounds</strong> (<em>tuple</em>) – Bounds (min, max) of realistic heat_rate values</p></li>
+<li><p><strong>max_perc</strong> (<em>float</em>) – Percentage (as a float) of max load and max HTINPUT to associate
+with start-up and shut-down</p></li>
+<li><p><strong>cc_map</strong> (<em>bool | str</em>) – Path to .csv with CEMS to EIA CC unit mapping if True use provided
+mapping in bin/cems_cc_mapping.csv</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – Run cts_to_cc in parallel</p></li>
+<li><p><strong>out_file</strong> (<em>str</em>) – Path to output .h5 file to write clean-data too</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>smoke_clean</strong> – Cleaned SMOKE data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.cli">
+<span id="natgenpd-cli-module"></span><h2>NaTGenPD.cli module<a class="headerlink" href="#module-NaTGenPD.cli" title="Permalink to this headline">¶</a></h2>
+<p>Command Line Interface and Entry point
+&#64;author: mrossol</p>
+<dl class="data">
+<dt id="NaTGenPD.cli.FORMAT">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">FORMAT</code><em class="property"> = '%(levelname)s - %(asctime)s [%(filename)s:%(lineno)d] : %(message)s'</em><a class="headerlink" href="#NaTGenPD.cli.FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.cli.LOG_LEVEL">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">LOG_LEVEL</code><em class="property"> = {'CRITICAL': 50, 'DEBUG': 10, 'ERROR': 40, 'INFO': 20, 'WARNING': 30}</em><a class="headerlink" href="#NaTGenPD.cli.LOG_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.cli.get_handler">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">get_handler</code><span class="sig-paren">(</span><em class="sig-param">log_level='INFO'</em>, <em class="sig-param">log_file=None</em>, <em class="sig-param">log_format='%(levelname)s - %(asctime)s [%(filename)s:%(lineno)d] : %(message)s'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cli.html#get_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cli.get_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>get logger handler</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_level</strong> (<em>str</em>) – handler-specific logging level, must be key in LOG_LEVEL.</p></li>
+<li><p><strong>log_file</strong> (<em>str</em>) – path to the log file</p></li>
+<li><p><strong>log_format</strong> (<em>str</em>) – format string to use with the logging package</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>handler</strong> – handler to add to logger</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>logging.FileHandler | logging.StreamHandler</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="NaTGenPD.cli.setup_logger">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">setup_logger</code><span class="sig-paren">(</span><em class="sig-param">logger_name</em>, <em class="sig-param">log_level='INFO'</em>, <em class="sig-param">log_file=None</em>, <em class="sig-param">log_format='%(levelname)s - %(asctime)s [%(filename)s:%(lineno)d] : %(message)s'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cli.html#setup_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cli.setup_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup logging instance with given name and attributes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logger_name</strong> (<em>str</em>) – Name of logger</p></li>
+<li><p><strong>log_level</strong> (<em>str</em>) – Level of logging to capture, must be key in LOG_LEVEL. If multiple
+handlers/log_files are requested in a single call of this function,
+the specified logging level will be applied to all requested handlers.</p></li>
+<li><p><strong>log_file</strong> (<em>str | list</em>) – Path to file to use for logging, if None use a StreamHandler
+list of multiple handlers is permitted</p></li>
+<li><p><strong>log_format</strong> (<em>str</em>) – Format for loggings, default is FORMAT</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>logger</strong> (<em>logging.logger</em>) – instance of logger for given name, with given level and added handler</p></li>
+<li><p><strong>handler</strong> (<em>logging.FileHandler | logging.StreamHandler | list</em>) – handler(s) added to logger</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.cli.main">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">main</code><em class="property"> = &lt;click.core.Group object&gt;</em><a class="headerlink" href="#NaTGenPD.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.cli.import_smoke_data">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">import_smoke_data</code><em class="property"> = &lt;click.core.Command object&gt;</em><a class="headerlink" href="#NaTGenPD.cli.import_smoke_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.cli.clean_smoke_data">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">clean_smoke_data</code><em class="property"> = &lt;click.core.Command object&gt;</em><a class="headerlink" href="#NaTGenPD.cli.clean_smoke_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="NaTGenPD.cli.combine_clean_files">
+<code class="sig-prename descclassname">NaTGenPD.cli.</code><code class="sig-name descname">combine_clean_files</code><em class="property"> = &lt;click.core.Command object&gt;</em><a class="headerlink" href="#NaTGenPD.cli.combine_clean_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.cluster">
+<span id="natgenpd-cluster-module"></span><h2>NaTGenPD.cluster module<a class="headerlink" href="#module-NaTGenPD.cluster" title="Permalink to this headline">¶</a></h2>
+<p>Data clustering utilities
+&#64;author: gbuster</p>
+<dl class="data">
+<dt id="NaTGenPD.cluster.logger">
+<code class="sig-prename descclassname">NaTGenPD.cluster.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.cluster (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.cluster.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.cluster.Cluster">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.cluster.</code><code class="sig-name descname">Cluster</code><span class="sig-paren">(</span><em class="sig-param">unit_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DBSCAN clustering class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of timeseries heat rate data for unit of interest</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.unit_df">
+<em class="property">property </em><code class="sig-name descname">unit_df</code><a class="headerlink" href="#NaTGenPD.cluster.Cluster.unit_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame for unit being clustered on</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>unit_df</strong> – DataFrame for unit being clustered on</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.unit_id">
+<em class="property">property </em><code class="sig-name descname">unit_id</code><a class="headerlink" href="#NaTGenPD.cluster.Cluster.unit_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of unit being clustered on</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>unit_id</strong> – Id of unit being clustered on</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#NaTGenPD.cluster.Cluster.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group type (generator + fuel) of unit being clustered on</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>type</strong> – Group type (generator + fuel) of unit being clustered on</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.normalize_values">
+<em class="property">static </em><code class="sig-name descname">normalize_values</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">norm=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.normalize_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.normalize_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize values in array by column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>ndarray</em>) – ndarray of values extracted from meta
+shape (n samples, with m features)</p></li>
+<li><p><strong>norm</strong> (<em>str</em>) – Normalization method to use, see sklearn.preprocessing.normalize</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>arr</strong> – array with values normalized by column
+shape (n samples, with m features)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.n_dist">
+<em class="property">static </em><code class="sig-name descname">n_dist</code><span class="sig-paren">(</span><em class="sig-param">array</em>, <em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.n_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.n_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the nk-nearest neighbor distance for all points in array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ndarray</em>) – Array of n samples with m features</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of nearest neighbors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dist</strong> – 1d array of nk-nearest neighbor distances</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.line_dist">
+<em class="property">static </em><code class="sig-name descname">line_dist</code><span class="sig-paren">(</span><em class="sig-param">k_dist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.line_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.line_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the distance between each point on the nk-nearest neighbor
+distance curve and the line connecting the min and max values. The
+maximum distance corresponds to the knee of the curve, which can be
+used to estimate the optimal epsilon value for DBSCAN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>k_dist</strong> (<em>ndarray</em>) – 1d array of nk-nearest neighbor distances</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dist</strong> – 1d array of distances between each value and the line connecting
+the min and max values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.cluster_score">
+<em class="property">static </em><code class="sig-name descname">cluster_score</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">labels</em>, <em class="sig-param">outliers=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.cluster_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.cluster_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modified silhouette score that excludes outliers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ndarray</em>) – Array to be used for clustering, shape n samples with m features</p></li>
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels for each row in array</p></li>
+<li><p><strong>outliers</strong> (<em>bool</em>) – Boolean flag to use outliers in silhouette_score calculation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>s</strong> – Silhouette score computed after removing outliers (label &lt; 0)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><em class="sig-param">cols</em>, <em class="sig-param">normalize=True</em>, <em class="sig-param">noise=0.01</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the Clustering class and meta shape</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cols</strong> (<em>list</em>) – List of columns to extract</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – Option to normalize data or not</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>arr</strong> – Array of given column values for all farms in meta
+shape (n samples, with m features)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.optimal_eps">
+<em class="property">static </em><code class="sig-name descname">optimal_eps</code><span class="sig-paren">(</span><em class="sig-param">array</em>, <em class="sig-param">k=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.optimal_eps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.optimal_eps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the k-nearest neighbor plot to estimate the optimal epsilon</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ndarray</em>) – Array to be used for clustering, shape n samples with m features</p></li>
+<li><p><strong>k</strong> (<em>'int'</em>) – Number of nearest neighbors (corresponds to min_samples in DBSCAN)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>eps</strong> – Optimal epsilon for running DBSCAN with min_samples = k</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.optimize_clusters">
+<code class="sig-name descname">optimize_clusters</code><span class="sig-paren">(</span><em class="sig-param">min_samples</em>, <em class="sig-param">dt=0.1</em>, <em class="sig-param">return_eps=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.optimize_clusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.optimize_clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incrimentally increase eps from given value to optimize cluster
+size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_samples</strong> (<em>int</em>) – min_samples value for clustering, if None set as len(array) / 1000</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Percentage eps by which it is to be incrementally increased</p></li>
+<li><p><strong>return_eps</strong> (<em>bool</em>) – Flag to return optimal eps</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels for each row in array</p></li>
+<li><p><strong>eps</strong> (<em>float (optional)</em>) – eps value used for clustering</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.Cluster.filter">
+<em class="property">classmethod </em><code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">unit_df</em>, <em class="sig-param">min_samples</em>, <em class="sig-param">threshold=10</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#Cluster.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.Cluster.filter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of timeseries heat rate data for unit of interest</p></li>
+<li><p><strong>min_samples</strong> (<em>int</em>) – Min_samples value for clustering</p></li>
+<li><p><strong>threshold</strong> (<em>int</em>) – Theshold for minimum number of points to filter unit</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>unit_df</strong> (<em>pandas.DataFrame</em>) – Updated DataFrame with cluster labels added for optimal cluster</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs for optimize_clusters</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.cluster.SingleCluster">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.cluster.</code><code class="sig-name descname">SingleCluster</code><span class="sig-paren">(</span><em class="sig-param">unit_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#SingleCluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.SingleCluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#NaTGenPD.cluster.Cluster" title="NaTGenPD.cluster.Cluster"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaTGenPD.cluster.Cluster</span></code></a></p>
+<p>Subclass to perform single cluster extraction on non-CC generators</p>
+<dl class="method">
+<dt id="NaTGenPD.cluster.SingleCluster.knn">
+<em class="property">static </em><code class="sig-name descname">knn</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">tree=None</em>, <em class="sig-param">k=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#SingleCluster.knn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.SingleCluster.knn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get euclidian distance nearest neighbors for numerical column data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ndarray</em>) – Array to be used for clustering, shape n samples with m features</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The number of k-th nearest neighbors to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dist</strong> – Each entry gives the list of distances to the neighbors of the
+corresponding point.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.SingleCluster.cluster_score">
+<em class="property">static </em><code class="sig-name descname">cluster_score</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">labels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#SingleCluster.cluster_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.SingleCluster.cluster_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modified silhouette score that excludes outliers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>ndarray</em>) – Array to be used for clustering, shape n samples with m features</p></li>
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels for each row in array</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>s</strong> – Silhouette score computed after removing outliers (label &lt; 0)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.SingleCluster.optimize_clusters">
+<code class="sig-name descname">optimize_clusters</code><span class="sig-paren">(</span><em class="sig-param">min_samples</em>, <em class="sig-param">dt=0.1</em>, <em class="sig-param">return_eps=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#SingleCluster.optimize_clusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.SingleCluster.optimize_clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incrimentally increase eps from given value to optimize cluster
+size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_samples</strong> (<em>int</em>) – min_samples value for clustering, if None set as len(array) / 1000</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Percentage eps by which it is to be incrementally increased</p></li>
+<li><p><strong>return_eps</strong> (<em>bool</em>) – Flag to return optimal eps</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels for each row in array</p></li>
+<li><p><strong>eps</strong> (<em>float (optional)</em>) – eps value used for clustering</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.cluster.ClusterCC">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.cluster.</code><code class="sig-name descname">ClusterCC</code><span class="sig-paren">(</span><em class="sig-param">unit_df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#ClusterCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.ClusterCC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#NaTGenPD.cluster.Cluster" title="NaTGenPD.cluster.Cluster"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaTGenPD.cluster.Cluster</span></code></a></p>
+<p>Subclass for finding operating modes in CCs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>unit_df</strong> (<em>pandas.DataFrame</em>) – DataFrame of timeseries heat rate data for unit of interest</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.cluster.ClusterCC.update_labels">
+<em class="property">static </em><code class="sig-name descname">update_labels</code><span class="sig-paren">(</span><em class="sig-param">labels</em>, <em class="sig-param">ct_pos</em>, <em class="sig-param">ct_labels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#ClusterCC.update_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.ClusterCC.update_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update labels vectors with labels from clustering on each unique
+number of cts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels</p></li>
+<li><p><strong>ct_pos</strong> (<em>ndarray</em>) – Boolean vector indicating with positions correspond to ct_labels</p></li>
+<li><p><strong>ct_labels</strong> (<em>ndarray</em>) – Labels from cluster of subset of points for a given number of cts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>labels</strong> – Updated cluster labels</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.cluster.ClusterCC.optimize_clusters">
+<code class="sig-name descname">optimize_clusters</code><span class="sig-paren">(</span><em class="sig-param">min_samples</em>, <em class="sig-param">dt=0.1</em>, <em class="sig-param">return_eps=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/cluster.html#ClusterCC.optimize_clusters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.cluster.ClusterCC.optimize_clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Incrimentally increase eps from given value to optimize cluster
+size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_samples</strong> (<em>int</em>) – min_samples value for clustering, if None set as len(array) / 1000</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Percentage eps by which it is to be incrementally increased</p></li>
+<li><p><strong>return_eps</strong> (<em>bool</em>) – Flag to return optimal eps</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>labels</strong> (<em>ndarray</em>) – Vector of cluster labels for each row in array</p></li>
+<li><p><strong>eps</strong> (<em>float (optional)</em>) – eps value used for clustering</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.filter">
+<span id="natgenpd-filter-module"></span><h2>NaTGenPD.filter module<a class="headerlink" href="#module-NaTGenPD.filter" title="Permalink to this headline">¶</a></h2>
+<p>Data filtering utilities
+&#64;author: mrossol</p>
+<dl class="data">
+<dt id="NaTGenPD.filter.logger">
+<code class="sig-prename descclassname">NaTGenPD.filter.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.filter (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.filter.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.filter.Filter">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.filter.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param">clean_h5</em>, <em class="sig-param">years=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.Filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Run Cluster filters on all units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clean_h5</strong> (<em>str</em>) – Path to .h5 file with pre-cleaned CEMS data</p></li>
+<li><p><strong>years</strong> (<em>int</em>) – Number of years of data being filtered</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="NaTGenPD.filter.Filter.FILTERS">
+<code class="sig-name descname">FILTERS</code><em class="property"> = {'Boiler': &lt;bound method Cluster.filter of &lt;class 'NaTGenPD.cluster.SingleCluster'&gt;&gt;, 'CC': &lt;bound method Cluster.filter of &lt;class 'NaTGenPD.cluster.ClusterCC'&gt;&gt;, 'CT': &lt;bound method Cluster.filter of &lt;class 'NaTGenPD.cluster.SingleCluster'&gt;&gt;}</em><a class="headerlink" href="#NaTGenPD.filter.Filter.FILTERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.Filter.total_points">
+<em class="property">property </em><code class="sig-name descname">total_points</code><a class="headerlink" href="#NaTGenPD.filter.Filter.total_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of total points possible in dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>points</strong> – total number of possible timesteps</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.Filter.filter_group">
+<code class="sig-name descname">filter_group</code><span class="sig-paren">(</span><em class="sig-param">group_type</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#Filter.filter_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.Filter.filter_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter all units of given group_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_type</strong> (<em>str</em>) – Group type (generator type + fuel type) to filter</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – For each group filter units in parallel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>group_df</strong> – Updated group DataFrame with cluster labels post filtering</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.Filter.filter_groups">
+<code class="sig-name descname">filter_groups</code><span class="sig-paren">(</span><em class="sig-param">out_h5</em>, <em class="sig-param">group_types</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#Filter.filter_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.Filter.filter_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter given group_types from clean_h5 and save to out_h5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_h5</strong> (<em>str</em>) – Path to .h5 file into which filtered data should be saved</p></li>
+<li><p><strong>group_types</strong> (<em>list</em>) – Group types to filter</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – For each group filter units in parallel</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.Filter.filter_all">
+<code class="sig-name descname">filter_all</code><span class="sig-paren">(</span><em class="sig-param">out_h5</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#Filter.filter_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.Filter.filter_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter all groups in clean_h5 and save to out_h5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_h5</strong> (<em>str</em>) – Path to .h5 file into which filtered data should be saved</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – For each group filter units in parallel</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.Filter.run">
+<em class="property">classmethod </em><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">clean_h5</em>, <em class="sig-param">out_h5</em>, <em class="sig-param">group_types=None</em>, <em class="sig-param">years=1</em>, <em class="sig-param">parallel=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#Filter.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.Filter.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter all groups in clean_h5 and save to out_h5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clean_h5</strong> (<em>str</em>) – Path to .h5 file with pre-cleaned CEMS data</p></li>
+<li><p><strong>out_h5</strong> (<em>str</em>) – Path to .h5 file into which filtered data should be saved</p></li>
+<li><p><strong>group_types</strong> (<em>list</em>) – Group types to filter, if None, filter all</p></li>
+<li><p><strong>years</strong> (<em>int</em>) – Number of years worth of data being filtered</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – For each group filter units in parallel</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.filter.PolyFit">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.filter.</code><code class="sig-name descname">PolyFit</code><span class="sig-paren">(</span><em class="sig-param">filtered_h5</em>, <em class="sig-param">order=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Fit filtered units to a polynomial</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filtered_h5</strong> (<em>str</em>) – Path to .h5 file containing filtered CEMS data</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Order of the polynomial fit</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="NaTGenPD.filter.PolyFit.META_COLS">
+<code class="sig-name descname">META_COLS</code><em class="property"> = ['latitude', 'longitude', 'state', 'EPA_region', 'NERC_region', 'unit_type', 'fuel_type', 'group_type']</em><a class="headerlink" href="#NaTGenPD.filter.PolyFit.META_COLS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.PolyFit.extract_fit">
+<em class="property">static </em><code class="sig-name descname">extract_fit</code><span class="sig-paren">(</span><em class="sig-param">load</em>, <em class="sig-param">heat_rate</em>, <em class="sig-param">order=4</em>, <em class="sig-param">points=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit.extract_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit.extract_fit" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Fit unit to a polynomial of given order</p>
+</div></blockquote>
+<dl>
+<dt>Parameters</dt><dd><dl class="simple">
+<dt>load<span class="classifier">ndarray</span></dt><dd><p>Load data for unit</p>
+</dd>
+<dt>heat_rate<span class="classifier">ndarray</span></dt><dd><p>Heat Rate data for unit</p>
+</dd>
+<dt>order<span class="classifier">int</span></dt><dd><p>Order/degree of the polynomial fit</p>
+</dd>
+<dt>points<span class="classifier">int</span></dt><dd><p>Number of load/heat-rate points to save</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>unit_fit<span class="classifier">pandas.Series</span></dt><dd><p>Heat rate fit and meta-data for unit
+Fit parameters p = [p_n, p_n-1, …]
+Such that y = p_n x^n + p_n-1 x^n-1 …</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.PolyFit.fit_unit">
+<code class="sig-name descname">fit_unit</code><span class="sig-paren">(</span><em class="sig-param">unit_df</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit.fit_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit.fit_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract meta data and heat-rate fit(s) for given unit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit_df</strong> (<em>pandas.DataFrame</em>) – DataFrame for unit to be fit</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>unit_fit</strong> – DataFrame of heat-rate fit(s) for given unit</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.PolyFit.fit_group">
+<code class="sig-name descname">fit_group</code><span class="sig-paren">(</span><em class="sig-param">group_type</em>, <em class="sig-param">out_file=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit.fit_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit.fit_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract polynomial fits for all units in given group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_type</strong> (<em>str</em>) – Group type (generator type + fuel type) to filter</p></li>
+<li><p><strong>out_file</strong> (<em>str</em>) – Path to file inwhich to save fit information (.json or .csv)</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – internal kwargs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>group_fits</strong> – DataFrame of fit information</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.PolyFit.fit_all">
+<code class="sig-name descname">fit_all</code><span class="sig-paren">(</span><em class="sig-param">out_dir</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit.fit_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit.fit_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract unit_fits for all units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_dir</strong> (<em>str</em>) – Directory into which fit files (.csvs) should be saved</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.PolyFit.run">
+<em class="property">classmethod </em><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">filtered_h5</em>, <em class="sig-param">out_dir</em>, <em class="sig-param">order=4</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#PolyFit.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.PolyFit.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract unit_fits for all units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filtered_h5</strong> (<em>str</em>) – Path to .h5 file containing filtered CEMS data</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em>) – Directory into which fit files (.csvs) should be saved</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Order of the polynomial fit</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.filter.FitFilter">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.filter.</code><code class="sig-name descname">FitFilter</code><span class="sig-paren">(</span><em class="sig-param">fit_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#FitFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.FitFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Filter Heat Rate fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fit_dir</strong> (<em>str</em>) – Path to directory containing heat rate fit files</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.filter.FitFilter.hr_fits">
+<em class="property">property </em><code class="sig-name descname">hr_fits</code><a class="headerlink" href="#NaTGenPD.filter.FitFilter.hr_fits" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_hr_fits</strong> – Instance of Fits handler class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#NaTGenPD.handler.Fits" title="NaTGenPD.handler.Fits">Fits</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.FitFilter.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">out_dir=None</em>, <em class="sig-param">min_units=100</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#FitFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.FitFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter all group types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_dir</strong> (<em>str | NoneType</em>) – Output directory to save filtered fits to, if None update in-place</p></li>
+<li><p><strong>min_units</strong> (<em>int</em>) – Minimum number of units with fits needed for filtering</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – internal kwargs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.filter.FitFilter.run">
+<em class="property">classmethod </em><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">fit_dir</em>, <em class="sig-param">out_dir=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/filter.html#FitFilter.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.filter.FitFilter.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter all group types in fit_dir and save to disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fit_dir</strong> (<em>str</em>) – Path to directory containing heat rate fit files</p></li>
+<li><p><strong>out_dir</strong> (<em>str | NoneType</em>) – Output directory to save filtered fits to, if None update in-place</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.handler">
+<span id="natgenpd-handler-module"></span><h2>NaTGenPD.handler module<a class="headerlink" href="#module-NaTGenPD.handler" title="Permalink to this headline">¶</a></h2>
+<p>Wrapper on .h5 to handle CEMS data
+&#64;author: mrossol</p>
+<dl class="data">
+<dt id="NaTGenPD.handler.logger">
+<code class="sig-prename descclassname">NaTGenPD.handler.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger NaTGenPD.handler (WARNING)&gt;</em><a class="headerlink" href="#NaTGenPD.handler.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.handler.CEMSGroup">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.handler.</code><code class="sig-name descname">CEMSGroup</code><span class="sig-paren">(</span><em class="sig-param">group_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMSGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMSGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to handle DataFrame of CEMS data for a single fuel/technology type</p>
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMSGroup.df">
+<em class="property">property </em><code class="sig-name descname">df</code><a class="headerlink" href="#NaTGenPD.handler.CEMSGroup.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataFrame of group data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_df</strong> – DataFrame of group data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMSGroup.unit_dfs">
+<em class="property">property </em><code class="sig-name descname">unit_dfs</code><a class="headerlink" href="#NaTGenPD.handler.CEMSGroup.unit_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group of unit DataFrames</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>_unit_dfs</strong> – Group of unit DataFrames</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.Groupby</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMSGroup.units">
+<em class="property">property </em><code class="sig-name descname">units</code><a class="headerlink" href="#NaTGenPD.handler.CEMSGroup.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Units in group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>units</strong> – List of units present in the group</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMSGroup.group_type">
+<em class="property">property </em><code class="sig-name descname">group_type</code><a class="headerlink" href="#NaTGenPD.handler.CEMSGroup.group_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group type for data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>group</strong> – Fuel/technology type for units</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.handler.CEMS">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.handler.</code><code class="sig-name descname">CEMS</code><span class="sig-paren">(</span><em class="sig-param">h5_path</em>, <em class="sig-param">mode='r'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to handle CEMS data .h5 files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_path</strong> (<em>str</em>) – Path to CEMS .h5 file
+NOTE: CEMS class cannot handle Raw SMOKE .h5 produced by ParseSmoke</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – Mode with which to open h5py File instance</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.writable">
+<em class="property">property </em><code class="sig-name descname">writable</code><a class="headerlink" href="#NaTGenPD.handler.CEMS.writable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if h5py.File instance is writable
+:returns: Flag if mode is writable
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.dsets">
+<em class="property">property </em><code class="sig-name descname">dsets</code><a class="headerlink" href="#NaTGenPD.handler.CEMS.dsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Datasets available in .h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of group_types stored as individual DataSets</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.get_dtype">
+<em class="property">static </em><code class="sig-name descname">get_dtype</code><span class="sig-paren">(</span><em class="sig-param">col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS.get_dtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS.get_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get column dtype for converstion to records array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>col</strong> (<em>pandas.Series</em>) – Column from pandas DataFrame</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>converted dtype for column
+-  float = float32
+-  int = int16 or int32 depending on data range
+-  object/str = U* max length of strings in col</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.to_records_array">
+<em class="property">static </em><code class="sig-name descname">to_records_array</code><span class="sig-paren">(</span><em class="sig-param">df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS.to_records_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS.to_records_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert pandas DataFrame to numpy Records Array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas DataFrame to be converted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Records array of input df</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.rec.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.update_dset">
+<code class="sig-name descname">update_dset</code><span class="sig-paren">(</span><em class="sig-param">dset</em>, <em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS.update_dset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS.update_dset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save dset to disk, if needed create dataset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close h5 instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NaTGenPD.handler.CEMS.combine_years">
+<em class="property">classmethod </em><code class="sig-name descname">combine_years</code><span class="sig-paren">(</span><em class="sig-param">comb_file</em>, <em class="sig-param">year_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#CEMS.combine_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.CEMS.combine_years" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine multiple years of CEMS data into a single file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comb_file</strong> (<em>str</em>) – Path to .h5 file to combine data into</p></li>
+<li><p><strong>year_files</strong> (<em>list | tuple</em>) – List of file paths to combine.
+Each file should correspond to a years worth of Clean SMOKE data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="NaTGenPD.handler.Fits">
+<em class="property">class </em><code class="sig-prename descclassname">NaTGenPD.handler.</code><code class="sig-name descname">Fits</code><span class="sig-paren">(</span><em class="sig-param">fit_dir</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NaTGenPD/handler.html#Fits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NaTGenPD.handler.Fits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to handle heat reate fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fit_dir</strong> (<em>str</em>) – Path to directory containing heat rate fit files</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="NaTGenPD.handler.Fits.group_types">
+<em class="property">property </em><code class="sig-name descname">group_types</code><a class="headerlink" href="#NaTGenPD.handler.Fits.group_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Datasets available in .h5 file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of group_types stored as individual DataSets</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-NaTGenPD.version">
+<span id="natgenpd-version-module"></span><h2>NaTGenPD.version module<a class="headerlink" href="#module-NaTGenPD.version" title="Permalink to this headline">¶</a></h2>
+<p>NaTGenPD version number</p>
+</div>
+<div class="section" id="module-NaTGenPD">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-NaTGenPD" title="Permalink to this headline">¶</a></h2>
+<p>The National Thermal Generator Performance Database.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="NaTGenPD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

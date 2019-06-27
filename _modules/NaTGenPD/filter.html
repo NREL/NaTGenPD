@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD.filter &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/modules.html">NaTGenPD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>NaTGenPD.filter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for NaTGenPD.filter</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Data filtering utilities</span>
+<span class="sd">@author: mrossol</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span> <span class="k">as</span> <span class="nn">cf</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">NaTGenPD.cluster</span> <span class="k">import</span> <span class="n">SingleCluster</span><span class="p">,</span> <span class="n">ClusterCC</span>
+<span class="kn">from</span> <span class="nn">NaTGenPD.handler</span> <span class="k">import</span> <span class="n">CEMS</span><span class="p">,</span> <span class="n">Fits</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Filter"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.Filter">[docs]</a><span class="k">class</span> <span class="nc">Filter</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run Cluster filters on all units</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FILTERS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Boiler&#39;</span><span class="p">:</span> <span class="n">SingleCluster</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
+               <span class="s1">&#39;CT&#39;</span><span class="p">:</span> <span class="n">SingleCluster</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
+               <span class="s1">&#39;CC&#39;</span><span class="p">:</span> <span class="n">ClusterCC</span><span class="o">.</span><span class="n">filter</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean_h5</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clean_h5 : str</span>
+<span class="sd">            Path to .h5 file with pre-cleaned CEMS data</span>
+<span class="sd">        years : int</span>
+<span class="sd">            Number of years of data being filtered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean_h5</span> <span class="o">=</span> <span class="n">clean_h5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_years</span> <span class="o">=</span> <span class="n">years</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">total_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Number of total points possible in dataset</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        points : int</span>
+<span class="sd">            total number of possible timesteps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_years</span> <span class="o">*</span> <span class="mi">8760</span>
+        <span class="k">return</span> <span class="n">points</span>
+
+<div class="viewcode-block" id="Filter.filter_group"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.Filter.filter_group">[docs]</a>    <span class="k">def</span> <span class="nf">filter_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter all units of given group_type</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Group type (generator type + fuel type) to filter</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            For each group filter units in parallel</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_df : pd.DataFrame</span>
+<span class="sd">            Updated group DataFrame with cluster labels post filtering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Filtering all </span><span class="si">{}</span><span class="s1"> units&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group_type</span><span class="p">))</span>
+        <span class="n">total_points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_points</span>
+        <span class="n">min_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_points</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Using min_samples = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_samples</span><span class="p">))</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_points</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Skipping units with &lt; </span><span class="si">{}</span><span class="s1"> points&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threshold</span><span class="p">))</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FILTERS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">group_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; (&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                  <span class="n">SingleCluster</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clean_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cf</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit_df</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">unit_dfs</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Filtering unit </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+                    <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="nb">filter</span><span class="p">,</span> <span class="n">unit_df</span><span class="p">,</span>
+                                                   <span class="n">min_samples</span><span class="p">,</span>
+                                                   <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+                <span class="n">group_df</span> <span class="o">=</span> <span class="p">[</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">group_df</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit_df</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">unit_dfs</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Filtering unit </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+                <span class="n">group_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">unit_df</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span>
+                                       <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="n">group_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">group_df</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">group_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Filter.filter_groups"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.Filter.filter_groups">[docs]</a>    <span class="k">def</span> <span class="nf">filter_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_h5</span><span class="p">,</span> <span class="n">group_types</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter given group_types from clean_h5 and save to out_h5</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_h5 : str</span>
+<span class="sd">            Path to .h5 file into which filtered data should be saved</span>
+<span class="sd">        group_types : list</span>
+<span class="sd">            Group types to filter</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            For each group filter units in parallel</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">out_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_out</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="n">group_types</span><span class="p">:</span>
+                <span class="n">f_out</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_group</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                                                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Filter.filter_all"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.Filter.filter_all">[docs]</a>    <span class="k">def</span> <span class="nf">filter_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_h5</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter all groups in clean_h5 and save to out_h5</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_h5 : str</span>
+<span class="sd">            Path to .h5 file into which filtered data should be saved</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            For each group filter units in parallel</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clean_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_in</span><span class="p">:</span>
+            <span class="n">group_types</span> <span class="o">=</span> <span class="n">f_in</span><span class="o">.</span><span class="n">dsets</span>
+
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">out_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_out</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="n">group_types</span><span class="p">:</span>
+                <span class="n">f_out</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_group</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span>
+                                                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Filter.run"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.Filter.run">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">clean_h5</span><span class="p">,</span> <span class="n">out_h5</span><span class="p">,</span> <span class="n">group_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter all groups in clean_h5 and save to out_h5</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clean_h5 : str</span>
+<span class="sd">            Path to .h5 file with pre-cleaned CEMS data</span>
+<span class="sd">        out_h5 : str</span>
+<span class="sd">            Path to .h5 file into which filtered data should be saved</span>
+<span class="sd">        group_types : list</span>
+<span class="sd">            Group types to filter, if None, filter all</span>
+<span class="sd">        years : int</span>
+<span class="sd">            Number of years worth of data being filtered</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            For each group filter units in parallel</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">clean_h5</span><span class="p">,</span> <span class="n">years</span><span class="o">=</span><span class="n">years</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">group_types</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">filter_groups</span><span class="p">(</span><span class="n">out_h5</span><span class="p">,</span> <span class="n">group_types</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">filter_all</span><span class="p">(</span><span class="n">out_h5</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PolyFit"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit">[docs]</a><span class="k">class</span> <span class="nc">PolyFit</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit filtered units to a polynomial</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">META_COLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;EPA_region&#39;</span><span class="p">,</span> <span class="s1">&#39;NERC_region&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;unit_type&#39;</span><span class="p">,</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">,</span> <span class="s1">&#39;group_type&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filtered_h5</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filtered_h5 : str</span>
+<span class="sd">            Path to .h5 file containing filtered CEMS data</span>
+<span class="sd">        order : int</span>
+<span class="sd">            Order of the polynomial fit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h5</span> <span class="o">=</span> <span class="n">filtered_h5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_order</span> <span class="o">=</span> <span class="n">order</span>
+
+<div class="viewcode-block" id="PolyFit.extract_fit"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit.extract_fit">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">extract_fit</span><span class="p">(</span><span class="n">load</span><span class="p">,</span> <span class="n">heat_rate</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit unit to a polynomial of given order</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        load : ndarray</span>
+<span class="sd">            Load data for unit</span>
+<span class="sd">        heat_rate : ndarray</span>
+<span class="sd">            Heat Rate data for unit</span>
+<span class="sd">        order : int</span>
+<span class="sd">            Order/degree of the polynomial fit</span>
+<span class="sd">        points : int</span>
+<span class="sd">            Number of load/heat-rate points to save</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_fit : pandas.Series</span>
+<span class="sd">            Heat rate fit and meta-data for unit</span>
+<span class="sd">            Fit parameters p = [p_n, p_n-1, ...]</span>
+<span class="sd">            Such that y = p_n x^n + p_n-1 x^n-1 ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fit_params</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">load_range</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">hr_range</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">load</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+            <span class="n">load_min</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">load_max</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">load</span><span class="p">,</span> <span class="n">heat_rate</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">fit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">fit_params</span> <span class="o">=</span> <span class="n">fit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">load_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">load_min</span><span class="p">,</span> <span class="n">load_max</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+                    <span class="n">hr_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit_params</span><span class="p">)(</span><span class="n">load_range</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Cannot fit unit&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">load_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            <span class="n">load_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="n">unit_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">fit_params</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span> <span class="s1">&#39;a3&#39;</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">])</span>
+        <span class="n">load_index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load_</span><span class="si">{:}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">points</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">load_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;load_min&#39;</span>
+        <span class="n">load_index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;load_max&#39;</span>
+
+        <span class="n">unit_load</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">load_range</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">load_index</span><span class="p">)</span>
+        <span class="n">unit_load</span><span class="p">[</span><span class="s1">&#39;load_min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_min</span>
+        <span class="n">unit_load</span><span class="p">[</span><span class="s1">&#39;load_max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_max</span>
+        <span class="n">unit_load</span><span class="p">[</span><span class="s1">&#39;total_load&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">unit_load</span><span class="p">[</span><span class="s1">&#39;min_gen_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_min</span> <span class="o">/</span> <span class="n">load_max</span>
+
+        <span class="n">hr_index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;heat_rate(</span><span class="si">{:}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">load_i</span><span class="p">)</span> <span class="k">for</span> <span class="n">load_i</span> <span class="ow">in</span> <span class="n">load_index</span><span class="p">]</span>
+        <span class="n">unit_hr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">hr_range</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">hr_index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">unit_fit</span><span class="p">,</span> <span class="n">unit_load</span><span class="p">,</span> <span class="n">unit_hr</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="PolyFit.fit_unit"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit.fit_unit">[docs]</a>    <span class="k">def</span> <span class="nf">fit_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract meta data and heat-rate fit(s) for given unit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame for unit to be fit</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_fit : pandas.DataFrame</span>
+<span class="sd">            DataFrame of heat-rate fit(s) for given unit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_meta</span> <span class="o">=</span> <span class="n">unit_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">unit_id</span> <span class="o">=</span> <span class="n">unit_meta</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">label</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+                           <span class="k">if</span> <span class="n">label</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">unit_fit</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">:</span>
+                <span class="n">fit_id</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">label</span>
+                <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">]]</span>
+                <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">])</span>
+                <span class="n">load</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+                <span class="n">heat_rate</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+                <span class="n">cluster_fit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_fit</span><span class="p">(</span><span class="n">load</span><span class="p">,</span> <span class="n">heat_rate</span><span class="p">,</span>
+                                               <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">cluster_fit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">fit_id</span>
+                <span class="n">unit_fit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cluster_fit</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+            <span class="n">unit_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">unit_fit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fit_id</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">)</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+            <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">]]</span>
+            <span class="n">cluster_df</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">])</span>
+            <span class="n">load</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">heat_rate</span> <span class="o">=</span> <span class="n">cluster_df</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">cluster_fit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_fit</span><span class="p">(</span><span class="n">load</span><span class="p">,</span> <span class="n">heat_rate</span><span class="p">,</span>
+                                           <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_order</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">cluster_fit</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">fit_id</span>
+            <span class="n">unit_fit</span> <span class="o">=</span> <span class="n">cluster_fit</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">META_COLS</span><span class="p">:</span>
+            <span class="n">unit_fit</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_meta</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">unit_fit</span></div>
+
+<div class="viewcode-block" id="PolyFit.fit_group"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit.fit_group">[docs]</a>    <span class="k">def</span> <span class="nf">fit_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract polynomial fits for all units in given group</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Group type (generator type + fuel type) to filter</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to file inwhich to save fit information (.json or .csv)</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_fits : pandas.DataFrame</span>
+<span class="sd">            DataFrame of fit information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Fitting all </span><span class="si">{}</span><span class="s1"> units&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group_type</span><span class="p">))</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit_df</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">unit_dfs</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Fitting unit </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+            <span class="n">group_fits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_unit</span><span class="p">(</span><span class="n">unit_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">group_fits</span><span class="p">)</span>
+        <span class="n">group_fits</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;unit_id&#39;</span>
+        <span class="k">if</span> <span class="n">out_file</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Saving fits to </span><span class="si">{}</span><span class="s1">&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">out_file</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">out_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">):</span>
+                <span class="n">group_fits</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">out_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.json&#39;</span><span class="p">):</span>
+                <span class="n">group_fits</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid file type, cannot save to .</span><span class="si">{}</span><span class="s1">&#39;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">out_file</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">group_fits</span></div>
+
+<div class="viewcode-block" id="PolyFit.fit_all"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit.fit_all">[docs]</a>    <span class="k">def</span> <span class="nf">fit_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract unit_fits for all units</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_dir : str</span>
+<span class="sd">            Directory into which fit files (.csvs) should be saved</span>
+<span class="sd">        kwargs: dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_h5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">group_types</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">dsets</span>
+
+        <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="n">group_types</span><span class="p">:</span>
+            <span class="n">out_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_fits.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">)</span>
+            <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">out_path</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_group</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">out_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PolyFit.run"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.PolyFit.run">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filtered_h5</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract unit_fits for all units</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filtered_h5 : str</span>
+<span class="sd">            Path to .h5 file containing filtered CEMS data</span>
+<span class="sd">        out_dir : str</span>
+<span class="sd">            Directory into which fit files (.csvs) should be saved</span>
+<span class="sd">        order : int</span>
+<span class="sd">            Order of the polynomial fit</span>
+<span class="sd">        kwargs: dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fit</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">filtered_h5</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">fit</span><span class="o">.</span><span class="n">fit_all</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FitFilter"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.FitFilter">[docs]</a><span class="k">class</span> <span class="nc">FitFilter</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter Heat Rate fits</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fit_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fit_dir : str</span>
+<span class="sd">            Path to directory containing heat rate fit files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hr_fits</span> <span class="o">=</span> <span class="n">Fits</span><span class="p">(</span><span class="n">fit_dir</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hr_fits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _hr_fits : Fits</span>
+<span class="sd">            Instance of Fits handler class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hr_fits</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_hr_min</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract minimum heat rate from unit fits</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit : pandas.Series</span>
+<span class="sd">            Row containing the fit stats and parameters for a single unit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        hr_min: float</span>
+<span class="sd">            Minimum heat rate from heat rate curve fit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unit</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
+        <span class="n">fit_params</span> <span class="o">=</span> <span class="n">unit</span><span class="p">[</span><span class="n">params</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fit_params</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">fit_params</span> <span class="o">=</span> <span class="n">fit_params</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">poly_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">fit_params</span><span class="p">)</span>
+            <span class="n">load_min</span><span class="p">,</span> <span class="n">load_max</span> <span class="o">=</span> <span class="n">unit</span><span class="p">[[</span><span class="s1">&#39;load_min&#39;</span><span class="p">,</span> <span class="s1">&#39;load_max&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">load_min</span><span class="p">,</span> <span class="n">load_max</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+            <span class="n">hr_min</span> <span class="o">=</span> <span class="n">poly_fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">hr_min</span> <span class="o">&lt;</span> <span class="mf">4.5</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Minimun heat rate value is &lt; 4.5!&#39;</span><span class="p">)</span>
+                <span class="n">hr_min</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hr_min</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">hr_min</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_min_hr_filter</span><span class="p">(</span><span class="n">min_hr</span><span class="p">,</span> <span class="n">stdev_multiplier</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter out the most and least efficient units based on multiples of the</span>
+<span class="sd">        standard deviation from the mean</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        min_hr : pd.Series</span>
+<span class="sd">            Series of minimum heat_rate values for all generators with a</span>
+<span class="sd">            valid fit</span>
+<span class="sd">        stdev_multiplier : float</span>
+<span class="sd">            Multiple of the stdev from the mean to use as the filter thresholds</span>
+<span class="sd">        threshold : tuple</span>
+<span class="sd">            Pre-impossed limits for the filter threshold</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        failed_units : ndarray</span>
+<span class="sd">            Array of units that failed the filter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">min_hr_values</span> <span class="o">=</span> <span class="n">min_hr</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">if</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">min_hr_values</span> <span class="o">=</span> <span class="n">min_hr_values</span><span class="p">[</span><span class="n">min_hr_values</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">min_hr_values</span> <span class="o">=</span> <span class="n">min_hr_values</span><span class="p">[</span><span class="n">min_hr_values</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">min_hr_values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">stdev</span> <span class="o">=</span> <span class="n">min_hr_values</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="n">thresh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">stdev_multiplier</span><span class="p">,</span> <span class="n">stdev_multiplier</span><span class="p">])</span> <span class="o">*</span> <span class="n">stdev</span> <span class="o">+</span> <span class="n">mean</span>
+
+        <span class="k">if</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">thresh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">thresh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">min_hr</span><span class="o">.</span><span class="n">values</span> <span class="o">&lt;</span> <span class="n">thresh</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">min_hr</span><span class="o">.</span><span class="n">values</span> <span class="o">&gt;</span> <span class="n">thresh</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">failed_units</span> <span class="o">=</span> <span class="n">min_hr</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+
+        <span class="k">return</span> <span class="n">failed_units</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_filter</span><span class="p">(</span><span class="n">group_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter units of given group</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_df : pd.DataFrame</span>
+<span class="sd">            DataFrame of fits for a given group types</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_df : pd.DataFrame</span>
+<span class="sd">            Updated DataFrame of fits with filtered units fit values</span>
+<span class="sd">            (load, heat_rate, and params) set to None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group_df</span> <span class="o">=</span> <span class="n">group_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)</span>
+        <span class="n">min_hr</span> <span class="o">=</span> <span class="n">group_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">FitFilter</span><span class="o">.</span><span class="n">_get_hr_min</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="n">failed_units</span> <span class="o">=</span> <span class="n">FitFilter</span><span class="o">.</span><span class="n">_min_hr_filter</span><span class="p">(</span><span class="n">min_hr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">filter_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">group_df</span><span class="o">.</span><span class="n">columns</span>
+                       <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">))</span>
+                       <span class="ow">and</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;load_min&#39;</span><span class="p">,</span> <span class="s1">&#39;load_max&#39;</span><span class="p">]]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- </span><span class="si">{}</span><span class="s1"> units being filtered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">failed_units</span><span class="p">)))</span>
+        <span class="n">group_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">failed_units</span><span class="p">,</span> <span class="n">filter_cols</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">group_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_filer_CCs</span><span class="p">(</span><span class="n">cc_df</span><span class="p">,</span> <span class="n">cut_off</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter CC units</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cc_df : pd.DataFrame</span>
+<span class="sd">            DataFrame of CC fits for each operating mode</span>
+<span class="sd">        cut_off : float</span>
+<span class="sd">            Threshold above which units should not be included in filter.</span>
+<span class="sd">            These units did not report the steam generation and are thus</span>
+<span class="sd">            appear overly in-efficient for a CC</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cc_df : pd.DataFrame</span>
+<span class="sd">            Updated DataFrame of CC fits with filtered units fit values</span>
+<span class="sd">            (load, heat_rate, and params) set to None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cc_df</span><span class="p">[</span><span class="s1">&#39;cc_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc_df</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cc_df</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;cc_id&#39;</span><span class="p">)</span>
+        <span class="n">cc_min_hr</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">FitFilter</span><span class="o">.</span><span class="n">_get_hr_min</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cc_min_hr</span> <span class="o">=</span> <span class="n">cc_min_hr</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">cc_min_hr</span> <span class="o">=</span> <span class="n">cc_min_hr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;cc_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+        <span class="n">failed_units</span> <span class="o">=</span> <span class="n">FitFilter</span><span class="o">.</span><span class="n">_min_hr_filter</span><span class="p">(</span><span class="n">cc_min_hr</span><span class="p">,</span>
+                                                <span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">cut_off</span><span class="p">),</span>
+                                                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">filter_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">columns</span>
+                       <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">))</span>
+                       <span class="ow">and</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;load_min&#39;</span><span class="p">,</span> <span class="s1">&#39;load_max&#39;</span><span class="p">]]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- </span><span class="si">{}</span><span class="s1"> units being filtered&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">failed_units</span><span class="p">)))</span>
+        <span class="n">cc_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">failed_units</span><span class="p">,</span> <span class="n">filter_cols</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FitFilter.filter"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.FitFilter.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_units</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter all group types</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_dir : str | NoneType</span>
+<span class="sd">            Output directory to save filtered fits to, if None update in-place</span>
+<span class="sd">        min_units : int</span>
+<span class="sd">            Minimum number of units with fits needed for filtering</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Filtering out the most and least efficient heat &#39;</span>
+                    <span class="s1">&#39;rate fits&#39;</span><span class="p">)</span>
+        <span class="n">out_fits</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">out_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out_fits</span> <span class="o">=</span> <span class="n">Fits</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hr_fits</span><span class="o">.</span><span class="n">group_types</span><span class="p">:</span>
+            <span class="n">group_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hr_fits</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span>
+            <span class="n">fit_units</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">~</span><span class="n">group_df</span><span class="p">[</span><span class="s1">&#39;a0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fit_units</span> <span class="o">&gt;</span> <span class="n">min_units</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;- Filtering </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s1">&#39;CC&#39;</span> <span class="ow">in</span> <span class="n">g_type</span><span class="p">:</span>
+                    <span class="n">group_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filer_CCs</span><span class="p">(</span><span class="n">group_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">group_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter</span><span class="p">(</span><span class="n">group_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">out_fits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">out_fits</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_df</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_hr_fits</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_df</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;- Skipping </span><span class="si">{}</span><span class="s1"> as it only has </span><span class="si">{}</span><span class="s1"> unique fits&#39;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">fit_units</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">out_fits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">out_fits</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_df</span></div>
+
+<div class="viewcode-block" id="FitFilter.run"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.filter.FitFilter.run">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fit_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter all group types in fit_dir and save to disk</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fit_dir : str</span>
+<span class="sd">            Path to directory containing heat rate fit files</span>
+<span class="sd">        out_dir : str | NoneType</span>
+<span class="sd">            Output directory to save filtered fits to, if None update in-place</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ff</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">fit_dir</span><span class="p">)</span>
+        <span class="n">ff</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

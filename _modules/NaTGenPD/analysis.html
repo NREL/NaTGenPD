@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD.analysis &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/modules.html">NaTGenPD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>NaTGenPD.analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for NaTGenPD.analysis</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Heat Rate Analysis utilities</span>
+<span class="sd">@author: mrossol</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">NaTGenPD.handler</span> <span class="k">import</span> <span class="n">Fits</span><span class="p">,</span> <span class="n">CEMS</span><span class="p">,</span> <span class="n">CEMSGroup</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ProcedureAnalysis"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.ProcedureAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ProcedureAnalysis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze cleaning and filtering procedure</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hr_fits</span><span class="p">,</span> <span class="n">raw_cems</span><span class="p">,</span> <span class="n">cleaned_cems</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">,</span>
+                 <span class="n">cc_map_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hr_fits : str</span>
+<span class="sd">            Path to heat rate fit .csv(s)</span>
+<span class="sd">        raw_cems : str</span>
+<span class="sd">            Path to raw CEMS .h5 file(s)</span>
+<span class="sd">        cleaned_cems : str</span>
+<span class="sd">            Path to cleaned CEMS .h5 file</span>
+<span class="sd">        filtered_cems : str</span>
+<span class="sd">            Path to filtered CEMS .h5 file</span>
+<span class="sd">        cc_map_path : str</span>
+<span class="sd">            Path to cc_mapping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span> <span class="o">=</span> <span class="n">Fits</span><span class="p">(</span><span class="n">hr_fits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_raw_CEMS</span><span class="p">(</span><span class="n">raw_cems</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleaned_path</span> <span class="o">=</span> <span class="n">cleaned_cems</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filtered_path</span> <span class="o">=</span> <span class="n">filtered_cems</span>
+        <span class="k">if</span> <span class="n">cc_map_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cc_map_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">),</span> <span class="s1">&#39;bin&#39;</span><span class="p">,</span>
+                                       <span class="s1">&#39;cems_cc_mapping.csv&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cc_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_cc_map</span><span class="p">(</span><span class="n">cc_map_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ProcedureAnalysis.parse_raw_CEMS"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.ProcedureAnalysis.parse_raw_CEMS">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse_raw_CEMS</span><span class="p">(</span><span class="n">raw_cems</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine multiple years of raw CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        raw_cems : list | str</span>
+<span class="sd">            Path to single or multiple .h5 files containing raw CEMS data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        raw_df : pd.DataFrame</span>
+<span class="sd">            DataFrame of raw CEMS data from all input years</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw_cems</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">raw_cems</span> <span class="o">=</span> <span class="p">[</span><span class="n">raw_cems</span><span class="p">]</span>
+
+        <span class="n">raw_df</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">raw_file</span> <span class="ow">in</span> <span class="n">raw_cems</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Loading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">raw_file</span><span class="p">)))</span>
+            <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">raw_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">raw_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;raw_CEMS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">raw_df</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcedureAnalysis.load_cc_map"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.ProcedureAnalysis.load_cc_map">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_cc_map</span><span class="p">(</span><span class="n">cc_map_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load cc_mapping, if path is None use provided mapping in bin</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cc_map_path : str</span>
+<span class="sd">            Path to .csv with CEMS to EIA CC unit mapping</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cc_map : pd.DataFrame</span>
+<span class="sd">            Mapping of CEMS cc cferators (CTs) to final CC units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">cc_map_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cc_map_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">),</span> <span class="s1">&#39;bin&#39;</span><span class="p">,</span>
+                                       <span class="s1">&#39;cems_cc_mapping.csv&#39;</span><span class="p">)</span>
+
+        <span class="n">cc_map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cc_map_path</span><span class="p">)</span>
+        <span class="n">cc_map</span> <span class="o">=</span> <span class="n">cc_map</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;CCUnit&#39;</span><span class="p">:</span> <span class="s1">&#39;cc_unit&#39;</span><span class="p">,</span>
+                                        <span class="s1">&#39;CEMSUnit&#39;</span><span class="p">:</span> <span class="s1">&#39;unit_id&#39;</span><span class="p">})</span>
+        <span class="n">cc_map</span> <span class="o">=</span> <span class="n">cc_map</span><span class="p">[[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;cc_unit&#39;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">cc_map</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_fits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract desired group type from heat rate fits</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Fuel/cferator type of interest</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_fits : pd.DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">group_fits</span>
+
+    <span class="k">def</span> <span class="nf">_get_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract desired group type from raw CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Fuel/cferator type of interest</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        raw : CEMSGroup</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_fits</span><span class="p">(</span><span class="n">group_type</span><span class="p">)</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">group_fits</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;CC&quot;</span> <span class="ow">in</span> <span class="n">group_type</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cc_map</span><span class="p">[</span><span class="s1">&#39;cc_unit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+            <span class="n">units</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cc_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_df</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">CEMSGroup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">raw</span>
+
+    <span class="k">def</span> <span class="nf">_get_cleaned</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract desired group type from cleaned CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Fuel/cferator type of interest</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cleaned : CEMSGroup</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleaned_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">cleaned</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">cleaned</span>
+
+    <span class="k">def</span> <span class="nf">_get_filtered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract desired group type from filtered CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Fuel/cferator type of interest</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filtered : CEMSGroup</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filtered_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">filtered</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_raw_stats</span><span class="p">(</span><span class="n">raw_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute raw stats for desired unit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        raw_df : CEMSGroup</span>
+<span class="sd">            Instance of CEMSGroup containing raw CEMS data</span>
+<span class="sd">        unit_id : str</span>
+<span class="sd">            Unit id of interest</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Stats for individual units</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Updated aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Updated stats for individual units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">-- Extracting raw stats&#39;</span><span class="p">)</span>
+            <span class="n">unit_df</span> <span class="o">=</span> <span class="n">raw_df</span><span class="p">[</span><span class="n">unit_id</span><span class="p">]</span>
+            <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;unit_dfs&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">cf</span> <span class="o">=</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;gload&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;raw_cf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cf</span>
+            <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;raw_cf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cf</span>
+            <span class="n">points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit_df</span><span class="p">)</span>
+            <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;total_points&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">points</span>
+            <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;total_points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points</span>
+            <span class="n">non_zero</span> <span class="o">=</span> <span class="p">(</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;gload&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;non_zero_points&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">non_zero</span>
+            <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;non_zero_points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">non_zero</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- </span><span class="si">{}</span><span class="s1"> is not present in Raw CEMS data&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_clean_stats</span><span class="p">(</span><span class="n">clean_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute cleaning stats for desired unit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clean_df : CEMSGroup</span>
+<span class="sd">            Instance of CEMSGroup containing cleaned CEMS data</span>
+<span class="sd">        unit_id : str</span>
+<span class="sd">            Unit id of interest</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Stats for individual units</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Updated aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Updated stats for individual units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">unit_df</span> <span class="o">=</span> <span class="n">clean_df</span><span class="p">[</span><span class="n">unit_id</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">-- Extracting clean stats&#39;</span><span class="p">)</span>
+                <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;clean_units&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">])</span>
+                <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;clean_cf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cf</span>
+                <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;clean_cf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cf</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- </span><span class="si">{}</span><span class="s1"> is not present in Clean CEMS data&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_filter_stats</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit_fit</span><span class="p">,</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute filtering stats for desired unit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filtered_df : CEMSGroup</span>
+<span class="sd">            Instance of CEMSGroup containing filtered CEMS data</span>
+<span class="sd">        unit_id : str</span>
+<span class="sd">            Unit id of interest</span>
+<span class="sd">        unit_fit : pd.Series</span>
+<span class="sd">            Unit fit data</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Stats for individual units</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Updated aggregate stats</span>
+<span class="sd">        unit_stats : pd.Series</span>
+<span class="sd">            Updated stats for individual units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">unit_df</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="p">[</span><span class="n">unit_id</span><span class="p">]</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+            <span class="n">unit_df</span> <span class="o">=</span> <span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">-- Extracting filter stats&#39;</span><span class="p">)</span>
+                <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;filtered_units&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">])</span>
+                <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;filtered_cf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cf</span>
+                <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;filtered_cf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cf</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">unit_fit</span><span class="p">[</span><span class="s1">&#39;a0&#39;</span><span class="p">]):</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">-- Extracting final stats&#39;</span><span class="p">)</span>
+                    <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;final_units&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;final_cf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cf</span>
+                    <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;final_cf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cf</span>
+                    <span class="n">f_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+                    <span class="n">unit_stats</span><span class="p">[</span><span class="s1">&#39;final_points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_points</span>
+                    <span class="n">group_stats</span><span class="p">[</span><span class="s1">&#39;final_points&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f_points</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- </span><span class="si">{}</span><span class="s1"> is not present in Filtered CEMS data&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span>
+
+    <span class="k">def</span> <span class="nf">_group_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute process stats for group in aggregate and each unit in</span>
+<span class="sd">        group type</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Group (fuel/cferator) type to analyze</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_stats : pd.Series</span>
+<span class="sd">            Aggregated processing stats</span>
+<span class="sd">        group_unit_stats : pd.DataFrame</span>
+<span class="sd">            Processing stats for each unit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unit_dfs&#39;</span><span class="p">,</span> <span class="s1">&#39;raw_cf&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;total_points&#39;</span><span class="p">,</span> <span class="s1">&#39;non_zero_points&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;clean_units&#39;</span><span class="p">,</span> <span class="s1">&#39;clean_cf&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;filtered_units&#39;</span><span class="p">,</span> <span class="s1">&#39;filtered_cf&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;final_units&#39;</span><span class="p">,</span> <span class="s1">&#39;final_cf&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;final_points&#39;</span><span class="p">])</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">group_stats</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unit_dfs&#39;</span><span class="p">,</span> <span class="s1">&#39;clean_units&#39;</span><span class="p">,</span>
+                                                <span class="s1">&#39;filtered_units&#39;</span><span class="p">,</span>
+                                                <span class="s1">&#39;final_units&#39;</span><span class="p">])</span>
+        <span class="n">group_stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">group_type</span>
+
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_fits</span><span class="p">(</span><span class="n">group_type</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)</span>
+        <span class="n">raw_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw</span><span class="p">(</span><span class="n">group_type</span><span class="p">)</span>
+        <span class="n">clean_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cleaned</span><span class="p">(</span><span class="n">group_type</span><span class="p">)</span>
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_filtered</span><span class="p">(</span><span class="n">group_type</span><span class="p">)</span>
+
+        <span class="n">group_unit_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit_fit</span> <span class="ow">in</span> <span class="n">group_fits</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Extracting stats for unit: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_id</span><span class="p">))</span>
+            <span class="n">unit_stats</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">unit_stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">unit_id</span>
+            <span class="c1"># Raw Dat Stats</span>
+            <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_stats</span><span class="p">(</span><span class="n">raw_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span>
+                                                      <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span><span class="p">)</span>
+            <span class="c1"># Clean Data Stats</span>
+
+            <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_stats</span><span class="p">(</span><span class="n">clean_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span>
+                                                        <span class="n">group_stats</span><span class="p">,</span>
+                                                        <span class="n">unit_stats</span><span class="p">)</span>
+            <span class="c1"># Filtered and Final data Stats</span>
+            <span class="n">group_stats</span><span class="p">,</span> <span class="n">unit_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_stats</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">unit_id</span><span class="p">,</span>
+                                                         <span class="n">unit_fit</span><span class="p">,</span>
+                                                         <span class="n">group_stats</span><span class="p">,</span>
+                                                         <span class="n">unit_stats</span><span class="p">)</span>
+            <span class="n">group_unit_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit_stats</span><span class="p">)</span>
+
+        <span class="n">group_unit_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">group_unit_stats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="n">group_stats</span><span class="p">,</span> <span class="n">group_unit_stats</span>
+
+<div class="viewcode-block" id="ProcedureAnalysis.process_stats"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.ProcedureAnalysis.process_stats">[docs]</a>    <span class="k">def</span> <span class="nf">process_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute process stats for all available group types in CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output file to save stats to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">process_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span><span class="o">.</span><span class="n">group_types</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Extracting stats for </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">))</span>
+            <span class="n">group_stats</span><span class="p">,</span> <span class="n">group_unit_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_stats</span><span class="p">(</span><span class="n">g_type</span><span class="p">)</span>
+            <span class="n">process_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_stats</span><span class="p">)</span>
+
+            <span class="n">f_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+            <span class="n">units_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">f_name</span><span class="p">)</span>
+            <span class="n">units_file</span> <span class="o">=</span> <span class="n">out_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">f_name</span><span class="p">,</span> <span class="n">units_file</span><span class="p">)</span>
+            <span class="n">group_unit_stats</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">units_file</span><span class="p">)</span>
+
+        <span class="n">process_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">process_stats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">process_stats</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcedureAnalysis.stats"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.ProcedureAnalysis.stats">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hr_fits</span><span class="p">,</span> <span class="n">raw_cems</span><span class="p">,</span> <span class="n">cleaned_cems</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span>
+              <span class="n">cc_map_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute process stats for all available group types in CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hr_fits : str</span>
+<span class="sd">            Path to heat rate fit .csv(s)</span>
+<span class="sd">        raw_cems : str</span>
+<span class="sd">            Path to raw CEMS .h5 file(s)</span>
+<span class="sd">        cleaned_cems : str</span>
+<span class="sd">            Path to cleaned CEMS .h5 file</span>
+<span class="sd">        filtered_cems : str</span>
+<span class="sd">            Path to filtered CEMS .h5 file</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output file to save stats to</span>
+<span class="sd">        cc_map_path : str</span>
+<span class="sd">            Path to cc_mapping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">analysis</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">hr_fits</span><span class="p">,</span> <span class="n">raw_cems</span><span class="p">,</span> <span class="n">cleaned_cems</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">,</span>
+                       <span class="n">cc_map_path</span><span class="o">=</span><span class="n">cc_map_path</span><span class="p">)</span>
+        <span class="n">analysis</span><span class="o">.</span><span class="n">process_stats</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="QuartileAnalysis"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.QuartileAnalysis">[docs]</a><span class="k">class</span> <span class="nc">QuartileAnalysis</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze cferation and operation time by load quartile</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hr_fits</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hr_fits : str</span>
+<span class="sd">            Path to heat rate fit .csv(s)</span>
+<span class="sd">        filtered_cems : str</span>
+<span class="sd">            Path to filtered CEMS .h5 file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span> <span class="o">=</span> <span class="n">Fits</span><span class="p">(</span><span class="n">hr_fits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filtered_path</span> <span class="o">=</span> <span class="n">filtered_cems</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract desired group type from filtered CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group_type : str</span>
+<span class="sd">            Fuel/cferator type of interest</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        filter_df : CEMSGroup</span>
+<span class="sd">            Filtered units for desired group with proper final heat-rate fits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">group_fits</span><span class="p">[</span><span class="s1">&#39;a0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="n">group_fits</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">pos</span><span class="p">]</span>
+        <span class="n">group_fits</span> <span class="o">=</span> <span class="n">group_fits</span><span class="p">[[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;load_max&#39;</span><span class="p">]]</span>
+
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filtered_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">group_filtered</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span>
+
+        <span class="n">ave_hr</span> <span class="o">=</span> <span class="n">group_filtered</span><span class="o">.</span><span class="n">unit_dfs</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">ave_hr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ave_heat_rate&#39;</span>
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">group_filtered</span><span class="o">.</span><span class="n">df</span><span class="p">,</span>
+                               <span class="n">ave_hr</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
+                               <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;ave_heat_rate&#39;</span><span class="p">]]</span>
+
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">group_fits</span><span class="p">,</span>
+                               <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+        <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;cf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span>
+                             <span class="o">/</span> <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;load_max&#39;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">filtered_df</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_compute_stats</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract CF quartile stats for given group:</span>
+<span class="sd">        - fraction of generation in each quartile</span>
+<span class="sd">        - fraction of time in each quartile</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filtered_df : pd.DataFrame</span>
+<span class="sd">            DataFrame to compute stats from</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        quartile_stats : pd.Series</span>
+<span class="sd">            CF quartile stats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">quartile_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">()</span>
+        <span class="n">load</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;cf&#39;</span><span class="p">]</span>
+        <span class="n">load_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">load</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="n">bin_size</span> <span class="o">=</span> <span class="n">load_range</span> <span class="o">/</span> <span class="mi">4</span>
+        <span class="n">bins</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="n">bin_size</span>
+        <span class="n">total_cf</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;cf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">total_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span>
+        <span class="c1"># Q1</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">load</span> <span class="o">&lt;=</span> <span class="n">bins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">q_cf</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;cf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q1_gen_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_cf</span> <span class="o">/</span> <span class="n">total_cf</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q1_time_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total_points</span>
+        <span class="c1"># Q2</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">load</span> <span class="o">&gt;</span> <span class="n">bins</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">load</span> <span class="o">&lt;=</span> <span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">q_cf</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;cf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q2_gen_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_cf</span> <span class="o">/</span> <span class="n">total_cf</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q2_time_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total_points</span>
+        <span class="c1"># Q3</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">load</span> <span class="o">&gt;</span> <span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">load</span> <span class="o">&lt;=</span> <span class="n">bins</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">q_cf</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;cf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q3_gen_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_cf</span> <span class="o">/</span> <span class="n">total_cf</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q3_time_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total_points</span>
+        <span class="c1"># Q4</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">load</span> <span class="o">&gt;</span> <span class="n">bins</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">q_cf</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;cf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q4_gen_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_cf</span> <span class="o">/</span> <span class="n">total_cf</span>
+        <span class="n">quartile_stats</span><span class="p">[</span><span class="s1">&#39;Q4_time_frac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total_points</span>
+
+        <span class="k">return</span> <span class="n">quartile_stats</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_hr_stats</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute quartile stats for bins of average heat-rate</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filtered_df : pd.DataFrame</span>
+<span class="sd">            DataFrame to compute stats from</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        hr_stats : pd.Series</span>
+<span class="sd">            CF quartile stats by average heat-rate bin</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hr_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">hr_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;ave_heat_rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                  <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bins</span><span class="p">):</span>
+            <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">hr_bins</span><span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">((</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;ave_heat_rate&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">)</span>
+                   <span class="o">&amp;</span> <span class="p">(</span><span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;ave_heat_rate&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">e</span><span class="p">))</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+            <span class="n">bin_stats</span> <span class="o">=</span> <span class="n">QuartileAnalysis</span><span class="o">.</span><span class="n">_compute_stats</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">bin_stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bin_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">hr_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bin_stats</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">hr_stats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<div class="viewcode-block" id="QuartileAnalysis.quartile_stats"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.QuartileAnalysis.quartile_stats">[docs]</a>    <span class="k">def</span> <span class="nf">quartile_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute process stats for all available group types in CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output file to save stats to</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">quartile_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">g_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fits</span><span class="o">.</span><span class="n">group_types</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Extracting stats for </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">))</span>
+            <span class="n">group_filtered</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">g_type</span><span class="p">]</span>
+            <span class="n">group_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_stats</span><span class="p">(</span><span class="n">group_filtered</span><span class="p">)</span>
+            <span class="n">group_stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">g_type</span>
+            <span class="n">quartile_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_stats</span><span class="p">)</span>
+
+            <span class="n">f_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+            <span class="n">group_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_type</span><span class="p">,</span> <span class="n">f_name</span><span class="p">)</span>
+            <span class="n">group_file</span> <span class="o">=</span> <span class="n">out_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">f_name</span><span class="p">,</span> <span class="n">group_file</span><span class="p">)</span>
+            <span class="n">hr_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hr_stats</span><span class="p">(</span><span class="n">group_filtered</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">hr_stats</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">group_file</span><span class="p">)</span>
+
+        <span class="n">quartile_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">quartile_stats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">quartile_stats</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="QuartileAnalysis.stats"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.analysis.QuartileAnalysis.stats">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hr_fits</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute quartile stats for all available group types in CEMS data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hr_fits : str</span>
+<span class="sd">            Path to heat rate fit .csv(s)</span>
+<span class="sd">        filtered_cems : str</span>
+<span class="sd">            Path to filtered CEMS .h5 file</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output file to save stats to</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">analysis</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">hr_fits</span><span class="p">,</span> <span class="n">filtered_cems</span><span class="p">)</span>
+        <span class="n">analysis</span><span class="o">.</span><span class="n">quartile_stats</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

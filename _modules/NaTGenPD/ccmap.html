@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD.ccmap &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/modules.html">NaTGenPD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>NaTGenPD.ccmap</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for NaTGenPD.ccmap</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Map CEMS CC generators to EIA CC units</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="method_1"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.ccmap.method_1">[docs]</a><span class="k">def</span> <span class="nf">method_1</span><span class="p">(</span><span class="n">boilers</span><span class="p">,</span> <span class="n">eia_plants</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method 1 to map boilers to eia plants</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create boiler-specific unit (Method 1)</span>
+    <span class="n">no_eia_plant</span> <span class="o">=</span> <span class="n">boilers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">boilers</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span> <span class="n">eia_plants</span><span class="p">),</span> <span class="p">:]</span>
+    <span class="n">no_eia_plant</span> <span class="o">=</span> <span class="n">no_eia_plant</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">no_eia_plant</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">no_eia_plant</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]</span>
+    <span class="n">no_eia_plant</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">no_eia_plant</span></div>
+
+
+<div class="viewcode-block" id="method_2_3"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.ccmap.method_2_3">[docs]</a><span class="k">def</span> <span class="nf">method_2_3</span><span class="p">(</span><span class="n">boilers23</span><span class="p">,</span> <span class="n">boilers_generators</span><span class="p">,</span> <span class="n">generators</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method 2 and 3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get boiler -&gt; generator matches (Methods 2 + 3)</span>
+    <span class="n">boilers_units</span> <span class="o">=</span> <span class="n">boilers23</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">boilers_generators</span><span class="p">,</span>
+                                   <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler ID&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+    <span class="n">boilers_units</span> <span class="o">=</span> <span class="n">boilers_units</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">generators</span><span class="p">[[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]],</span>
+                                       <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Generator ID&quot;</span><span class="p">],</span>
+                                       <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+    <span class="n">boilers_units</span> <span class="o">=</span> <span class="n">boilers_units</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">,</span>
+                                                                <span class="s2">&quot;Unit Code&quot;</span><span class="p">])</span>
+
+    <span class="n">gen_missing_unit_code</span> <span class="o">=</span> <span class="n">boilers_units</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+
+    <span class="c1"># Assign unit code directly (Method 2)</span>
+    <span class="n">direct_result</span> <span class="o">=</span> <span class="n">boilers_units</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">gen_missing_unit_code</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">direct_result</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># Create generator-specific unit (Method 3)</span>
+    <span class="n">direct_nounit_result</span> <span class="o">=</span> <span class="n">boilers_units</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gen_missing_unit_code</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">direct_nounit_result</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">direct_nounit_result</span><span class="p">[</span><span class="s2">&quot;Generator ID&quot;</span><span class="p">]</span>
+    <span class="n">direct_nounit_result</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">return</span> <span class="n">direct_result</span><span class="p">,</span> <span class="n">direct_nounit_result</span></div>
+
+
+<div class="viewcode-block" id="method_4"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.ccmap.method_4">[docs]</a><span class="k">def</span> <span class="nf">method_4</span><span class="p">(</span><span class="n">boilers4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method 4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check for no CA/CTs</span>
+    <span class="n">boilers_plants</span> <span class="o">=</span> <span class="n">boilers4567</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">boilers4567</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span>
+                                     <span class="n">generators_cc</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">]),</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Create boiler-specific unit (Method 4)</span>
+    <span class="n">boilers_plants</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boilers_plants</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">boilers_plants</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="k">return</span> <span class="n">boilers_plants</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="method_5"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.ccmap.method_5">[docs]</a><span class="k">def</span> <span class="nf">method_5</span><span class="p">(</span><span class="n">boilers4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method 5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check for single unit code among all CA/CTs in plant</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">generators_cc</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span> <span class="n">boilers4567</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">])</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">generators_cc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Unit Code&quot;</span><span class="p">]]</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">plants_units</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">plants_units</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span>
+    <span class="n">unit_code_count</span> <span class="o">=</span> <span class="n">plants_units</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">unit_code_count</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">single_unit_plants</span> <span class="o">=</span> <span class="n">unit_code_count</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+
+    <span class="c1"># Assign all boilers in plant to same unit code if single unit code exists</span>
+    <span class="c1"># (Method 5)</span>
+    <span class="n">single_unit_plants</span> <span class="o">=</span> <span class="n">plants_units</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">single_unit_plants</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">boilers4567</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">single_unit_plants</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span>
+                              <span class="n">how</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="method_6_7"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.ccmap.method_6_7">[docs]</a><span class="k">def</span> <span class="nf">method_6_7</span><span class="p">(</span><span class="n">boilers4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method 6 and 7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check for nonsingle unit code among all CA/CTs in plant</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">generators_cc</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span> <span class="n">boilers4567</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">])</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">generators_cc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Unit Code&quot;</span><span class="p">]]</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">plants_units</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span>
+    <span class="n">plants_units</span> <span class="o">=</span> <span class="n">plants_units</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span>
+    <span class="n">unit_code_count</span> <span class="o">=</span> <span class="n">plants_units</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">unit_code_count</span> <span class="o">!=</span> <span class="mi">1</span>
+    <span class="n">nonsingle_unit_plants</span> <span class="o">=</span> <span class="n">unit_code_count</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+
+    <span class="c1"># Group boilers and generators by plant</span>
+    <span class="n">boiler_groups</span> <span class="o">=</span> <span class="n">boilers4567</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">boilers4567</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span> <span class="n">nonsingle_unit_plants</span><span class="p">),</span>
+        <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span>
+    <span class="n">gen_groups</span> <span class="o">=</span> <span class="n">generators_cc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">generators_cc</span><span class="p">[</span><span class="s2">&quot;Prime Mover&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CT&quot;</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">)</span>
+
+    <span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Generator ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span>
+    <span class="n">result6</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
+    <span class="n">result7</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
+
+    <span class="c1"># Match boilers and generators by sorting</span>
+    <span class="k">for</span> <span class="n">plant</span> <span class="ow">in</span> <span class="n">nonsingle_unit_plants</span><span class="p">:</span>
+
+        <span class="n">bs</span> <span class="o">=</span> <span class="n">boiler_groups</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">plant</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">)</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">gen_groups</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">plant</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Generator ID&quot;</span><span class="p">)</span>
+
+        <span class="n">n_bs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">n_gs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="c1"># Match boilers to generator unit codes (Method 6)</span>
+        <span class="k">if</span> <span class="n">n_bs</span> <span class="o">&lt;=</span> <span class="n">n_gs</span><span class="p">:</span>
+            <span class="n">gs</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_bs</span><span class="p">)</span>
+            <span class="n">result6</span> <span class="o">=</span> <span class="n">result6</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                <span class="s2">&quot;CEMSUnit&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs</span><span class="p">[</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;Plant Code&quot;</span><span class="p">:</span> <span class="n">plant</span><span class="p">,</span>
+                <span class="s2">&quot;Boiler ID&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;Generator ID&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="s2">&quot;Generator ID&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;Unit Code&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">])}),</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Match boilers to generator unit codes,</span>
+        <span class="c1"># creating new units for extra boilers (Method 7)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bs_rem</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n_bs</span> <span class="o">-</span> <span class="n">n_gs</span><span class="p">)</span>
+            <span class="n">bs</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_gs</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs</span><span class="p">[</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">]),</span>
+                               <span class="s2">&quot;Plant Code&quot;</span><span class="p">:</span> <span class="n">plant</span><span class="p">,</span>
+                               <span class="s2">&quot;Boiler ID&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]),</span>
+                               <span class="s2">&quot;Generator ID&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="s2">&quot;Generator ID&quot;</span><span class="p">]),</span>
+                               <span class="s2">&quot;Unit Code&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">])})</span>
+            <span class="n">result7</span> <span class="o">=</span> <span class="n">result7</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs_rem</span><span class="p">[</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">]),</span>
+                               <span class="s2">&quot;Plant Code&quot;</span><span class="p">:</span> <span class="n">plant</span><span class="p">,</span>
+                               <span class="s2">&quot;Boiler ID&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs_rem</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]),</span>
+                               <span class="s2">&quot;Unit Code&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bs_rem</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">])})</span>
+            <span class="n">result7</span> <span class="o">=</span> <span class="n">result7</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">result6</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">result7</span><span class="p">[</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+
+    <span class="k">return</span> <span class="n">result6</span><span class="p">,</span> <span class="n">result7</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="c1"># Load CEMS boilers</span>
+    <span class="n">boilers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../bin/emission_01-17-2017.csv&quot;</span><span class="p">,</span>
+                          <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                          <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Unit Type&quot;</span><span class="p">])</span>
+    <span class="n">boilers</span> <span class="o">=</span> <span class="n">boilers</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;combined cycle&quot;</span> <span class="ow">in</span> <span class="n">ut</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                           <span class="k">for</span> <span class="n">ut</span> <span class="ow">in</span> <span class="n">boilers</span><span class="p">[</span><span class="s2">&quot;Unit Type&quot;</span><span class="p">]],</span> <span class="p">:]</span>
+    <span class="n">boilers</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Unit Type&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">boilers</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">boilers</span><span class="p">[</span><span class="s2">&quot;Boiler ID&quot;</span><span class="p">]</span>
+    <span class="n">boilers</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="n">boilers</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;CEMSUnit&quot;</span>
+
+    <span class="c1"># Load boiler-generator mapping</span>
+    <span class="n">boilers_generators</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
+        <span class="s2">&quot;../bin/6_1_EnviroAssoc_Y2017.xlsx&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler Generator&quot;</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read_generators</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sheet</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read generator from excel sheet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sheet</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+                       <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Load generator-unit mapping</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="s2">&quot;../bin/3_1_Generator_Y2017.xlsx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">generators</span> <span class="o">=</span> <span class="n">read_generators</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;Operable&quot;</span><span class="p">)</span>
+        <span class="n">generators_retired</span> <span class="o">=</span> <span class="n">read_generators</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;Retired and Canceled&quot;</span><span class="p">)</span>
+        <span class="n">generators_proposed</span> <span class="o">=</span> <span class="n">read_generators</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;Proposed&quot;</span><span class="p">)</span>
+
+    <span class="n">generators</span> <span class="o">=</span> <span class="n">generators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generators_retired</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="n">generators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generators_proposed</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">generators</span><span class="p">[</span><span class="s2">&quot;Prime Mover&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;CT&quot;</span><span class="p">])</span>
+    <span class="n">generators_cc</span> <span class="o">=</span> <span class="n">generators</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="c1"># Any CC CA/CTs without a unit code are assigned to a plant-wide unit</span>
+    <span class="n">gcc_nounitcode</span> <span class="o">=</span> <span class="n">generators_cc</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="n">generators_cc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gcc_nounitcode</span><span class="p">,</span> <span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">eia_plants</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="n">generators</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">eia_plants_boilers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">boilers_generators</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="n">boilers_234567</span> <span class="o">=</span> <span class="n">boilers</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">boilers</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">],</span> <span class="n">eia_plants</span><span class="p">),</span> <span class="p">:]</span>
+    <span class="n">boilers_23</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">p</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">eia_plants_boilers</span>
+                           <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">boilers_234567</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()])</span>
+    <span class="n">boilers_4567</span> <span class="o">=</span> <span class="n">boilers_234567</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">boilers_23</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">boilers_23</span> <span class="o">=</span> <span class="n">boilers_234567</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">boilers_23</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="c1"># Process CEMS boiler + EIA860 plant/generator data</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="n">method_1</span><span class="p">(</span><span class="n">boilers</span><span class="p">,</span> <span class="n">eia_plants</span><span class="p">)</span>
+    <span class="n">result2</span><span class="p">,</span> <span class="n">result3</span> <span class="o">=</span> <span class="n">method_2_3</span><span class="p">(</span><span class="n">boilers_23</span><span class="p">,</span> <span class="n">boilers_generators</span><span class="p">,</span> <span class="n">generators</span><span class="p">)</span>
+    <span class="n">result4</span> <span class="o">=</span> <span class="n">method_4</span><span class="p">(</span><span class="n">boilers_4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">)</span>
+    <span class="n">result5</span> <span class="o">=</span> <span class="n">method_5</span><span class="p">(</span><span class="n">boilers_4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">)</span>
+    <span class="n">result6</span><span class="p">,</span> <span class="n">result7</span> <span class="o">=</span> <span class="n">method_6_7</span><span class="p">(</span><span class="n">boilers_4567</span><span class="p">,</span> <span class="n">generators_cc</span><span class="p">)</span>
+
+    <span class="c1"># Recombine results from all methods</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result1</span><span class="p">,</span> <span class="n">result2</span><span class="p">,</span> <span class="n">result3</span><span class="p">,</span> <span class="n">result4</span><span class="p">,</span> <span class="n">result5</span><span class="p">,</span> <span class="n">result6</span><span class="p">,</span>
+                        <span class="n">result7</span><span class="p">],</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;CEMSUnit&quot;</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="p">[[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Generator ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Unit Code&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Unit Code Method&quot;</span><span class="p">]]</span>
+    <span class="n">plant_code</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">unit_code</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;Unit Code&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;CCUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plant_code</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">unit_code</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;CEMSUnit&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2393_0</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+        <span class="n">unit_info</span><span class="p">[</span><span class="s1">&#39;CEMSUnit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2393_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit_info</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> input boilers&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boilers</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> output mappings&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s2">&quot;Plant Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Boiler ID&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> unique output mappings&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outputs</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Unit Code Method&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+
+    <span class="n">result</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../bin/cems_cc_mapping.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

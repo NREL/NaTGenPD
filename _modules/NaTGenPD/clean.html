@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD.clean &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/modules.html">NaTGenPD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>NaTGenPD.clean</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for NaTGenPD.clean</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Data cleaning utilities</span>
+<span class="sd">@author: mrossol</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span> <span class="k">as</span> <span class="nn">cf</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">NaTGenPD.handler</span> <span class="k">import</span> <span class="n">CEMS</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ParseSmoke"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke">[docs]</a><span class="k">class</span> <span class="nc">ParseSmoke</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse and combine SMOKE .txt files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SMOKE_HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ORISID&quot;</span><span class="p">,</span> <span class="s2">&quot;BLRID&quot;</span><span class="p">,</span> <span class="s2">&quot;YYMMDD&quot;</span><span class="p">,</span> <span class="s2">&quot;HOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;NOXMASS&quot;</span><span class="p">,</span> <span class="s2">&quot;SO2MASS&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;NOXRATE&quot;</span><span class="p">,</span> <span class="s2">&quot;OPTIME&quot;</span><span class="p">,</span> <span class="s2">&quot;GLOAD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLOAD&quot;</span><span class="p">,</span> <span class="s2">&quot;HTINPUT&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;HTINPUTMEASURE&quot;</span><span class="p">,</span> <span class="s2">&quot;SO2MEASURE&quot;</span><span class="p">,</span> <span class="s2">&quot;NOXMMEASURE&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;NOXRMEASURE&quot;</span><span class="p">,</span> <span class="s2">&quot;UNITFLOW&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_path : str</span>
+<span class="sd">            Path to root directory containing SMOKE .txt files</span>
+<span class="sd">        year : int | str</span>
+<span class="sd">            Year to parse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_smoke_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine_smoke_files</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">smoke_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame of raw SMOKE data parsed from .txt files</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smoke_raw</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">smoke_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame of performance variables derived from SMOKE data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        performance_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance varialbes derived from SMOKE data</span>
+<span class="sd">            (unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_performance_vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smoke_raw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">smoke_df</span>
+
+<div class="viewcode-block" id="ParseSmoke.get_smoke_files"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.get_smoke_files">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_smoke_files</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find all .txt files in dir_path associated with year</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_path : str</span>
+<span class="sd">            Path to root directory containing SMOKE .txt files</span>
+<span class="sd">        year : int | str</span>
+<span class="sd">            Year to parse</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_files : list</span>
+<span class="sd">            List of .txt files for given year</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+
+        <span class="n">smoke_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.txt&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+                    <span class="n">smoke_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_files</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Missing </span><span class="si">{}</span><span class="s2"> files for </span><span class="si">{}</span><span class="s2">&quot;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">missing</span><span class="p">,</span> <span class="n">year</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">smoke_files</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.combine_smoke_files"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.combine_smoke_files">[docs]</a>    <span class="k">def</span> <span class="nf">combine_smoke_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine all .txt files for given year into a single DataFrame</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_path : str</span>
+<span class="sd">            Path to root directory containing SMOKE .txt files</span>
+<span class="sd">        year : int | str</span>
+<span class="sd">            Year to parse</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of Smoke data for given year</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_smoke_files</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">SMOKE_HEADER</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">smoke_files</span><span class="p">]</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.create_unit_ids"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.create_unit_ids">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_unit_ids</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create unit ids from ORISID and BLRD ID</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_raw : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_ids : pd.DataFrame</span>
+<span class="sd">            unit ids</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_ids</span> <span class="o">=</span> <span class="p">(</span><span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;ORISID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
+                    <span class="o">+</span> <span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;BLRID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">unit_ids</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.create_datetime"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.create_datetime">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_datetime</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create timestamps from YYMMDD and HOUR</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_raw : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        time_stamps : pandas.DateTimeIndex</span>
+<span class="sd">            Datetime Stamps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time_stamps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;YYMMDD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+                                     <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">time_stamps</span> <span class="o">+=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;HOUR&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">time_stamps</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.calc_gross_load"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.calc_gross_load">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calc_gross_load</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute gross load from GLOAD and OPTIME</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_raw : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        gload : pandas.DataFrame</span>
+<span class="sd">            gross load</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gload</span> <span class="o">=</span> <span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;GLOAD&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;OPTIME&#39;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">gload</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.calc_heat_rate"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.calc_heat_rate">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calc_heat_rate</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute heat rate in (mmBTU/MWh)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_raw : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        heat_rate : pandas.DataFrame</span>
+<span class="sd">            heat rate in mmBTU/MWh</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gload</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">calc_gross_load</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">)</span>
+        <span class="n">heat_rate</span> <span class="o">=</span> <span class="n">smoke_raw</span><span class="p">[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">gload</span>
+
+        <span class="k">return</span> <span class="n">heat_rate</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.extract_performance_vars"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.extract_performance_vars">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">extract_performance_vars</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract and compute variable needed for heat rate analysis</span>
+<span class="sd">        (unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_raw : pandas.DataFrame</span>
+<span class="sd">            DataFrame of raw SMOKE data (loaded from .txt files)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_raw</span><span class="p">[[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">,</span> <span class="s1">&#39;OPTIME&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUTMEASURE&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">create_unit_ids</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">)</span>
+        <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">create_datetime</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">)</span>
+        <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;gload&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">calc_gross_load</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">)</span>
+        <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">calc_heat_rate</span><span class="p">(</span><span class="n">smoke_raw</span><span class="p">)</span>
+
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;gload&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUT&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;heat_rate&#39;</span><span class="p">,</span> <span class="s1">&#39;OPTIME&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUTMEASURE&#39;</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.save_peformance_vars"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.save_peformance_vars">[docs]</a>    <span class="k">def</span> <span class="nf">save_peformance_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract and compute variable needed for heat rate analysis and save</span>
+<span class="sd">        as a .h5 file</span>
+<span class="sd">        (unit_id, time, gload, heat_rate, OPTIME, HTINPUT, HTINPUTMEASURE)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving data to </span><span class="si">{}</span><span class="s1">&#39;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_file</span><span class="p">)))</span>
+            <span class="n">f</span><span class="p">[</span><span class="s1">&#39;raw_CEMS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">smoke_df</span></div>
+
+<div class="viewcode-block" id="ParseSmoke.performance_vars"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseSmoke.performance_vars">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">performance_vars</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse Smoke data from .txt, extract performance variables, and save</span>
+<span class="sd">        to disc as a .h5 file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_path : str</span>
+<span class="sd">            Path to root directory containing SMOKE .txt files</span>
+<span class="sd">        year : int | str</span>
+<span class="sd">            Year to parse</span>
+<span class="sd">        save : bool</span>
+<span class="sd">            Flag to save data to .h5 file in dir_path</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="s1">&#39;SMOKE_</span><span class="si">{}</span><span class="s1">.h5&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">))</span>
+            <span class="n">smoke</span><span class="o">.</span><span class="n">save_peformance_vars</span><span class="p">(</span><span class="n">out_file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">smoke</span><span class="o">.</span><span class="n">smoke_df</span></div></div>
+
+
+<div class="viewcode-block" id="ParseUnitInfo"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseUnitInfo">[docs]</a><span class="k">class</span> <span class="nc">ParseUnitInfo</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract Unit locational (coordinate, state, regions) and</span>
+<span class="sd">    type (fuel, technology)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">COLS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39; Facility ID (ORISPL)&#39;</span><span class="p">:</span> <span class="s1">&#39;ORISID&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; Unit ID&#39;</span><span class="p">:</span> <span class="s1">&#39;BLRID&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; Facility Latitude&#39;</span><span class="p">:</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; Facility Longitude&#39;</span><span class="p">:</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;State&#39;</span><span class="p">:</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; EPA Region&#39;</span><span class="p">:</span> <span class="s1">&#39;EPA_region&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; NERC Region&#39;</span><span class="p">:</span> <span class="s1">&#39;NERC_region&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; Unit Type&#39;</span><span class="p">:</span> <span class="s1">&#39;unit_type&#39;</span><span class="p">,</span>
+            <span class="s1">&#39; Fuel Type (Primary)&#39;</span><span class="p">:</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_csv</span><span class="p">(</span><span class="n">unit_attrs_path</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unit attributes parsed from .csv</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        _unit_attrs: pandas.DataFrame</span>
+<span class="sd">            DataFrame of unit attributes parsed from .csv</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_attrs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unit info:</span>
+<span class="sd">        (&#39;unit_id&#39;, &#39;latitude&#39;, &#39;longitude&#39;, &#39;state&#39;, &#39;EPA_region&#39;</span>
+<span class="sd">         &#39;NERC_region&#39;, &#39;unit_type&#39;, &#39;fuel_type&#39;, &#39;group_type&#39;)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_info: pandas.DataFrame</span>
+<span class="sd">            DataFrame of unit info</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_attrs</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COLS</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="n">unit_info</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">COLS</span><span class="p">)</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_unit_info</span><span class="p">(</span><span class="n">unit_info</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">unit_info</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_csv</span><span class="p">(</span><span class="n">unit_attrs_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load unit attributes from .csv file and update columns</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_attrs : pandas.DataFrame</span>
+<span class="sd">            DataFrame of unit attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_attrs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">unit_attrs_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">unit_attrs</span>
+
+<div class="viewcode-block" id="ParseUnitInfo.create_group_types"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseUnitInfo.create_group_types">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_group_types</span><span class="p">(</span><span class="n">unit_attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create technology (fuel) groups from fuel and unit types</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_attrs: pandas.DataFrame</span>
+<span class="sd">            DataFrame of unit attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        group_types : pd.DataFrame</span>
+<span class="sd">            Unit technology and fuel group type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tech</span> <span class="o">=</span> <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;unit_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Combine boilers and tangentially-fired units</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">tech</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">unit_type</span><span class="p">:</span> <span class="s1">&#39;boiler&#39;</span> <span class="ow">in</span> <span class="n">unit_type</span>
+                         <span class="ow">or</span> <span class="n">unit_type</span> <span class="o">==</span> <span class="s1">&#39;Tangentially-fired&#39;</span><span class="p">)</span>
+        <span class="n">tech</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Boiler&#39;</span>
+        <span class="c1"># Combine Combined cycle units</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">tech</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">unit_type</span><span class="p">:</span> <span class="s1">&#39;cycle&#39;</span> <span class="ow">in</span> <span class="n">unit_type</span><span class="p">)</span>
+        <span class="n">tech</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;CC&#39;</span>
+        <span class="c1"># Combine turbine units</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">tech</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">unit_type</span><span class="p">:</span> <span class="s1">&#39;turbine&#39;</span> <span class="ow">in</span> <span class="n">unit_type</span><span class="p">)</span>
+        <span class="n">tech</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;CT&#39;</span>
+
+        <span class="n">fuel</span> <span class="o">=</span> <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;fuel_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Combine Coals and petroleum coke</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fuel</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">fuel_type</span><span class="p">:</span> <span class="s1">&#39;Coal&#39;</span> <span class="ow">in</span> <span class="n">fuel_type</span>
+                         <span class="ow">or</span> <span class="n">fuel_type</span> <span class="o">==</span> <span class="s1">&#39;Petroleum Coke&#39;</span><span class="p">)</span>
+        <span class="n">fuel</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Coal&#39;</span>
+        <span class="c1"># Combine Natural Gas and all other gases</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fuel</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">fuel_type</span><span class="p">:</span> <span class="s1">&#39;Gas&#39;</span> <span class="ow">in</span> <span class="n">fuel_type</span><span class="p">)</span>
+        <span class="n">fuel</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;NG&#39;</span>
+        <span class="c1"># Combine Diesel Oil and all other oils</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fuel</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">fuel_type</span><span class="p">:</span> <span class="s1">&#39;Oil&#39;</span> <span class="ow">in</span> <span class="n">fuel_type</span><span class="p">)</span>
+        <span class="n">fuel</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Oil&#39;</span>
+        <span class="c1"># Combine Wood and Other Solid Fuel and Tire Derived Fuel</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">fuel</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">fuel_type</span><span class="p">:</span> <span class="n">fuel_type</span> <span class="ow">in</span>
+                         <span class="p">[</span><span class="s1">&#39;Wood&#39;</span><span class="p">,</span> <span class="s1">&#39;Other Solid Fuel&#39;</span><span class="p">,</span> <span class="s1">&#39;Tire Derived Fuel&#39;</span><span class="p">])</span>
+        <span class="n">fuel</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Other Solid Fuel&#39;</span>
+
+        <span class="c1"># Combine tech and fuel types</span>
+        <span class="n">group_types</span> <span class="o">=</span> <span class="n">tech</span> <span class="o">+</span> <span class="s1">&#39; (&#39;</span> <span class="o">+</span> <span class="n">fuel</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="n">group_types</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;group_type&#39;</span>
+
+        <span class="k">return</span> <span class="n">group_types</span></div>
+
+<div class="viewcode-block" id="ParseUnitInfo.create_unit_info"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseUnitInfo.create_unit_info">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_unit_info</span><span class="p">(</span><span class="n">unit_attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add unit_ids and group_types to unit_attrs</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_attrs: pandas.DataFrame</span>
+<span class="sd">            DataFrame of unit attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_attrs : pd.DataFrame</span>
+<span class="sd">            Updated and cleaned up unit attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseSmoke</span><span class="o">.</span><span class="n">create_unit_ids</span><span class="p">(</span><span class="n">unit_attrs</span><span class="p">)</span>
+        <span class="n">unit_attrs</span> <span class="o">=</span> <span class="n">unit_attrs</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ORISID&#39;</span><span class="p">,</span> <span class="s1">&#39;BLRID&#39;</span><span class="p">])</span>
+        <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;group_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParseUnitInfo</span><span class="o">.</span><span class="n">create_group_types</span><span class="p">(</span><span class="n">unit_attrs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">unit_attrs</span></div>
+
+<div class="viewcode-block" id="ParseUnitInfo.add_unit_info"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.ParseUnitInfo.add_unit_info">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_unit_info</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse unit info and add it to smoke_df</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">unit_attrs_path</span><span class="p">)</span><span class="o">.</span><span class="n">unit_info</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_info</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span></div></div>
+
+
+<div class="viewcode-block" id="CleanSmoke"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke">[docs]</a><span class="k">class</span> <span class="nc">CleanSmoke</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pre-clean Smoke data prior to Heat Rate analysis</span>
+<span class="sd">    - Convert gross load to net load</span>
+<span class="sd">    - Remove null value</span>
+<span class="sd">    - Remove start-up and shut-down</span>
+<span class="sd">    - Remove unrealistic values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">OUT_COLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUT&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;EPA_region&#39;</span><span class="p">,</span> <span class="s1">&#39;NERC_region&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;unit_type&#39;</span><span class="p">,</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">,</span> <span class="s1">&#39;group_type&#39;</span><span class="p">,</span> <span class="s1">&#39;cts&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smoke</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke : pandas.DataFrame | str</span>
+<span class="sd">            DataFrame of performance variables or path to .h5 file</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning SMOKE data&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_smoke_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_smoke_df</span><span class="p">(</span><span class="n">smoke</span><span class="p">,</span>
+                                                             <span class="n">unit_attrs_path</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">smoke_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame of performance variables from SMOKE data with unit info</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smoke_df</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame of unique units and their attributes (type, fuel, location)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        _unit_info : pandas.DataFrame</span>
+<span class="sd">            DataFrame of unique units and their attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_info</span>
+
+<div class="viewcode-block" id="CleanSmoke.load_smoke_df"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.load_smoke_df">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_smoke_df</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load smoke data if needed and combine unit info if needed</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame | str</span>
+<span class="sd">            DataFrame of performance variables or path to .h5 file</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        unit_info : pandas.DataFrame</span>
+<span class="sd">            DataFrame of unique units and their attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;raw_CEMS&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s1">&#39;group_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">unit_attrs_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unit attributes are needed to clean data&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Adding unit attributes to SMOKE data&#39;</span><span class="p">)</span>
+                <span class="n">unit_info</span> <span class="o">=</span> <span class="n">ParseUnitInfo</span><span class="p">(</span><span class="n">unit_attrs_path</span><span class="p">)</span><span class="o">.</span><span class="n">unit_info</span>
+                <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_info</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span>
+                                    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">unit_info</span> <span class="o">=</span> <span class="n">CleanSmoke</span><span class="o">.</span><span class="n">get_unit_info</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_info</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.get_unit_info"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.get_unit_info">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_unit_info</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract unit attributes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_info : pandas.DataFrame</span>
+<span class="sd">            DataFrame of unique units and their attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;EPA_region&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;NERC_region&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_type&#39;</span><span class="p">,</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">,</span> <span class="s1">&#39;group_type&#39;</span><span class="p">]</span>
+        <span class="n">unit_info</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="n">info_cols</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">unit_info</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.remove_null_values"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.remove_null_values">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">remove_null_values</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove null values:</span>
+<span class="sd">        - HTINPUT &lt;= 0</span>
+<span class="sd">        - HTINPUTMEASURE is not measured (1) or calculated (2)</span>
+<span class="sd">        - load &lt;= 0</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame w/ null values removed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;HTINPUTMEASURE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])]</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;HTINPUTMEASURE&#39;</span><span class="p">])</span>
+
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;gload&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.gross_to_net"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.gross_to_net">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">gross_to_net</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span>
+                     <span class="n">load_multipliers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;solid&#39;</span><span class="p">:</span> <span class="mf">0.925</span><span class="p">,</span> <span class="s1">&#39;liquid&#39;</span><span class="p">:</span> <span class="mf">0.963</span><span class="p">}):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert gross load to net load using given multipliers for</span>
+<span class="sd">        solid and liquid fuel</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        load_multipliers : dict</span>
+<span class="sd">            Gross to net multipliers for solid and liquid/gas fuel</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame w/ net load and updated heat rate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fuel_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;solid&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Coal&#39;</span><span class="p">,</span> <span class="s1">&#39;Solid Fuel&#39;</span><span class="p">],</span> <span class="s1">&#39;liquid&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NG&#39;</span><span class="p">,</span> <span class="s1">&#39;Oil&#39;</span><span class="p">]}</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;gload&#39;</span><span class="p">:</span> <span class="s1">&#39;load&#39;</span><span class="p">})</span>
+
+        <span class="k">def</span> <span class="nf">_filter</span><span class="p">(</span><span class="n">fuels</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fuels</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">fuels</span> <span class="ow">in</span> <span class="n">fuel_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;group_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_filter</span><span class="p">,</span> <span class="n">fuels</span><span class="p">))</span>
+            <span class="n">gross_to_net</span> <span class="o">=</span> <span class="n">load_multipliers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">gross_to_net</span>
+            <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">gross_to_net</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.remove_unrealistic_hr"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.remove_unrealistic_hr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">remove_unrealistic_hr</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">hr_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove null values heat_rate is outside given heat reat bounds</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        hr_bounds : tuple</span>
+<span class="sd">            Bounds (min, max) of realistic heat_rate values</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame w/ null values removed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;load&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Converting gload to net load&#39;</span><span class="p">)</span>
+            <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">CleanSmoke</span><span class="o">.</span><span class="n">gross_to_net</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">hr_min</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">hr_bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">hr_max</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">hr_bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">hr_min</span><span class="p">,</span> <span class="n">hr_max</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.remove_start_stop"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.remove_start_stop">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">remove_start_stop</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">max_perc</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove data associated with start-up and shut-down:</span>
+<span class="sd">        - OPTIME &lt; 1</span>
+<span class="sd">        - Data with &lt; max_perc of max load or max HTINPUT</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        max_perc : float</span>
+<span class="sd">            Percentage (as a float) of max load and max HTINPUT to associate</span>
+<span class="sd">            with start-up and shut-down</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame with start-up and shut-down removed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;OPTIME&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OPTIME&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s1">&#39;load&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Converting gload to net load&#39;</span><span class="p">)</span>
+            <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">CleanSmoke</span><span class="o">.</span><span class="n">gross_to_net</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">max_perc</span><span class="p">:</span>
+            <span class="n">maxes</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)[[</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">maxes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">[[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]],</span> <span class="n">maxes</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
+                             <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">)</span>
+
+            <span class="n">load_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">maxes</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">max_perc</span>
+            <span class="n">ht_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">maxes</span><span class="p">[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">max_perc</span>
+            <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">load_pos</span><span class="p">,</span> <span class="n">ht_pos</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.fill_null_units"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.fill_null_units">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_null_units</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">unit_info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Insert place-holders for units removed during cleaning</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of cleaned SMOKE data</span>
+<span class="sd">        unit_info : pandas.DataFrame</span>
+<span class="sd">            DataFrame of unique units and their attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of cleaned SMOKE data with null units filled in</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">missing_units</span> <span class="o">=</span> <span class="n">unit_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">unit_info</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">units</span><span class="p">)]</span>
+
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">missing_units</span><span class="p">),</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.get_cts"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.get_cts">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_cts</span><span class="p">(</span><span class="n">cc_ts</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine number of cts running at given time-step</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cc_ts : Unit time-step for a pre-aggregated CC</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cts : int</span>
+<span class="sd">            Number of cts running during time-step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cts</span> <span class="o">=</span> <span class="n">cc_ts</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">cts</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.cts_to_cc"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.cts_to_cc">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cts_to_cc</span><span class="p">(</span><span class="n">cc_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine multiple CTs into a single CC by:</span>
+<span class="sd">        - Aggregating load and htinput</span>
+<span class="sd">        - Re-computing heat_rate</span>
+<span class="sd">        - Renaming unit</span>
+<span class="sd">        - Transfering unit info</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cc_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame containing data points for all CTs that make up a EIA CC</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cc_unit : pandas.DataFrame</span>
+<span class="sd">            CC unit data after aggregation of CT data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cc_unit</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)[[</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">cc_unit</span> <span class="o">=</span> <span class="n">cc_unit</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;heat_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;HTINPUT&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">unit_id</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">unit_id</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;cc_unit&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">cc_unit</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">cts_df</span> <span class="o">=</span> <span class="n">cc_df</span><span class="p">[[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">cts_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cts_df</span><span class="p">[</span><span class="s1">&#39;load&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">cts</span> <span class="o">=</span> <span class="n">cts_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">CleanSmoke</span><span class="o">.</span><span class="n">get_cts</span><span class="p">)</span>
+            <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;cts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cts</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cc_unit</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]][[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;HTINPUT&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">]]</span>
+            <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;cts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">cc_unit</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_id</span>
+        <span class="n">info_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;EPA_region&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;NERC_region&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_type&#39;</span><span class="p">,</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">,</span> <span class="s1">&#39;group_type&#39;</span><span class="p">]</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">info_cols</span><span class="p">:</span>
+            <span class="n">cc_unit</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">cc_unit</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.aggregate_ccs"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.aggregate_ccs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">aggregate_ccs</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">cc_map</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Aggregate CEMS CC &#39;units&#39; into EIA CC &#39;units&#39;</span>
+<span class="sd">        NOTE: CEMS reports CC on a CT by CT basis with the combined steam</span>
+<span class="sd">        generation disaggregated between the CTs</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of performance variables from SMOKE data with unit info</span>
+<span class="sd">        cc_map : pd.DataFrame</span>
+<span class="sd">            Path to .csv with CEMS to EIA CC unit mapping</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            Run cts_to_cc in parallel</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs for gross_to_net</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame with CCs aggregated to EIA units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;load&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Converting gload to net load&#39;</span><span class="p">)</span>
+            <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">CleanSmoke</span><span class="o">.</span><span class="n">gross_to_net</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">cc_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">smoke_df</span><span class="p">,</span> <span class="n">cc_map</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
+        <span class="n">cc_df</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;cc_unit&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cf</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">CleanSmoke</span><span class="o">.</span><span class="n">cts_to_cc</span><span class="p">,</span> <span class="n">cc_g</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">cc_g</span> <span class="ow">in</span> <span class="n">cc_df</span><span class="p">]</span>
+                <span class="n">cc_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cc_df</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">CleanSmoke</span><span class="o">.</span><span class="n">cts_to_cc</span><span class="p">)</span>
+
+        <span class="n">cc_df</span> <span class="o">=</span> <span class="n">cc_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">smoke_df</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cc_map</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">])</span>
+        <span class="n">smoke_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">smoke_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">pos</span><span class="p">],</span> <span class="n">cc_df</span><span class="p">),</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">smoke_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.preclean"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.preclean">[docs]</a>    <span class="k">def</span> <span class="nf">preclean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">load_multipliers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;solid&#39;</span><span class="p">:</span> <span class="mf">0.925</span><span class="p">,</span> <span class="s1">&#39;liquid&#39;</span><span class="p">:</span> <span class="mf">0.963</span><span class="p">},</span>
+                 <span class="n">hr_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">max_perc</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">cc_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clean-up SMOKE data for heat rate analysis:</span>
+<span class="sd">        - Convert gross load to net load</span>
+<span class="sd">        - Remove null/unrealistic values</span>
+<span class="sd">        - Remove start-up and shut-down</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        load_multipliers : dict</span>
+<span class="sd">            Gross to net multipliers for solid and liquid/gas fuel</span>
+<span class="sd">        hr_bounds : tuple</span>
+<span class="sd">            Bounds (min, max) of realistic heat_rate values</span>
+<span class="sd">        max_perc : float</span>
+<span class="sd">            Percentage (as a float) of max load and max HTINPUT to associate</span>
+<span class="sd">            with start-up and shut-down</span>
+<span class="sd">        cc_map : bool | str</span>
+<span class="sd">            Path to .csv with CEMS to EIA CC unit mapping if True use provided</span>
+<span class="sd">            mapping in bin/cems_cc_mapping.csv</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            Run cts_to_cc in parallel</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_clean : pandas.DataFrame</span>
+<span class="sd">            Cleaned SMOKE data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s_p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smoke_df</span><span class="p">)</span>
+        <span class="n">s_u</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit_info</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Raw points = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_p</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Raw units = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_u</span><span class="p">))</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_null_values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">smoke_df</span><span class="p">)</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gross_to_net</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">,</span>
+                                        <span class="n">load_multipliers</span><span class="o">=</span><span class="n">load_multipliers</span><span class="p">)</span>
+        <span class="n">s_i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Null points removed = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_p</span> <span class="o">-</span> <span class="n">s_i</span><span class="p">))</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_start_stop</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">,</span> <span class="n">max_perc</span><span class="o">=</span><span class="n">max_perc</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Start/Shut-down points removed = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">)))</span>
+        <span class="n">s_i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">)</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_unrealistic_hr</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">,</span>
+                                                 <span class="n">hr_bounds</span><span class="o">=</span><span class="n">hr_bounds</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Unrealistic heat rate values removed = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Clean units = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_null_units</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_info</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cc_map</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Combining CC units&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cc_map</span><span class="p">):</span>
+                <span class="n">cc_map</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">),</span> <span class="s1">&#39;bin&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;cems_cc_mapping.csv&#39;</span><span class="p">)</span>
+
+            <span class="n">cc_map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cc_map</span><span class="p">)</span>
+            <span class="n">cc_map</span> <span class="o">=</span> <span class="n">cc_map</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;CCUnit&#39;</span><span class="p">:</span> <span class="s1">&#39;cc_unit&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;CEMSUnit&#39;</span><span class="p">:</span> <span class="s1">&#39;unit_id&#39;</span><span class="p">})</span>
+            <span class="n">cc_map</span> <span class="o">=</span> <span class="n">cc_map</span><span class="p">[[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;cc_unit&#39;</span><span class="p">]]</span>
+            <span class="n">smoke_clean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_ccs</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">,</span> <span class="n">cc_map</span><span class="p">,</span>
+                                             <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Units combined = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s_u</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">OUT_COLS</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;cts&#39;</span><span class="p">)</span>
+
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="n">smoke_clean</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">])</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="n">smoke_clean</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">OUT_COLS</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Clean points = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;- Final units = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">smoke_clean</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+        <span class="k">return</span> <span class="n">smoke_clean</span></div>
+
+<div class="viewcode-block" id="CleanSmoke.clean"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.clean.CleanSmoke.clean">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">smoke</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">load_multipliers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;solid&#39;</span><span class="p">:</span> <span class="mf">0.925</span><span class="p">,</span> <span class="s1">&#39;liquid&#39;</span><span class="p">:</span> <span class="mf">0.963</span><span class="p">},</span>
+              <span class="n">hr_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">max_perc</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">cc_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+              <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clean-up SMOKE data for heat rate analysis:</span>
+<span class="sd">        - Convert gross load to net load</span>
+<span class="sd">        - Remove null/unrealistic values</span>
+<span class="sd">        - Remove start-up and shut-down</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smoke : pandas.DataFrame | str</span>
+<span class="sd">            DataFrame of performance variables or path to .h5 file</span>
+<span class="sd">        unit_attrs_path : str</span>
+<span class="sd">            Path to .csv containing facility (unit) attributes</span>
+<span class="sd">        load_multipliers : dict</span>
+<span class="sd">            Gross to net multipliers for solid and liquid/gas fuel</span>
+<span class="sd">        hr_bounds : tuple</span>
+<span class="sd">            Bounds (min, max) of realistic heat_rate values</span>
+<span class="sd">        max_perc : float</span>
+<span class="sd">            Percentage (as a float) of max load and max HTINPUT to associate</span>
+<span class="sd">            with start-up and shut-down</span>
+<span class="sd">        cc_map : bool | str</span>
+<span class="sd">            Path to .csv with CEMS to EIA CC unit mapping if True use provided</span>
+<span class="sd">            mapping in bin/cems_cc_mapping.csv</span>
+<span class="sd">        parallel : bool</span>
+<span class="sd">            Run cts_to_cc in parallel</span>
+<span class="sd">        out_file : str</span>
+<span class="sd">            Path to output .h5 file to write clean-data too</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smoke_clean : pandas.DataFrame</span>
+<span class="sd">            Cleaned SMOKE data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoke</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">smoke</span><span class="p">,</span> <span class="n">unit_attrs_path</span><span class="o">=</span><span class="n">unit_attrs_path</span><span class="p">)</span>
+        <span class="n">smoke_clean</span> <span class="o">=</span> <span class="n">smoke</span><span class="o">.</span><span class="n">preclean</span><span class="p">(</span><span class="n">load_multipliers</span><span class="o">=</span><span class="n">load_multipliers</span><span class="p">,</span>
+                                     <span class="n">hr_bounds</span><span class="o">=</span><span class="n">hr_bounds</span><span class="p">,</span> <span class="n">max_perc</span><span class="o">=</span><span class="n">max_perc</span><span class="p">,</span>
+                                     <span class="n">cc_map</span><span class="o">=</span><span class="n">cc_map</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="n">parallel</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">out_file</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">CEMS</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving data to </span><span class="si">{}</span><span class="s1">&#39;</span>
+                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_file</span><span class="p">)))</span>
+                <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">smoke_clean</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group_type&#39;</span><span class="p">):</span>
+                    <span class="n">f</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+
+        <span class="k">return</span> <span class="n">smoke_clean</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

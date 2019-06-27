@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NaTGenPD.cluster &mdash; NaTGenPD 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NaTGenPD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/modules.html">NaTGenPD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html">NaTGenPD package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.analysis">NaTGenPD.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.ccmap">NaTGenPD.ccmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.clean">NaTGenPD.clean module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cli">NaTGenPD.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.cluster">NaTGenPD.cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.filter">NaTGenPD.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.handler">NaTGenPD.handler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD.version">NaTGenPD.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../NaTGenPD/NaTGenPD.html#module-NaTGenPD">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaTGenPD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>NaTGenPD.cluster</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for NaTGenPD.cluster</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Data clustering utilities</span>
+<span class="sd">@author: gbuster</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">DBSCAN</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">silhouette_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">normalize</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Cluster"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster">[docs]</a><span class="k">class</span> <span class="nc">Cluster</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DBSCAN clustering class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of timeseries heat rate data for unit of interest</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit_df</span> <span class="o">=</span> <span class="n">unit_df</span>
+        <span class="n">unit_attrs</span> <span class="o">=</span> <span class="n">unit_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unit_id</span> <span class="o">=</span> <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;unit_id&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">unit_attrs</span><span class="p">[</span><span class="s1">&#39;group_type&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print the Clustering class and meta shape</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        str</span>
+<span class="sd">            Clustering type and variables, farms in meta</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> for </span><span class="si">{}</span><span class="s1"> unit </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_id</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame for unit being clustered on</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame for unit being clustered on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_df</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unit_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Id of unit being clustered on</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_id : str</span>
+<span class="sd">            Id of unit being clustered on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Group type (generator + fuel) of unit being clustered on</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        type : string</span>
+<span class="sd">            Group type (generator + fuel) of unit being clustered on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
+
+<div class="viewcode-block" id="Cluster.normalize_values"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.normalize_values">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">normalize_values</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Normalize values in array by column</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        arr : ndarray</span>
+<span class="sd">            ndarray of values extracted from meta</span>
+<span class="sd">            shape (n samples, with m features)</span>
+<span class="sd">        norm : str</span>
+<span class="sd">            Normalization method to use, see sklearn.preprocessing.normalize</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        arr : ndarray</span>
+<span class="sd">            array with values normalized by column</span>
+<span class="sd">            shape (n samples, with m features)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">norm</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">min_all</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">max_all</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">range_all</span> <span class="o">=</span> <span class="n">max_all</span> <span class="o">-</span> <span class="n">min_all</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">range_all</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="n">range_all</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">arr</span> <span class="o">-=</span> <span class="n">min_all</span>
+            <span class="n">arr</span> <span class="o">/=</span> <span class="n">range_all</span>
+
+        <span class="k">return</span> <span class="n">arr</span></div>
+
+<div class="viewcode-block" id="Cluster.n_dist"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.n_dist">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">n_dist</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the nk-nearest neighbor distance for all points in array</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array of n samples with m features</span>
+<span class="sd">        n : int</span>
+<span class="sd">            Number of nearest neighbors</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        dist : ndarray</span>
+<span class="sd">            1d array of nk-nearest neighbor distances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">n_min</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">n_min</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Cluster.line_dist"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.line_dist">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">line_dist</span><span class="p">(</span><span class="n">k_dist</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract the distance between each point on the nk-nearest neighbor</span>
+<span class="sd">        distance curve and the line connecting the min and max values. The</span>
+<span class="sd">        maximum distance corresponds to the knee of the curve, which can be</span>
+<span class="sd">        used to estimate the optimal epsilon value for DBSCAN</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k_dist : ndarray</span>
+<span class="sd">            1d array of nk-nearest neighbor distances</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        dist : ndarray</span>
+<span class="sd">            1d array of distances between each value and the line connecting</span>
+<span class="sd">            the min and max values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_dist</span><span class="p">)),</span> <span class="n">k_dist</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">b</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b_hat</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">coords</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">),</span> <span class="n">b_hat</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">dist</span></div>
+
+<div class="viewcode-block" id="Cluster.cluster_score"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.cluster_score">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cluster_score</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">outliers</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modified silhouette score that excludes outliers</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        outliers : bool</span>
+<span class="sd">            Boolean flag to use outliers in silhouette_score calculation</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        s : float</span>
+<span class="sd">            Silhouette score computed after removing outliers (label &lt; 0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">_l</span> <span class="k">for</span> <span class="n">_l</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="k">if</span> <span class="n">_l</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">outliers</span> <span class="ow">and</span> <span class="n">n_clusters</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">s</span></div>
+
+<div class="viewcode-block" id="Cluster.get_data"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print the Clustering class and meta shape</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cols : list</span>
+<span class="sd">            List of columns to extract</span>
+<span class="sd">        normalize : bool</span>
+<span class="sd">            Option to normalize data or not</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        arr : ndarray</span>
+<span class="sd">            Array of given column values for all farms in meta</span>
+<span class="sd">            shape (n samples, with m features)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_values</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">noise</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">noise</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">noise</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">arr</span></div>
+
+<div class="viewcode-block" id="Cluster.optimal_eps"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.optimal_eps">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">optimal_eps</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use the k-nearest neighbor plot to estimate the optimal epsilon</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        k : &#39;int&#39;</span>
+<span class="sd">            Number of nearest neighbors (corresponds to min_samples in DBSCAN)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        eps : float</span>
+<span class="sd">            Optimal epsilon for running DBSCAN with min_samples = k</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k_dist</span> <span class="o">=</span> <span class="n">Cluster</span><span class="o">.</span><span class="n">n_dist</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="n">eps_dist</span> <span class="o">=</span> <span class="n">Cluster</span><span class="o">.</span><span class="n">line_dist</span><span class="p">(</span><span class="n">k_dist</span><span class="p">)</span>
+        <span class="n">eps_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">eps_dist</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">k_dist</span><span class="p">[</span><span class="n">eps_pos</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">eps</span></div>
+
+    <span class="k">def</span> <span class="nf">_cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run DBSCAN on array, compute eps if not supplied.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            min_samples value for running DBSCAN</span>
+<span class="sd">        eps : float</span>
+<span class="sd">            Epsilon value for running DBSCAN</span>
+<span class="sd">            If None estimate using k-n distance and min_samples</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        eps : float</span>
+<span class="sd">            eps value used to run DBSCAN</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_eps</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
+
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+
+<div class="viewcode-block" id="Cluster.optimize_clusters"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.optimize_clusters">[docs]</a>    <span class="k">def</span> <span class="nf">optimize_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">return_eps</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Incrimentally increase eps from given value to optimize cluster</span>
+<span class="sd">        size</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            min_samples value for clustering, if None set as len(array) / 1000</span>
+<span class="sd">        dt : float</span>
+<span class="sd">            Percentage eps by which it is to be incrementally increased</span>
+<span class="sd">        return_eps : bool</span>
+<span class="sd">            Flag to return optimal eps</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        eps : float (optional)</span>
+<span class="sd">            eps value used for clustering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">])</span>
+
+        <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_score</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">cluster_params</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+        <span class="k">while</span> <span class="n">score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eps_dt</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">dt</span>
+            <span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">+</span> <span class="n">eps_dt</span>
+            <span class="n">labels</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+            <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">n_clusters</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_score</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">score</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">s</span>
+                    <span class="n">cluster_params</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;New best fit: min_samples=</span><span class="si">{}</span><span class="s1">, eps=</span><span class="si">{}</span><span class="s1">, s=</span><span class="si">{}</span><span class="s1">&#39;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">n_clusters</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">return_eps</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Optimal eps = </span><span class="si">{}</span><span class="s1">, min_samples = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">cluster_params</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cluster_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Cluster.filter"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.Cluster.filter">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">unit_df</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit_df : pandas.DataFrame</span>
+<span class="sd">            DataFrame of timeseries heat rate data for unit of interest</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            Min_samples value for clustering</span>
+<span class="sd">        threshold : int</span>
+<span class="sd">            Theshold for minimum number of points to filter unit</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        unit_df : pandas.DataFrame</span>
+<span class="sd">            Updated DataFrame with cluster labels added for optimal cluster</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs for optimize_clusters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit_df</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Unit only has </span><span class="si">{}</span><span class="s1"> points and will not be filtered&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unit_df</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">unit_df</span><span class="p">)</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">optimize_clusters</span><span class="p">(</span><span class="n">min_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+
+        <span class="k">return</span> <span class="n">unit_df</span></div></div>
+
+
+<div class="viewcode-block" id="SingleCluster"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.SingleCluster">[docs]</a><span class="k">class</span> <span class="nc">SingleCluster</span><span class="p">(</span><span class="n">Cluster</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass to perform single cluster extraction on non-CC generators</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_df</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unit_df</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="SingleCluster.knn"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.SingleCluster.knn">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">knn</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get euclidian distance nearest neighbors for numerical column data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        k : int</span>
+<span class="sd">            The number of k-th nearest neighbors to return.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dist : np.ndarray</span>
+<span class="sd">            Each entry gives the list of distances to the neighbors of the</span>
+<span class="sd">            corresponding point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># execute KNN query</span>
+        <span class="k">if</span> <span class="n">tree</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+        <span class="n">dist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dist</span></div>
+
+<div class="viewcode-block" id="SingleCluster.cluster_score"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.SingleCluster.cluster_score">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">cluster_score</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modified silhouette score that excludes outliers</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        s : float</span>
+<span class="sd">            Silhouette score computed after removing outliers (label &lt; 0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cluster</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
+
+        <span class="c1"># Compute intra-cluster nearest neighbor distance</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="c1"># Compute nearest neighbor distance between cluster and noise</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">b</span> <span class="o">/</span> <span class="n">a</span></div>
+
+    <span class="k">def</span> <span class="nf">_cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find single cluster for array, compute eps if not supplied.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        array : ndarray</span>
+<span class="sd">            Array to be used for clustering, shape n samples with m features</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            min_samples value for clustering</span>
+<span class="sd">        eps : float</span>
+<span class="sd">            Epsilon value for clustering</span>
+<span class="sd">            If None estimate using k-n distance and min_samples</span>
+<span class="sd">        tree : bool</span>
+<span class="sd">            Compute tree, if False use pre-computed tree</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        eps : float</span>
+<span class="sd">            eps value used to cluster</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_eps</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
+
+        <span class="n">n_dat</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_samples</span> <span class="o">&gt;</span> <span class="n">n_dat</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of nearest neighbors to retrieve &#39;</span>
+                             <span class="s1">&#39;(min_samples=</span><span class="si">{}</span><span class="s1">) exceeds length of the &#39;</span>
+                             <span class="s1">&#39;dataframe </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_samples</span><span class="p">,</span> <span class="n">n_dat</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal_eps</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Set contains </span><span class="si">{}</span><span class="s1"> coordinates, &#39;</span>
+                     <span class="s1">&#39;N-neighbors required: </span><span class="si">{}</span><span class="s1"> at </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_dat</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="p">))</span>
+        <span class="c1"># get nearest neighbors for min_samples + 1 as there is self-reference</span>
+        <span class="k">if</span> <span class="n">tree</span><span class="p">:</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">knn</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">min_samples</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># count the number of distance results per index less than the</span>
+        <span class="c1"># threshold (exclude the 1st dist row which is self-referential)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">eps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># find where there are NN neighbors satisfying the distance threshold</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">&gt;=</span> <span class="n">min_samples</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">labels</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+
+<div class="viewcode-block" id="SingleCluster.optimize_clusters"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.SingleCluster.optimize_clusters">[docs]</a>    <span class="k">def</span> <span class="nf">optimize_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">return_eps</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Incrimentally increase eps from given value to optimize cluster</span>
+<span class="sd">        size</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            min_samples value for clustering, if None set as len(array) / 1000</span>
+<span class="sd">        dt : float</span>
+<span class="sd">            Percentage eps by which it is to be incrementally increased</span>
+<span class="sd">        return_eps : bool</span>
+<span class="sd">            Flag to return optimal eps</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        eps : float (optional)</span>
+<span class="sd">            eps value used for clustering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">([</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;heat_rate&#39;</span><span class="p">])</span>
+
+        <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_score</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">cluster_params</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">eps_dt</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">dt</span>
+            <span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">+</span> <span class="n">eps_dt</span>
+            <span class="n">labels</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cluster</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster_score</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">score</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">s</span>
+                <span class="n">cluster_params</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;New best fit: min_samples=</span><span class="si">{}</span><span class="s1">, eps=</span><span class="si">{}</span><span class="s1">, score=</span><span class="si">{}</span><span class="s1">&#39;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">min_samples</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">return_eps</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Optimal eps = </span><span class="si">{}</span><span class="s1">, min_samples = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">cluster_params</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cluster_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="ClusterCC"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.ClusterCC">[docs]</a><span class="k">class</span> <span class="nc">ClusterCC</span><span class="p">(</span><span class="n">Cluster</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass for finding operating modes in CCs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ClusterCC.update_labels"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.ClusterCC.update_labels">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">update_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">ct_pos</span><span class="p">,</span> <span class="n">ct_labels</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update labels vectors with labels from clustering on each unique</span>
+<span class="sd">        number of cts</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels</span>
+<span class="sd">        ct_pos : ndarray</span>
+<span class="sd">            Boolean vector indicating with positions correspond to ct_labels</span>
+<span class="sd">        ct_labels: ndarray</span>
+<span class="sd">            Labels from cluster of subset of points for a given number of cts</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Updated cluster labels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_l</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">outliers</span> <span class="o">=</span> <span class="n">ct_labels</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="n">ct_labels</span><span class="p">[</span><span class="n">outliers</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">ct_labels</span><span class="p">[</span><span class="o">~</span><span class="n">outliers</span><span class="p">]</span> <span class="o">+=</span> <span class="n">_l</span>
+        <span class="n">labels</span><span class="p">[</span><span class="n">ct_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">ct_labels</span>
+
+        <span class="k">return</span> <span class="n">labels</span></div>
+
+<div class="viewcode-block" id="ClusterCC.optimize_clusters"><a class="viewcode-back" href="../../NaTGenPD/NaTGenPD.html#NaTGenPD.cluster.ClusterCC.optimize_clusters">[docs]</a>    <span class="k">def</span> <span class="nf">optimize_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">return_eps</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Incrimentally increase eps from given value to optimize cluster</span>
+<span class="sd">        size</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        min_samples : int</span>
+<span class="sd">            min_samples value for clustering, if None set as len(array) / 1000</span>
+<span class="sd">        dt : float</span>
+<span class="sd">            Percentage eps by which it is to be incrementally increased</span>
+<span class="sd">        return_eps : bool</span>
+<span class="sd">            Flag to return optimal eps</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Internal kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        labels : ndarray</span>
+<span class="sd">            Vector of cluster labels for each row in array</span>
+<span class="sd">        eps : float (optional)</span>
+<span class="sd">            eps value used for clustering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit_df</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n_cts</span> <span class="ow">in</span> <span class="n">cts</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_df</span><span class="p">[</span><span class="s1">&#39;cts&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_cts</span>
+                <span class="n">ct_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">Cluster</span><span class="p">(</span><span class="n">ct_df</span><span class="p">)</span>
+                <span class="n">ct_labels</span><span class="p">,</span> <span class="n">ct_eps</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">optimize_clusters</span><span class="p">(</span><span class="n">min_samples</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+                                                        <span class="n">return_eps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                        <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">pos</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ct_labels</span><span class="p">)</span>
+                <span class="n">eps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ct_eps</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Could not find an optimal cluster for &#39;</span>
+                               <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> w/ </span><span class="si">{}</span><span class="s1"> cts: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit_id</span><span class="p">,</span> <span class="n">n_cts</span><span class="p">,</span>
+                                                         <span class="n">ex</span><span class="p">))</span>
+                <span class="n">eps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_eps</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Optimal eps = </span><span class="si">{}</span><span class="s1">, min_samples = </span><span class="si">{}</span><span class="s1">&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">labels</span><span class="p">,</span> <span class="n">eps</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">labels</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Rossol, Grant Buster
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
