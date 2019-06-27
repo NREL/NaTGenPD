@@ -439,22 +439,26 @@ class QuartileAnalysis:
         group_fits = self._fits[group_type]
         pos = group_fits['a0'].isnull()
         group_fits = group_fits.loc[~pos]
-        cols = [c for c in group_fits.columns if 'heat_rate' in c]
-        group_fits['ave_heat_rate'] = group_fits[cols].mean()
-        group_fits = group_fits[['unit_id', 'load_max', 'ave_heat_rate']]
+        group_fits = group_fits[['unit_id', 'load_max']]
 
         with CEMS(self._filtered_path, mode='r') as f:
-            group_filtered = f[group_type].df
+            group_filtered = f[group_type]
 
-        pos = group_filtered['cluster'] >= 0
-        group_filtered = group_filtered.loc[pos, ['unit_id', 'load']]
+        ave_hr = group_filtered.unit_dfs['heat_rate'].mean()
+        ave_hr.name = 'ave_heat_rate'
+        filtered_df = pd.merge(group_filtered.df,
+                               ave_hr.to_frame().reset_index(),
+                               on='unit_id')
 
-        group_filtered = pd.merge(group_filtered, group_fits,
-                                  on='unit_id', how='left')
-        group_filtered['cf'] = (group_filtered['load']
-                                / group_filtered['load_max'])
+        pos = filtered_df['cluster'] >= 0
+        filtered_df = filtered_df.loc[pos, ['unit_id', 'load']]
 
-        return group_filtered
+        filtered_df = pd.merge(filtered_df, group_fits,
+                               on='unit_id', how='left')
+        filtered_df['cf'] = (filtered_df['load']
+                             / filtered_df['load_max'])
+
+        return filtered_df
 
     @staticmethod
     def _compute_stats(filtered_df):
