@@ -524,9 +524,10 @@ class QuartileAnalysis:
             CF quartile stats by average heat-rate bin
         """
         hr_stats = []
-        _, bins = np.histogram(filtered_df['ave_heat_rate'].values, bins=bins)
+        _, hr_bins = np.histogram(filtered_df['ave_heat_rate'].values,
+                                  bins=bins)
         for i in range(bins):
-            s, e = bins[[i, i + 1]]
+            s, e = hr_bins[[i, i + 1]]
             pos = (filtered_df['ave_heat_rate'] > s
                    & filtered_df['ave_heat_rate'] <= e)
             df = filtered_df.loc[pos]
