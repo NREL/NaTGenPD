@@ -8,7 +8,7 @@ import numpy as np
 import os
 import pandas as pd
 
-from NaTGenPD.handler import Fits, CEMS, CEMSGroup
+from NaTcfPD.handler import Fits, CEMS, CEMSGroup
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 logger = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class ProcedureAnalysis:
     """
-    Heat Rate Analysis Class
+    Analyze cleaning and filtering procedure
     """
     def __init__(self, hr_fits, raw_cems, cleaned_cems, filtered_cems,
                  cc_map_path=None):
@@ -83,7 +83,7 @@ class ProcedureAnalysis:
         Returns
         -------
         cc_map : pd.DataFrame
-            Mapping of CEMS cc generators (CTs) to final CC units
+            Mapping of CEMS cc cferators (CTs) to final CC units
         """
         if cc_map_path is None:
             cc_map_path = os.path.join(os.path.dirname(PROJECT_ROOT), 'bin',
@@ -102,7 +102,7 @@ class ProcedureAnalysis:
         Parameters
         ----------
         group_type : str
-            Fuel/Generator type of interest
+            Fuel/cferator type of interest
 
         Returns
         -------
@@ -119,7 +119,7 @@ class ProcedureAnalysis:
         Parameters
         ----------
         group_type : str
-            Fuel/Generator type of interest
+            Fuel/cferator type of interest
 
         Returns
         -------
@@ -143,7 +143,7 @@ class ProcedureAnalysis:
         Parameters
         ----------
         group_type : str
-            Fuel/Generator type of interest
+            Fuel/cferator type of interest
 
         Returns
         -------
@@ -161,7 +161,7 @@ class ProcedureAnalysis:
         Parameters
         ----------
         group_type : str
-            Fuel/Generator type of interest
+            Fuel/cferator type of interest
 
         Returns
         -------
@@ -199,9 +199,9 @@ class ProcedureAnalysis:
             logger.debug('\t-- Extracting raw stats')
             unit_df = raw_df[unit_id]
             group_stats['unit_dfs'] += 1
-            gen = unit_df['gload'].max()
-            group_stats['raw_gen'] += gen
-            unit_stats['raw_gen'] = gen
+            cf = unit_df['gload'].max()
+            group_stats['raw_cf'] += cf
+            unit_stats['raw_cf'] = cf
             points = len(unit_df)
             group_stats['total_points'] += points
             unit_stats['total_points'] = points
@@ -242,9 +242,9 @@ class ProcedureAnalysis:
             if unit_df['load'].nonzero()[0].any():
                 logger.debug('\t-- Extracting clean stats')
                 group_stats['clean_units'] += 1
-                gen = np.nanmax(unit_df['load'])
-                group_stats['clean_gen'] += gen
-                unit_stats['clean_gen'] = gen
+                cf = np.nanmax(unit_df['load'])
+                group_stats['clean_cf'] += cf
+                unit_stats['clean_cf'] = cf
         except KeyError:
             logger.warning('- {} is not present in Clean CEMS data'
                            .format(unit_id))
@@ -283,14 +283,14 @@ class ProcedureAnalysis:
             if unit_df['load'].nonzero()[0].any():
                 logger.debug('\t-- Extracting filter stats')
                 group_stats['filtered_units'] += 1
-                gen = np.nanmax(unit_df['load'])
-                group_stats['filtered_gen'] += gen
-                unit_stats['filtered_gen'] = gen
+                cf = np.nanmax(unit_df['load'])
+                group_stats['filtered_cf'] += cf
+                unit_stats['filtered_cf'] = cf
                 if not np.isnan(unit_fit['a0']):
                     logger.debug('\t-- Extracting final stats')
                     group_stats['final_units'] += 1
-                    group_stats['final_gen'] += gen
-                    unit_stats['final_gen'] = gen
+                    group_stats['final_cf'] += cf
+                    unit_stats['final_cf'] = cf
                     f_points = len(unit_df.loc[unit_df['load'] > 0])
                     unit_stats['final_points'] = f_points
                     group_stats['final_points'] += f_points
@@ -308,7 +308,7 @@ class ProcedureAnalysis:
         Parameters
         ----------
         group_type : str
-            Group (fuel/generator) type to analyze
+            Group (fuel/cferator) type to analyze
 
         Returns
         -------
@@ -317,11 +317,11 @@ class ProcedureAnalysis:
         group_unit_stats : pd.DataFrame
             Processing stats for each unit
         """
-        group_stats = pd.Series(0, index=['unit_dfs', 'raw_gen',
+        group_stats = pd.Series(0, index=['unit_dfs', 'raw_cf',
                                           'total_points', 'non_zero_points',
-                                          'clean_units', 'clean_gen',
-                                          'filtered_units', 'filtered_gen',
-                                          'final_units', 'final_gen',
+                                          'clean_units', 'clean_cf',
+                                          'filtered_units', 'filtered_cf',
+                                          'final_units', 'final_cf',
                                           'final_points'])
         stats = group_stats.copy().drop(labels=['unit_dfs', 'clean_units',
                                                 'filtered_units',
@@ -369,11 +369,12 @@ class ProcedureAnalysis:
         process_stats = []
         for g_type in self._fits.group_types:
             logger.info('Extracting stats for {}'.format(g_type))
+            group_stats, group_unit_stats = self._group_stats(g_type)
+            process_stats.append(group_stats)
+
             f_name = os.path.basename(out_file)
             units_file = "{}_{}".format(g_type, f_name)
             units_file = out_file.replace(f_name, units_file)
-            group_stats, group_unit_stats = self._group_stats(g_type)
-            process_stats.append(group_stats)
             group_unit_stats.to_csv(units_file)
 
         process_stats = pd.concat(process_stats, axis=1).T
@@ -400,6 +401,172 @@ class ProcedureAnalysis:
         cc_map_path : str
             Path to cc_mapping
         """
-        process = cls(hr_fits, raw_cems, cleaned_cems, filtered_cems,
-                      cc_map_path=cc_map_path)
-        process.process_stats(out_file)
+        analysis = cls(hr_fits, raw_cems, cleaned_cems, filtered_cems,
+                       cc_map_path=cc_map_path)
+        analysis.process_stats(out_file)
+
+
+class QuartileAnalysis:
+    """
+    Analyze cferation and operation time by load quartile
+    """
+    def __init__(self, hr_fits, filtered_cems):
+        """
+        Parameters
+        ----------
+        hr_fits : str
+            Path to heat rate fit .csv(s)
+        filtered_cems : str
+            Path to filtered CEMS .h5 file
+        """
+        self._fits = Fits(hr_fits)
+        self._filtered_path = filtered_cems
+
+    def __getitem__(self, group_type):
+        """
+        Extract desired group type from filtered CEMS data
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/cferator type of interest
+
+        Returns
+        -------
+        group_filtered : CEMSGroup
+            Filtered units for desired group with proper final heat-rate fits
+        """
+        group_fits = self._fits[group_type]
+        pos = group_fits['a0'].isnull()
+        group_fits = group_fits.loc[~pos]
+        cols = [c for c in group_fits.columns if 'heat_rate' in c]
+        group_fits['ave_heat_rate'] = group_fits[cols].mean()
+        group_fits = group_fits[['unit_id', 'load_max', 'ave_heat_rate']]
+
+        with CEMS(self._filtered_path, mode='r') as f:
+            group_filtered = f[group_type][['unit_id', 'load']]
+
+        group_filtered = pd.merge(group_filtered, group_fits,
+                                  on='unit_id', how='left')
+        group_filtered['cf'] = (group_filtered['load']
+                                / group_filtered['load_max'])
+
+        return group_filtered
+
+    @staticmethod
+    def _compute_stats(filtered_df):
+        """
+        Extract CF quartile stats for given group:
+        - fraction of generation in each quartile
+        - fraction of time in each quartile
+
+        Parameters
+        ----------
+        filtered_df : pd.DataFrame
+            DataFrame to compute stats from
+
+        Returns
+        -------
+        quartile_stats : pd.Series
+            CF quartile stats
+        """
+        quartile_stats = pd.Series()
+        load = filtered_df['cf']
+        load_range = (load.max() - load.min())
+        bin_size = load_range / 4
+        bins = load.min() + np.arange(1, 4) * bin_size
+        total_cf = filtered_df['cf'].sum()
+        total_points = len(filtered_df)
+        # Q1
+        pos = load <= bins[0]
+        q_cf = filtered_df.loc[pos, 'cf'].sum()
+        quartile_stats['Q1_gen_frac'] = q_cf / total_cf
+        quartile_stats['Q1_time_frac'] = pos.sum() / total_points
+        # Q2
+        pos = (load > bins[0]) & (load <= bins[1])
+        q_cf = filtered_df.loc[pos, 'cf'].sum()
+        quartile_stats['Q2_gen_frac'] = q_cf / total_cf
+        quartile_stats['Q2_time_frac'] = pos.sum() / total_points
+        # Q3
+        pos = (load > bins[1]) & (load <= bins[2])
+        q_cf = filtered_df.loc[pos, 'cf'].sum()
+        quartile_stats['Q3_gen_frac'] = q_cf / total_cf
+        quartile_stats['Q3_time_frac'] = pos.sum() / total_points
+        # Q4
+        pos = load > bins[2]
+        q_cf = filtered_df.loc[pos, 'cf'].sum()
+        quartile_stats['Q4_gen_frac'] = q_cf / total_cf
+        quartile_stats['Q4_time_frac'] = pos.sum() / total_points
+
+        return quartile_stats
+
+    @staticmethod
+    def hr_stats(filtered_df, bins=3):
+        """
+        Compute quartile stats for bins of average heat-rate
+
+        Parameters
+        ----------
+        filtered_df : pd.DataFrame
+            DataFrame to compute stats from
+
+        Returns
+        -------
+        hr_stats : pd.Series
+            CF quartile stats by average heat-rate bin
+        """
+        hr_stats = []
+        _, bins = np.histogram(filtered_df['ave_heat_rate'].values, bins=bins)
+        for i in range(bins):
+            s, e = bins[[i, i + 1]]
+            pos = (filtered_df['ave_heat_rate'] > s
+                   & filtered_df['ave_heat_rate'] <= e)
+            df = filtered_df.loc[pos]
+            bin_stats = QuartileAnalysis._compute_stats(df)
+            bin_stats.name = "bin_{}".format(i)
+            hr_stats.append(bin_stats)
+
+        return pd.concat(hr_stats, axis=1).T
+
+    def quartile_stats(self, out_file):
+        """
+        Compute process stats for all available group types in CEMS data
+
+        Parameters
+        ----------
+        out_file : str
+            Path to output file to save stats to
+        """
+        quartile_stats = []
+        for g_type in self._fits.group_types:
+            logger.info('Extracting stats for {}'.format(g_type))
+            group_filtered = self[g_type]
+            group_stats = self._compute_stats(group_filtered)
+            quartile_stats.name = g_type
+            quartile_stats.append(group_stats)
+
+            f_name = os.path.basename(out_file)
+            group_file = "{}_{}".format(g_type, f_name)
+            group_file = out_file.replace(f_name, group_file)
+            hr_stats = self.hr_stats(group_filtered)
+            hr_stats.to_csv(group_file)
+
+        quartile_stats = pd.concat(quartile_stats, axis=1).T
+        quartile_stats.to_csv(out_file)
+
+    @classmethod
+    def stats(cls, hr_fits, filtered_cems, out_file):
+        """
+        Compute quartile stats for all available group types in CEMS data
+
+        Parameters
+        ----------
+        hr_fits : str
+            Path to heat rate fit .csv(s)
+        filtered_cems : str
+            Path to filtered CEMS .h5 file
+        out_file : str
+            Path to output file to save stats to
+        """
+        analysis = cls(hr_fits, filtered_cems)
+        analysis.quartile_stats(out_file)
