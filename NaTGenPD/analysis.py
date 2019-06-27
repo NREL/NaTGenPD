@@ -501,7 +501,7 @@ class QuartileAnalysis:
         return quartile_stats
 
     @staticmethod
-    def hr_stats(filtered_df, bins=3):
+    def _hr_stats(filtered_df, bins=3):
         """
         Compute quartile stats for bins of average heat-rate
 
@@ -528,7 +528,7 @@ class QuartileAnalysis:
 
         return pd.concat(hr_stats, axis=1).T
 
-    def quartile_stats(self, out_file):
+    def quartile_stats(self, out_file, **kwargs):
         """
         Compute process stats for all available group types in CEMS data
 
@@ -536,6 +536,8 @@ class QuartileAnalysis:
         ----------
         out_file : str
             Path to output file to save stats to
+        kwargs : dict
+            Internal kwargs
         """
         quartile_stats = []
         for g_type in self._fits.group_types:
@@ -548,14 +550,14 @@ class QuartileAnalysis:
             f_name = os.path.basename(out_file)
             group_file = "{}_{}".format(g_type, f_name)
             group_file = out_file.replace(f_name, group_file)
-            hr_stats = self.hr_stats(group_filtered)
+            hr_stats = self._hr_stats(group_filtered, **kwargs)
             hr_stats.to_csv(group_file)
 
         quartile_stats = pd.concat(quartile_stats, axis=1).T
         quartile_stats.to_csv(out_file)
 
     @classmethod
-    def stats(cls, hr_fits, filtered_cems, out_file):
+    def stats(cls, hr_fits, filtered_cems, out_file, **kwargs):
         """
         Compute quartile stats for all available group types in CEMS data
 
@@ -567,6 +569,8 @@ class QuartileAnalysis:
             Path to filtered CEMS .h5 file
         out_file : str
             Path to output file to save stats to
+        kwargs : dict
+            Internal kwargs
         """
         analysis = cls(hr_fits, filtered_cems)
-        analysis.quartile_stats(out_file)
+        analysis.quartile_stats(out_file, **kwargs)
