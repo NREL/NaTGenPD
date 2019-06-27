@@ -433,7 +433,7 @@ class QuartileAnalysis:
 
         Returns
         -------
-        group_filtered : CEMSGroup
+        filter_df : CEMSGroup
             Filtered units for desired group with proper final heat-rate fits
         """
         group_fits = self._fits[group_type]
@@ -451,7 +451,8 @@ class QuartileAnalysis:
                                on='unit_id')
 
         pos = filtered_df['cluster'] >= 0
-        filtered_df = filtered_df.loc[pos, ['unit_id', 'load']]
+        filtered_df = filtered_df.loc[pos,
+                                      ['unit_id', 'load', 'ave_heat_rate']]
 
         filtered_df = pd.merge(filtered_df, group_fits,
                                on='unit_id', how='left')
