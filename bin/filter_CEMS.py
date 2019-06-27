@@ -1,5 +1,5 @@
 """
-HPC Script to parse, clean, filter, and fit CEMS data
+HPC Script to filter, and fit CEMS data
 """
 import os
 import sys
