@@ -209,8 +209,8 @@ class ProcedureAnalysis:
             group_stats['non_zero_points'] += non_zero
             unit_stats['non_zero_points'] = non_zero
         except KeyError:
-            logger.warning('- {} is not present in Raw CEMS data'
-                           .format(unit_id))
+            logger.debug('- {} is not present in Raw CEMS data'
+                         .format(unit_id))
 
         return group_stats, unit_stats
 
@@ -246,8 +246,8 @@ class ProcedureAnalysis:
                 group_stats['clean_cf'] += cf
                 unit_stats['clean_cf'] = cf
         except KeyError:
-            logger.warning('- {} is not present in Clean CEMS data'
-                           .format(unit_id))
+            logger.debug('- {} is not present in Clean CEMS data'
+                         .format(unit_id))
 
         return group_stats, unit_stats
 
@@ -295,8 +295,8 @@ class ProcedureAnalysis:
                     unit_stats['final_points'] = f_points
                     group_stats['final_points'] += f_points
         except KeyError:
-            logger.warning('- {} is not present in Filtered CEMS data'
-                           .format(unit_id))
+            logger.debug('- {} is not present in Filtered CEMS data'
+                         .format(unit_id))
 
         return group_stats, unit_stats
 
