@@ -528,8 +528,8 @@ class QuartileAnalysis:
                                   bins=bins)
         for i in range(bins):
             s, e = hr_bins[[i, i + 1]]
-            pos = (filtered_df['ave_heat_rate'] > s
-                   & filtered_df['ave_heat_rate'] <= e)
+            pos = ((filtered_df['ave_heat_rate'] > s)
+                   & (filtered_df['ave_heat_rate'] <= e))
             df = filtered_df.loc[pos]
             bin_stats = QuartileAnalysis._compute_stats(df)
             bin_stats.name = "bin_{}".format(i)
