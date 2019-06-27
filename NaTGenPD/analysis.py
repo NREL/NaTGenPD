@@ -444,7 +444,7 @@ class QuartileAnalysis:
         group_fits = group_fits[['unit_id', 'load_max', 'ave_heat_rate']]
 
         with CEMS(self._filtered_path, mode='r') as f:
-            group_filtered = f[group_type]
+            group_filtered = f[group_type].df
 
         pos = group_filtered['cluster'] >= 0
         group_filtered = group_filtered.loc[pos, ['unit_id', 'load']]
