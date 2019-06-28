@@ -201,7 +201,7 @@ class ProcedureAnalysis:
         try:
             logger.debug('\t-- Extracting raw stats')
             unit_df = raw_df[unit_id]
-            group_stats['unit_dfs'] += 1
+            group_stats['raw_units'] += 1
             cf = unit_df['gload'].max()
             group_stats['raw_cf'] += cf
             unit_stats['raw_cf'] = cf
@@ -320,13 +320,13 @@ class ProcedureAnalysis:
         group_unit_stats : pd.DataFrame
             Processing stats for each unit
         """
-        group_stats = pd.Series(0, index=['unit_dfs', 'raw_cf',
+        group_stats = pd.Series(0, index=['raw_units', 'raw_cf',
                                           'total_points', 'non_zero_points',
                                           'clean_units', 'clean_cf',
                                           'filtered_units', 'filtered_cf',
                                           'final_units', 'final_cf',
                                           'final_points'])
-        stats = group_stats.copy().drop(labels=['unit_dfs', 'clean_units',
+        stats = group_stats.copy().drop(labels=['raw_units', 'clean_units',
                                                 'filtered_units',
                                                 'final_units'])
         group_stats.name = group_type
