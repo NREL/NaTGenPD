@@ -135,7 +135,9 @@ class ProcedureAnalysis:
             units = self._cc_map.loc[pos, 'unit_id'].to_list()
 
         pos = self._raw_df['unit_id'].isin(units)
-        raw = CEMSGroup(self._raw_df.loc[pos])
+        raw = self._raw_df.loc[pos].copy()
+        raw['group_type'] = group_type
+        raw = CEMSGroup(raw)
 
         return raw
 
