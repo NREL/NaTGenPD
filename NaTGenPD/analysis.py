@@ -109,6 +109,9 @@ class ProcedureAnalysis:
         group_fits : pd.DataFrame
         """
         group_fits = self._fits[group_type]
+        if "CC" in group_type:
+            group_fits['unit_id'] = group_fits['unit_id'].str.split('-').str[0]
+            group_fits = group_fits.groupby('unit_id').mean().reset_index()
 
         return group_fits
 
