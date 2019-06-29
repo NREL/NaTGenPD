@@ -178,7 +178,7 @@ class ProcedureAnalysis:
         return filtered
 
     @staticmethod
-    def _raw_stats(raw_df, unit_id, group_stats, unit_stats):
+    def _raw_stats(raw_df, unit_ids, group_stats, unit_stats):
         """
         Compute raw stats for desired unit
 
@@ -186,8 +186,8 @@ class ProcedureAnalysis:
         ----------
         raw_df : CEMSGroup
             Instance of CEMSGroup containing raw CEMS data
-        unit_id : str
-            Unit id of interest
+        unit_id : list
+            List of unit ids of interest
         group_stats : pd.Series
             Aggregate stats
         unit_stats : pd.Series
@@ -200,22 +200,23 @@ class ProcedureAnalysis:
         unit_stats : pd.Series
             Updated stats for individual units
         """
-        try:
-            logger.debug('\t-- Extracting raw stats')
-            unit_df = raw_df[unit_id]
-            group_stats['raw_units'] += 1
-            cf = unit_df['gload'].max()
-            group_stats['raw_cf'] += cf
-            unit_stats['raw_cf'] = cf
-            points = len(unit_df)
-            group_stats['total_points'] += points
-            unit_stats['total_points'] = points
-            non_zero = (unit_df['gload'] > 0).sum()
-            group_stats['non_zero_points'] += non_zero
-            unit_stats['non_zero_points'] = non_zero
-        except KeyError:
-            logger.debug('- {} is not present in Raw CEMS data'
-                         .format(unit_id))
+        for unit_id in unit_ids:
+            try:
+                logger.debug('\t-- Extracting raw stats')
+                unit_df = raw_df[unit_id]
+                group_stats['raw_units'] += 1
+                cf = unit_df['gload'].max()
+                group_stats['raw_cf'] += cf
+                unit_stats['raw_cf'] += cf
+                points = len(unit_df)
+                group_stats['total_points'] += points
+                unit_stats['total_points'] += points
+                non_zero = (unit_df['gload'] > 0).sum()
+                group_stats['non_zero_points'] += non_zero
+                unit_stats['non_zero_points'] += non_zero
+            except KeyError:
+                logger.debug('- {} is not present in Raw CEMS data'
+                             .format(unit_id))
 
         return group_stats, unit_stats
 
@@ -344,7 +345,13 @@ class ProcedureAnalysis:
             unit_stats = stats.copy()
             unit_stats.name = unit_id
             # Raw Dat Stats
-            group_stats, unit_stats = self._raw_stats(raw_df, unit_id,
+            if "CC" in group_type:
+                pos = self._cc_map['cc_unit'] == unit_id
+                raw_unit_ids = self._cc_map.loc[pos, 'unit_id'].to_list()
+            else:
+                raw_unit_ids = [unit_id]
+
+            group_stats, unit_stats = self._raw_stats(raw_df, raw_unit_ids,
                                                       group_stats, unit_stats)
             # Clean Data Stats
 
