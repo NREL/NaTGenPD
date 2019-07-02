@@ -206,8 +206,11 @@ class ProcedureAnalysis:
                 unit_df = raw_df[unit_id]
                 group_stats['raw_units'] += 1
                 cf = unit_df['gload'].max()
+                gen = unit_df['gload'].sum()
                 group_stats['raw_cf'] += cf
+                group_stats['raw_gen'] += gen
                 unit_stats['raw_cf'] += cf
+                unit_stats['raw_gen'] += gen
                 points = len(unit_df)
                 group_stats['total_points'] += points
                 unit_stats['total_points'] += points
@@ -249,8 +252,11 @@ class ProcedureAnalysis:
                 logger.debug('\t-- Extracting clean stats')
                 group_stats['clean_units'] += 1
                 cf = np.nanmax(unit_df['load'])
+                gen = np.nansum(unit_df['load'])
                 group_stats['clean_cf'] += cf
+                group_stats['clean_gen'] += gen
                 unit_stats['clean_cf'] = cf
+                unit_stats['clean_gen'] = gen
         except KeyError:
             logger.debug('- {} is not present in Clean CEMS data'
                          .format(unit_id))
@@ -290,13 +296,18 @@ class ProcedureAnalysis:
                 logger.debug('\t-- Extracting filter stats')
                 group_stats['filtered_units'] += 1
                 cf = np.nanmax(unit_df['load'])
+                gen = np.nansum(unit_df['load'])
                 group_stats['filtered_cf'] += cf
+                group_stats['filtered_gen'] += gen
                 unit_stats['filtered_cf'] = cf
+                unit_stats['filtered_gen'] = gen
                 if not np.isnan(unit_fit['a0']):
                     logger.debug('\t-- Extracting final stats')
                     group_stats['final_units'] += 1
                     group_stats['final_cf'] += cf
+                    group_stats['final_gen'] += gen
                     unit_stats['final_cf'] = cf
+                    unit_stats['final_gen'] = gen
                     f_points = len(unit_df.loc[unit_df['load'] > 0])
                     unit_stats['final_points'] = f_points
                     group_stats['final_points'] += f_points
