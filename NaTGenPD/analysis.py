@@ -115,6 +115,29 @@ class ProcedureAnalysis:
 
         return group_fits
 
+    @staticmethod
+    def gross_to_net_multiplier(group_type):
+        """
+        Convert gross load to net load using given multipliers for
+        solid and liquid fuel
+
+        Parameters
+        ----------
+        group_type : str
+            Fuel/cferator type of interest
+
+        Returns
+        -------
+        float
+            Load multiplier to convert gross to net
+        """
+        fuel_map = {'Coal': 0.925, 'Other Solid Fuel': 0.925,
+                    'NG': 0.963, 'Oil': 0.963}
+
+        fuel_type = group_type.split('(')[1].strip(')')
+
+        return fuel_map[fuel_type]
+
     def _get_raw(self, group_type):
         """
         Extract desired group type from raw CEMS data
@@ -137,6 +160,11 @@ class ProcedureAnalysis:
         pos = self._raw_df['unit_id'].isin(units)
         raw = self._raw_df.loc[pos].copy()
         raw['group_type'] = group_type
+        # Convert gross load to net load
+        raw = raw.rename(columns={'gload': 'load'})
+        gross_to_net = self.gross_to_net_multiplier(group_type)
+        raw['load'] *= gross_to_net
+        raw['heat_rate'] /= gross_to_net
         raw = CEMSGroup(raw)
 
         return raw
@@ -205,8 +233,9 @@ class ProcedureAnalysis:
                 logger.debug('\t-- Extracting raw stats')
                 unit_df = raw_df[unit_id]
                 group_stats['raw_units'] += 1
-                cf = unit_df['gload'].max()
-                gen = unit_df['gload'].sum()
+                cf = unit_df['load'].max()
+                pos = unit_df['load'] > 0
+                gen = unit_df.loc[pos, 'load'].sum()
                 group_stats['raw_cf'] += cf
                 group_stats['raw_gen'] += gen
                 unit_stats['raw_cf'] += cf
@@ -214,7 +243,7 @@ class ProcedureAnalysis:
                 points = len(unit_df)
                 group_stats['total_points'] += points
                 unit_stats['total_points'] += points
-                non_zero = (unit_df['gload'] > 0).sum()
+                non_zero = (unit_df['load'] > 0).sum()
                 group_stats['non_zero_points'] += non_zero
                 unit_stats['non_zero_points'] += non_zero
             except KeyError:
