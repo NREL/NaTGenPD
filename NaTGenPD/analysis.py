@@ -334,12 +334,13 @@ class ProcedureAnalysis:
         group_unit_stats : pd.DataFrame
             Processing stats for each unit
         """
-        group_stats = pd.Series(0, index=['raw_units', 'raw_cf',
+        group_stats = pd.Series(0, index=['raw_units', 'raw_cf', 'raw_gen'
                                           'total_points', 'non_zero_points',
                                           'clean_units', 'clean_cf',
-                                          'filtered_units', 'filtered_cf',
+                                          'clean_gen', 'filtered_units',
+                                          'filtered_cf', 'filtered_gen',
                                           'final_units', 'final_cf',
-                                          'final_points'])
+                                          'final_gen', 'final_points'])
         stats = group_stats.copy().drop(labels=['raw_units', 'clean_units',
                                                 'filtered_units',
                                                 'final_units'])
