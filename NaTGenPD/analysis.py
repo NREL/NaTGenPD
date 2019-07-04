@@ -165,7 +165,10 @@ class ProcedureAnalysis:
         gross_to_net = self.gross_to_net_multiplier(group_type)
         raw['load'] *= gross_to_net
         raw['heat_rate'] /= gross_to_net
-        raw = raw.merge(self._cc_map[['unit_id', 'cc_unit']], on='unit_id')
+
+        if 'CC' in group_type:
+            raw = raw.merge(self._cc_map[['unit_id', 'cc_unit']], on='unit_id')
+
         raw = CEMSGroup(raw)
 
         return raw
