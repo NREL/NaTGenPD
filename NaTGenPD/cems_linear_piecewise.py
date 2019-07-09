@@ -1,142 +1,101 @@
 import pandas as pd
 import numpy as np
-from re import match
 import os
+import sys
+import warnings
 
 from handler import CEMS
-from peicewiseconvex import fit_piecewise_convex, generate_plexos_parameters
+from piecewiseconvex import fit_piecewise_convex, generate_plexos_parameters
 
-blacklist=["55102_3", "7783_P001"]
-#    units_keep = np.array([x not in blacklist for x in data["unit"]])
-#    return data[units_keep].reset_index()
+fit_columns = [
+    "min_aicc", "1_b", "1_m1", "1_x1",
+    "2_b", "2_m1", "2_m2", "2_x1", "2_x2",
+    "3_b", "3_m1", "3_m2", "3_m3", "3_x1", "3_x2", "2_x3"]
 
-def linear_fits(filtered_h5, out_dir, max_segments=3):
+def linear_fits(filtered_h5, max_segments):
 
     results = []
+
+    print("Opening", filtered_h5)
 
     with CEMS(filtered_h5, mode='r') as f:
 
         for group_type in f.dsets:
 
+            print("Processing", group_type, "group...")
+
             result = f[group_type].unit_dfs.apply(
                 lambda unit_df: unit_df.groupby("cluster").apply(
                     unit_linear_fit, max_segments=max_segments))
 
+            result["min_aicc"].astype(int, copy=False)
+            result.reset_index(2, drop=True, inplace=True)
+            result["group_type"] = group_type
+            result.set_index("group_type", drop=True, append=True, inplace=True)
+            result = result.reorder_levels(["group_type", "unit_id", "cluster"])
+
             results.append(result)
+            print(result)
 
-            out_path = group_type + "_linpiecewise_fits.csv"
-            out_path = os.path.join(out_dir, out_path)
-            result.to_csv(out_path)
-
-    return pd.concat(results, join="inner")
+    print("Closed", filtered_h5)
+    return pd.concat(results, join="outer", sort=False)
 
 
 def unit_linear_fit(unit_cluster_df, max_segments):
 
-    # Ignore the -1 (noise) clusters
-    if unit_cluster_id["cluster"] == -1:
-        return pd.Series()
+    load = unit_cluster_df["load"]
+    heatinput = unit_cluster_df["HTINPUT"]
+    minload = min(load)
+    maxload = max(load)
 
-    # TODO: Fitting calculations
+    if ((len(np.unique(load)) < 6) or # Require a minimum amount of unique data
+        (maxload - minload < 1) or # Require at least 1 MW data spread
+        ("unit_id" not in unit_cluster_df.columns) or # Drop data missing certain columns
+        ("cluster" not in unit_cluster_df.columns) or
+        (unit_cluster_df["cluster"].iloc[0] == -1)): # Ignore the -1 (noise) clusters
+        return pd.DataFrame(index=[], columns=fit_columns)
 
-    return pd.Series(
-        [min_aicc] + seg1_results + seg2_results + seg3_results,
-        index=["min_aicc",
-               "1_b", "1_m1", "1_x1",
-               "2_b", "2_m1", "2_m2", "2_x1", "2_x2",
-               "3_b", "3_m1", "3_m2", "3_m3", "3_x1", "3_x2", "2_x3"])
+    unitname = unit_cluster_df["unit_id"].iloc[0]
+    unitcluster = unit_cluster_df["cluster"].iloc[0]
+    print(unitname, unitcluster, unit_cluster_df.shape)
+
+    aicc1, (ms1, bs1) = fit_simple(load, heatinput)
+    b1, ms1, xs1 = generate_plexos_parameters(ms1, bs1, minload, maxload)
+    results1 = np.concatenate([[b1], ms1, xs1])
+
+    aicc2, (ms2, bs2) = fit_piecewise_convex(load, heatinput, 2)
+    b2, ms2, xs2 = generate_plexos_parameters(ms2, bs2, minload, maxload)
+    results2 = np.concatenate([[b2], ms2, xs2])
+
+    aicc3, (ms3, bs3) = fit_piecewise_convex(load, heatinput, 3)
+    b3, ms3, xs3 = generate_plexos_parameters(ms3, bs3, minload, maxload)
+    results3 = np.concatenate([[b3], ms3, xs3])
+
+    min_aicc = np.argmin([aicc1, aicc2, aicc3]) + 1
+
+    x = pd.DataFrame(
+        np.concatenate([[min_aicc], results1, results2, results3]).reshape(1, -1),
+        columns=fit_columns)
+    print(x.isna().sum(axis=1).sum())
+    return x
 
 
-def fit(data, group_col, max_tranches):
+def write_group_results(df, out_dir="."):
 
-    grouped = data.groupby(group_col)
-    results = pd.DataFrame(np.nan,
-                           columns=["Heat Rate Base",
-                                    "Heat Rate Incr 1", "Load Point 1",
-                                    "Heat Rate Incr 2", "Load Point 2",
-                                    "Heat Rate Incr 3", "Load Point 3"],
-                           index=[g for g, _ in grouped])
-    results["Type"] = "missing"
-    results["Fuel"] = "missing"
-    results["Category"] = "missing"
-   
-    print("Fitting heat input functions...")
-    for i, (groupname, group) in enumerate(grouped):
+    group_type = df.index.get_level_values("group_type")[0]
+    out_path = os.path.join(out_dir, group_type + "_linpiecewise_fits.csv")
+    df.to_csv(out_path)
 
-        print("  " + groupname)
-        ms, bs = fit_piecewise_convex(group.load, group.HTINPUT, max_tranches)
-        
-        heat_rate_base, heat_rate_incrs, load_points = \
-            generate_plexos_parameters(ms, bs, min(group.load), max(group.load))
 
-        results.iloc[i, 0] = heat_rate_base
-
-        for j in range(len(heat_rate_incrs)):
-            results.iloc[i, 1 + 2*j] = heat_rate_incrs[j]
-            results.iloc[i, 2 + 2*j] = load_points[j]
-
-        results.iloc[i, 7] = group.unit_type.iloc[0]
-        results.iloc[i, 8] = group.fuel_type.iloc[0]
-        results.iloc[i, 9] = group.group_type.iloc[0]
-
-    return results
-    
-m_idxs = np.array([1,3,5])
-x_idxs = np.array([2,4,6])
-
-def min_avg_heat_rates(row):
-
-    base = row[0]
-    ms = row[m_idxs].data
-    xs = row[x_idxs].data
-    dxs = np.diff(np.insert(xs, 0, 0))
-    avg_hrs = (base + np.cumsum(ms * dxs)) / xs
-    return min(avg_hrs)
-
-def filter_units(data):
-    
-    grouped = data.groupby("Category")
-    result = pd.DataFrame(np.nan, columns=data.columns, index=[])
-    
-    for groupname, group in grouped:
-        
-        if groupname in ["Boiler (Coal)", "Boiler (Natural Gas)",
-                         "Combustion turbine (Natural Gas)",
-                         "Combined cycle (Natural Gas)"]:
-        
-            # For each unit, calculate average heat rate at each load point,
-            # and keep the smallest
-            min_rates = group.apply(min_avg_heat_rates, axis=1, raw=True)
-            mu = min_rates.mean()
-            sigma = min_rates.std()
-            
-            if groupname in ["Boiler (Coal)", "Boiler (Natural Gas)",
-                             "Combustion turbine (Natural Gas)"]:
-                keepers = np.logical_and(mu - 2*sigma < min_rates, min_rates < mu + 2*sigma)
-                group = group[keepers]
-
-            else:
-                keepers = np.logical_and(mu - 2*sigma < min_rates, min_rates < 9.5)
-                group = group[keepers]
-
-        result = result.append(group)
-        
-    return result
-    
 if __name__ == "__main__":
-    
-    # Fit individual units and do final filter
-    data = load_data()
-    unit_fits = fit(data, "unit", 3)
-    #unit_fits = pd.read_csv("raw_unit_fits.csv", index_col=0)
-    unit_fits_filtered = filter_units(unit_fits)
-    unit_fits_filtered.to_csv("cems_unit_fits.csv", index_label="unit")
-    
-    # Use final fits to calculate generic fits
-    data.index = data.unit
-    data_filtered = data.loc[unit_fits_filtered.index].reset_index(drop=True)
-    data = data.reset_index(drop=True)
-    generic_fits_filtered = fit(data_filtered, "group_type", 1).loc[:,
-                               ["Heat Rate Base", "Heat Rate Incr 1", "Load Point 1"]]
-    generic_fits_filtered.to_csv("cems_generic_fits.csv", index_label="Category")
 
+    h5file = sys.argv[1]
+    outputdir = sys.argv[2]
+
+    # Hides some spurious numpy warnings - may want to disable if debugging.
+    #with warnings.catch_warnings():
+        #warnings.simplefilter("ignore")
+        #results = linear_fits(h5file, max_segments=3)
+
+    results = linear_fits(h5file, max_segments=3)
+    results.groupby(level="group_type").apply(write_group_results, out_dir=outputdir)
