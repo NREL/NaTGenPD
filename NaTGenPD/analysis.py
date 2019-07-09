@@ -286,6 +286,9 @@ class ProcedureAnalysis:
                 group_stats['clean_units'] += 1
                 cf = np.nanmax(unit_df['load'])
                 gen = np.nansum(unit_df['load'])
+                points = len(unit_df.loc[unit_df['load'] > 0])
+                group_stats['clean_points'] += points
+                unit_stats['clean_points'] = points
                 group_stats['clean_cf'] += cf
                 group_stats['clean_gen'] += gen
                 unit_stats['clean_cf'] = cf
@@ -330,6 +333,9 @@ class ProcedureAnalysis:
                 group_stats['filtered_units'] += 1
                 cf = np.nanmax(unit_df['load'])
                 gen = np.nansum(unit_df['load'])
+                points = len(unit_df.loc[unit_df['load'] > 0])
+                group_stats['filtered_points'] += points
+                unit_stats['filtered_points'] = points
                 group_stats['filtered_cf'] += cf
                 group_stats['filtered_gen'] += gen
                 unit_stats['filtered_cf'] = cf
@@ -341,9 +347,8 @@ class ProcedureAnalysis:
                     group_stats['final_gen'] += gen
                     unit_stats['final_cf'] = cf
                     unit_stats['final_gen'] = gen
-                    f_points = len(unit_df.loc[unit_df['load'] > 0])
-                    unit_stats['final_points'] = f_points
-                    group_stats['final_points'] += f_points
+                    unit_stats['final_points'] = points
+                    group_stats['final_points'] += points
         except KeyError:
             logger.debug('- {} is not present in Filtered CEMS data'
                          .format(unit_id))
@@ -369,8 +374,9 @@ class ProcedureAnalysis:
         """
         group_stats = pd.Series(0, index=['raw_units', 'raw_cf', 'raw_gen',
                                           'total_points', 'non_zero_points',
-                                          'clean_units', 'clean_cf',
-                                          'clean_gen', 'filtered_units',
+                                          'clean_units', 'clean_points',
+                                          'clean_cf', 'clean_gen',
+                                          'filtered_units', 'filtered_points'
                                           'filtered_cf', 'filtered_gen',
                                           'final_units', 'final_cf',
                                           'final_gen', 'final_points'])
