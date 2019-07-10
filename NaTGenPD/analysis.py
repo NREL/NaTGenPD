@@ -376,7 +376,7 @@ class ProcedureAnalysis:
                                           'total_points', 'non_zero_points',
                                           'clean_units', 'clean_points',
                                           'clean_cf', 'clean_gen',
-                                          'filtered_units', 'filtered_points'
+                                          'filtered_units', 'filtered_points',
                                           'filtered_cf', 'filtered_gen',
                                           'final_units', 'final_cf',
                                           'final_gen', 'final_points'])
