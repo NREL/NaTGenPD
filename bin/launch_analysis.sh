@@ -7,5 +7,5 @@ cd /home/mrossol/NaTGenPD/bin
 #     qstat -u mrossol | grep CEMS_${analysis} | grep ' [RQ] ' || qsub -N CEMS_${analysis} -v analysis="${analysis}" analyze_CEMS.sh
 # done
 
-analysis=process
+analysis=quartiles
 qstat -u mrossol | grep CEMS_${analysis} | grep ' [RQ] ' || qsub -N CEMS_${analysis} -v analysis="${analysis}" analyze_CEMS.sh

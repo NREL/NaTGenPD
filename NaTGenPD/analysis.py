@@ -500,29 +500,38 @@ class QuartileAnalysis:
             Filtered units for desired group with proper final heat-rate fits
         """
         group_fits = self._fits[group_type]
+        if "CC" in group_type:
+            group_fits['unit_id'] = group_fits['unit_id'].str.split('-').str[0]
+            group_fits = group_fits.groupby('unit_id').mean().reset_index()
+
         pos = group_fits['a0'].isnull()
         group_fits = group_fits.loc[~pos]
-        group_fits = group_fits[['unit_id', 'load_max']]
 
         with CEMS(self._filtered_path, mode='r') as f:
-            group_filtered = f[group_type]
+            filtered_df = f[group_type].df
 
-        ave_hr = group_filtered.unit_dfs['heat_rate'].mean()
+        pos = filtered_df['cluster'] >= 0
+        filtered_df = filtered_df.loc[pos]
+        pos = filtered_df['unit_id'].isin(group_fits['unit_id'].to_list())
+        filtered_df = filtered_df.loc[pos]
+
+        ave_hr = filtered_df.groupby('unit_id')['heat_rate'].mean()
         ave_hr.name = 'ave_heat_rate'
-        filtered_df = pd.merge(group_filtered.df,
+        filtered_df = pd.merge(filtered_df,
                                ave_hr.to_frame().reset_index(),
                                on='unit_id')
 
-        pos = filtered_df['cluster'] >= 0
-        filtered_df = filtered_df.loc[pos,
-                                      ['unit_id', 'load', 'ave_heat_rate']]
+        load_max = filtered_df.groupby('unit_id')['load'].max()
+        load_max.name = 'load_max'
+        filtered_df = pd.merge(filtered_df,
+                               load_max.to_frame().reset_index(),
+                               on='unit_id')
 
-        filtered_df = pd.merge(filtered_df, group_fits,
-                               on='unit_id', how='left')
         filtered_df['cf'] = (filtered_df['load']
                              / filtered_df['load_max'])
 
-        return filtered_df
+        cols = ['unit_id', 'load', 'load_max', 'cf', 'ave_heat_rate']
+        return filtered_df[cols]
 
     @staticmethod
     def _compute_stats(filtered_df):
