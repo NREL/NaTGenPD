@@ -20,12 +20,7 @@ def get_hr_fit(group_fits, unit_id):
     cols = ['load_min', 'load_2', 'load_3', 'load_4', 'load_max']
     load = unit_fit[cols].values
     hr = unit_fit[['heat_rate({})'.format(c) for c in cols]].values
-    try:
-        fit = np.dstack((load, hr))[0]
-    except IndexError:
-        fit = np.array([[0, 0], [0, 0]])
-
-    return fit
+    return np.dstack((load, hr))[0]
 
 
 def get_raw_cc(raw_group, unit_id):
@@ -107,6 +102,7 @@ if __name__ == '__main__':
     cc_raw = analysis._get_raw(group_type)
     cc_filtered = analysis._get_filtered(group_type)
     cc_fits = analysis._fits[group_type]
+    cc_fits = cc_fits.loc[~cc_fits['a0'].isnull()]
 
     cc_ids = (cc_fits['unit_id'].str.split('-').str[0]).unique()
     for unit_id in cc_ids:
