@@ -80,11 +80,15 @@ def plot_unit(unit_id, cc_filtered, cc_fits, out_dir):
     plt_data = cluster_units + cluster_fits
     linestyles = ('', ) * len(legend) + ('--',) * len(legend)
     f_path = os.path.join(out_dir, '{}.png'.format(unit_id))
+    x = filtered_unit.loc[pos, 'load'].values
+    x_lim = np.nanmax(x[x != np.inf]) * 1.1
+    y = filtered_unit.loc[pos, 'heat_rate'].values
+    y_lim = np.nanmax(y[y != np.inf]) * 1.1
     mplt.line_plot(*plt_data, despine=True, title=title,
                    linestyles=linestyles, markers=('o', ),
                    colors=colors,
                    xlabel='Load (MWh)', ylabel='Heat Rate (mmBTU/MWh)',
-                   xlim=(0, 650), ylim=(0, 40),
+                   xlim=(0, x_lim), ylim=(0, y_lim),
                    legend=legend, legend_loc=0,
                    filename=f_path, showplot=False
                    )
