@@ -23,7 +23,7 @@ def get_hr_fit(group_fits, unit_id):
     try:
         fit = np.dstack((load, hr))[0]
     except IndexError:
-        fit = None
+        fit = np.array([[0, 0], [0, 0]])
 
     return fit
 
