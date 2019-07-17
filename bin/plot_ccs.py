@@ -62,36 +62,39 @@ def plot_unit(unit_id, cc_filtered, cc_fits, out_dir):
     Plot cc unit with fits
     """
     title = unit_id
-    filtered_unit = cc_filtered[unit_id]
-    pos = filtered_unit['cluster'] >= 0
-    clusters = len(filtered_unit.loc[pos, 'cluster'].unique())
-    colors = sns.color_palette('colorblind', clusters)
-    cluster_units = []
-    cluster_fits = []
-    legend = []
-    for c, cluster_df in filtered_unit.loc[pos].groupby('cluster'):
-        cts = int(cluster_df.iloc[0]['cts'])
-        legend.append('CTs = {}'.format(cts))
-        cluster_units.append(cluster_df[['load', 'heat_rate']].values)
-        colors.append(lighten(colors[c], 0.5))
-        cluster_id = '{}-{}'.format(unit_id, c)
-        cluster_fits.append(get_hr_fit(cc_fits, cluster_id))
+    try:
+        filtered_unit = cc_filtered[unit_id]
+        pos = filtered_unit['cluster'] >= 0
+        clusters = len(filtered_unit.loc[pos, 'cluster'].unique())
+        colors = sns.color_palette('colorblind', clusters)
+        cluster_units = []
+        cluster_fits = []
+        legend = []
+        for c, cluster_df in filtered_unit.loc[pos].groupby('cluster'):
+            cts = int(cluster_df.iloc[0]['cts'])
+            legend.append('CTs = {}'.format(cts))
+            cluster_units.append(cluster_df[['load', 'heat_rate']].values)
+            colors.append(lighten(colors[c], 0.5))
+            cluster_id = '{}-{}'.format(unit_id, c)
+            cluster_fits.append(get_hr_fit(cc_fits, cluster_id))
 
-    plt_data = cluster_units + cluster_fits
-    linestyles = ('', ) * len(legend) + ('--',) * len(legend)
-    f_path = os.path.join(out_dir, '{}.png'.format(unit_id))
-    x = filtered_unit.loc[pos, 'load'].values
-    x_lim = np.nanmax(x[x != np.inf]) * 1.1
-    y = filtered_unit.loc[pos, 'heat_rate'].values
-    y_lim = np.nanmax(y[y != np.inf]) * 1.1
-    mplt.line_plot(*plt_data, despine=True, title=title,
-                   linestyles=linestyles, markers=('o', ),
-                   colors=colors,
-                   xlabel='Load (MWh)', ylabel='Heat Rate (mmBTU/MWh)',
-                   xlim=(0, x_lim), ylim=(0, y_lim),
-                   legend=legend, legend_loc=0,
-                   filename=f_path, showplot=False
-                   )
+        plt_data = cluster_units + cluster_fits
+        linestyles = ('', ) * len(legend) + ('--',) * len(legend)
+        f_path = os.path.join(out_dir, '{}.png'.format(unit_id))
+        x = filtered_unit.loc[pos, 'load'].values
+        x_lim = np.nanmax(x[x != np.inf]) * 1.1
+        y = filtered_unit.loc[pos, 'heat_rate'].values
+        y_lim = np.nanmax(y[y != np.inf]) * 1.1
+        mplt.line_plot(*plt_data, despine=True, title=title,
+                       linestyles=linestyles, markers=('o', ),
+                       colors=colors,
+                       xlabel='Load (MWh)', ylabel='Heat Rate (mmBTU/MWh)',
+                       xlim=(0, x_lim), ylim=(0, y_lim),
+                       legend=legend, legend_loc=0,
+                       filename=f_path, showplot=False
+                       )
+    except Exception as ex:
+        print("{} failed due to {}".format(unit_id, ex))
 
 
 if __name__ == '__main__':
