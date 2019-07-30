@@ -1,0 +1,2 @@
+unit_id,a4,a3,a2,a1,a0,load_min,load_2,load_3,load_4,load_max,total_load,min_gen_perc,heat_rate(load_min),heat_rate(load_2),heat_rate(load_3),heat_rate(load_4),heat_rate(load_max),latitude,longitude,state,EPA_region,NERC_region,unit_type,fuel_type,group_type
+50628_780001,,,,,,,,,,,0.0,,,,,,,39.84,-75.25830078125,NJ,2.0,,Process Heater,Process Gas,Process Heater (NG)
