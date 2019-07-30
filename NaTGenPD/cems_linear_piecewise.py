@@ -5,7 +5,7 @@ import sys
 import warnings
 
 from handler import CEMS
-from piecewiseconvex import fit_piecewise_convex, generate_plexos_parameters
+from piecewiseconvex import fit_simple, fit_piecewise_convex, generate_plexos_parameters
 
 fit_columns = [
     "min_aicc", "1_b", "1_m1", "1_x1",
@@ -57,7 +57,8 @@ def unit_linear_fit(unit_cluster_df, max_segments):
 
     unitname = unit_cluster_df["unit_id"].iloc[0]
     unitcluster = unit_cluster_df["cluster"].iloc[0]
-    print(unitname, unitcluster, unit_cluster_df.shape)
+    print(unitname, unitcluster, unit_cluster_df.shape,
+          len(np.unique(load)), "...", end="")
 
     aicc1, (ms1, bs1) = fit_simple(load, heatinput)
     b1, ms1, xs1 = generate_plexos_parameters(ms1, bs1, minload, maxload)
@@ -76,7 +77,7 @@ def unit_linear_fit(unit_cluster_df, max_segments):
     x = pd.DataFrame(
         np.concatenate([[min_aicc], results1, results2, results3]).reshape(1, -1),
         columns=fit_columns)
-    print(x.isna().sum(axis=1).sum())
+    print(" done.")
     return x
 
 

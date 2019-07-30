@@ -2,9 +2,12 @@ import numpy as np
 
 def fit_simple(loads, heat_inputs):
 
+    if len(np.unique(loads)) < 2:
+        print("Unique load values:", len(np.unique(loads)))
+        print(np.linalg.matrix_rank([loads, heat_inputs]))
     ms, bs = np.polyfit(loads, heat_inputs, 1)
-    ms = [ms]
-    bs = [bs]
+    ms = np.array([ms])
+    bs = np.array([bs])
     aicc = _fit_aicc(loads, heat_inputs,
                      np.zeros(len(loads), dtype=int), ms, bs)
 
@@ -56,6 +59,10 @@ def _fit_piecewise_convex(loads, heat_rates, n_partitions,
 
             # Lost a partition, break and start over
             if len(np.unique(partition_assignments)) < n_partitions:
+                break
+
+            # Some partition spans a single load value, break and start over
+            if np.any([len(np.unique(loads[partition_assignments == j])) <= 1 for j in range(n_partitions)]):
                 break
 
             # Converged on a local optima, break and return
@@ -116,13 +123,11 @@ def _assign_random_partitions(loads, n_partitions):
                 bounds = []
                 break
 
-            print("Options:", sorted(list(validbounds)))
             bound = np.random.choice(list(validbounds))
-            validbounds -= set(range(bound-2, bound+3))
+            validbounds -= set(range(bound-1, bound+2))
             bounds.append(bound)
-            print("Bounds:", bounds)
 
-    bounds = sorted(bounds, reverse=True)
+    bounds = sorted(bounds)
     bounds = unique_loads[bounds]
 
     for i, bound in enumerate(bounds):
@@ -131,17 +136,15 @@ def _assign_random_partitions(loads, n_partitions):
     return assignments
 
 
-#def _nearest_neighbour(samples, prototypes):
-#    return np.argmin(np.absolute(np.array([samples]).T - prototypes), 1)
-
-
 def _fit_partitions(loads, heat_rates, partition_assignments, ms, bs):
 
     for j in range(len(ms)):
         partition_idx = partition_assignments == j
         partition_loads = loads[partition_idx]
         partition_heat_rates = heat_rates[partition_idx]
-        print("Unique load values:", len(np.unique(partition_loads)))
+        if len(np.unique(partition_loads)) < 2:
+            print("Unique load values:", len(np.unique(partition_loads)))
+            print("Rank:", np.linalg.matrix_rank([partition_loads, partition_heat_rates]))
         ms[j], bs[j] = np.polyfit(partition_loads, partition_heat_rates, 1)
 
     ordering = np.argsort(bs)[::-1]
