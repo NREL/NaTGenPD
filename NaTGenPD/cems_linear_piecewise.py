@@ -93,10 +93,5 @@ if __name__ == "__main__":
     h5file = sys.argv[1]
     outputdir = sys.argv[2]
 
-    # Hides some spurious numpy warnings - may want to disable if debugging.
-    #with warnings.catch_warnings():
-        #warnings.simplefilter("ignore")
-        #results = linear_fits(h5file, max_segments=3)
-
     results = linear_fits(h5file, max_segments=3)
     results.groupby(level="group_type").apply(write_group_results, out_dir=outputdir)
