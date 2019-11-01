@@ -360,7 +360,7 @@ class Fits:
     """
     Class to handle heat reate fits
     """
-    def __init__(self, fit_dir):
+    def __init__(self, fit_dir, suffix='fits.csv'):
         """
         Parameters
         ----------
@@ -368,7 +368,9 @@ class Fits:
             Path to directory containing heat rate fit files
         """
         self._fit_dir = fit_dir
-        self._group_fits = self._find_group_fits(fit_dir)
+        self._suffix = suffix
+        self._group_fits = self._find_group_fits(fit_dir, suffix=suffix)
+        self._i = 0
 
     def __repr__(self):
         msg = "{} w/ {} fits".format(self.__class__.__name__,
@@ -388,9 +390,25 @@ class Fits:
         if g_type in self.group_types:
             path = self._group_fits[g_type]
         else:
-            path = os.path.join(self._fit_dir, '{}_fits.csv'.format(g_type))
+            path = os.path.join(self._fit_dir,
+                                '{}_{}'.format(g_type, self._suffix))
 
         df.to_csv(path, index=False)
+
+    def __len__(self):
+        return len(self.group_types)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._i < len(self):
+            group_name = self.group_types[self._i]
+            group_fits = self[group_name]
+            self._i += 1
+            return group_name, group_fits
+        else:
+            raise StopIteration
 
     @property
     def group_types(self):
@@ -405,7 +423,7 @@ class Fits:
         return sorted(list(self._group_fits))
 
     @staticmethod
-    def _find_group_fits(fit_dir):
+    def _find_group_fits(fit_dir, suffix='fits.csv'):
         """
         Identify all heat rate fit files
 
@@ -421,7 +439,7 @@ class Fits:
         """
         group_fits = {}
         for f_name in os.listdir(fit_dir):
-            if f_name.endswith(".csv"):
+            if f_name.endswith(suffix):
                 group_type = f_name.split('_')[0]
                 group_fits[group_type] = os.path.join(fit_dir, f_name)
 
