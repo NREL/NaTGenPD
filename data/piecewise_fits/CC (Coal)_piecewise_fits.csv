@@ -1,0 +1,4 @@
+unit_id,group_type,cluster,heat_rate_base,heat_rate_incr1,load_point1,heat_rate_incr2,load_point2,latitude,longitude,state,EPA_region,NERC_region,unit_type,fuel_type
+1004_1,CC (Coal),0,2366.0040898481084,3.5063832843727054,411.57379472988805,5.478978143773165,445.8500061035156,,,,,,,
+1004_1,CC (Coal),2,924.4948361226303,4.685440762404118,222.9250030517578,,,,,,,,,
+1004_1,CC (Coal),3,478.3236178830526,15.484537783884235,37.92499923706055,,,,,,,,,

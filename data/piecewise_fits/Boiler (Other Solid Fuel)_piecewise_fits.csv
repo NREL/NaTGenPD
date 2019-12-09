@@ -1,0 +1,6 @@
+unit_id,group_type,cluster,heat_rate_base,heat_rate_incr1,load_point1,heat_rate_incr2,load_point2,latitude,longitude,state,EPA_region,NERC_region,unit_type,fuel_type
+2367_5,Boiler (Other Solid Fuel),0,377.0741645857077,6.565269321585995,45.32500076293945,,,43.0978,-70.7842025756836,NH,1.0,,Circulating fluidized bed boiler,Wood
+55708_BFB-1,Boiler (Other Solid Fuel),0,182.62656670785626,11.298415103791282,101.75,,,31.8326,-94.90059661865234,TX,6.0,,Bubbling fluidized bed boiler,Wood
+57241_BFB1,Boiler (Other Solid Fuel),0,490.6572597940531,9.435641728895185,106.375,,,29.7675,-82.39640045166016,FL,4.0,,Bubbling fluidized bed boiler,Wood
+58054_ST01,Boiler (Other Solid Fuel),0,2688.1914571824427,-42.935166588995365,47.22497239577861,13.342058144576725,70.30000305175781,44.4719,-71.17530059814453,NH,1.0,,Bubbling fluidized bed boiler,Wood
+589_1,Boiler (Other Solid Fuel),0,79.17659734323634,12.841015141574912,52.41591826255065,51.46402699687714,54.57500076293945,44.4917,-73.20809936523438,VT,1.0,NPCC,Other boiler,Wood
